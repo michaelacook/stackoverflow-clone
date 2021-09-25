@@ -15,11 +15,14 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->foreignId('user_id')->constrained();
-            $table->string('title');
+            $table->foreignId('user_id')->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->string('title')->unique();
             $table->mediumText('body');
             $table->integer('views')->default(0);
             $table->integer('votes')->default(0);
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

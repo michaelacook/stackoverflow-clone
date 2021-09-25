@@ -13,9 +13,15 @@ class CreateQuestionTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('question_tags', function (Blueprint $table) {
-            $table->foreignId('question_id')->constrained('questions');
-            $table->foreignId('tag_id')->constrained('tags');
+        Schema::create('question_tag', function (Blueprint $table) {
+            $table->foreignId('question_id')
+                ->constrained('questions')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignId('tag_id')
+                ->constrained('tags')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

@@ -20,6 +20,7 @@ class Tag extends Model
      */
     public function questions()
     {
-        return $this->belongsToMany(Question::class);
+        return $this->belongsToMany(Question::class)
+            ->using(QuestionTag::class);
     }
 }
