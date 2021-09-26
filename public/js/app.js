@@ -3631,7 +3631,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function Navbar() {
+function Navbar(_ref) {
+  var user = _ref.user;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "h-1 bg-yellow-600"
@@ -3659,7 +3660,7 @@ function Navbar() {
             })]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          className: "inline-block relative w-4/5 xl:w-1/2 2xl:w-2/3 py-2",
+          className: "inline-block relative w-3/5 xl:w-1/2 2xl:w-2/3 py-2",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("svg", {
             xmlns: "http://www.w3.org/2000/svg",
             className: "h-5 w-5 absolute top-1/2 transform -translate-y-1/2 left-2 text-gray-400",
@@ -3677,7 +3678,7 @@ function Navbar() {
             placeholder: "Search...",
             className: "inline-block w-full border-gray-300 bg-white rounded pl-8 placeholder-gray-400 text-xs"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        }), user ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "flex flex-row",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             className: "hover:bg-gray-300",
@@ -3708,6 +3709,20 @@ function Navbar() {
                 })
               })
             })
+          })]
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "mt-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_1__.Link, {
+            href: "/login",
+            as: "button",
+            type: "button",
+            className: "border-box px-2 py-1 text-sm text-blue-600 bg-blue-100 hover:bg-blue-200 border border-blue-600 rounded-sm mr-1",
+            children: "Login"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_1__.Link, {
+            href: "/register",
+            as: "button",
+            className: "border-box px-2 py-1 text-sm text-white bg-blue-600 hover:bg-blue-700 border border-blue-600 rounded-sm mr-2",
+            children: "Sign up"
           })]
         })]
       })
@@ -4700,9 +4715,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function Home() {
+function Home(_ref) {
+  var user = _ref.user;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Components_Navbar__WEBPACK_IMPORTED_MODULE_1__["default"], {})
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Components_Navbar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      user: user
+    })
   });
 }
 

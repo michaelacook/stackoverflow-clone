@@ -1,7 +1,7 @@
 import React from "react" 
 import { Link } from '@inertiajs/inertia-react'
 
-export default function Navbar() {
+export default function Navbar({ user }) {
   return (
       <div>
           <div className="h-1 bg-yellow-600"></div>
@@ -16,7 +16,7 @@ export default function Navbar() {
                     </h1>
                 </Link>
 
-                <div className="inline-block relative w-4/5 xl:w-1/2 2xl:w-2/3 py-2">
+                <div className="inline-block relative w-3/5 xl:w-1/2 2xl:w-2/3 py-2">
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
                         className="h-5 w-5 absolute top-1/2 transform -translate-y-1/2 left-2 text-gray-400" 
@@ -39,39 +39,60 @@ export default function Navbar() {
                     />
                 </div>
 
-                <div className="flex flex-row">
-                    <div className="hover:bg-gray-300">
+                {user ? (
+                    <div className="flex flex-row">
+                        <div className="hover:bg-gray-300">
 
-                        <div className="inline-block px-2">
-                            <Link href="#">
-                                <img 
-                                    src="default-profile.png" 
-                                    alt="profile picture"
-                                    className="w-7 h-7 rounded my-2"
-                                />
-                            </Link>
+                            <div className="inline-block px-2">
+                                <Link href="#">
+                                    <img 
+                                        src="default-profile.png" 
+                                        alt="profile picture"
+                                        className="w-7 h-7 rounded my-2"
+                                    />
+                                </Link>
+                            </div>
+
                         </div>
 
-                    </div>
 
-
-                    <div className="hover:bg-gray-300">
-                        <div className="inline-block px-2">
-                            <svg 
-                                xmlns="http://www.w3.org/2000/svg" 
-                                className="h-7 w-7 text-gray-500 my-2"
-                                viewBox="0 0 19 19" 
-                                fill="currentColor"
-                            >
-                                <path 
-                                    fill-rule="evenodd" 
-                                    d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v7h-2l-1 2H8l-1-2H5V5z" 
-                                    clip-rule="evenodd" 
-                                />
-                            </svg>
+                        <div className="hover:bg-gray-300">
+                            <div className="inline-block px-2">
+                                <svg 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    className="h-7 w-7 text-gray-500 my-2"
+                                    viewBox="0 0 19 19" 
+                                    fill="currentColor"
+                                >
+                                    <path 
+                                        fill-rule="evenodd" 
+                                        d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v7h-2l-1 2H8l-1-2H5V5z" 
+                                        clip-rule="evenodd" 
+                                    />
+                                </svg>
+                            </div>
                         </div>
                     </div>
-                </div>
+                ) : (
+                    <div className="mt-2">
+                        <Link 
+                            href="/login"
+                            as="button"
+                            type="button"
+                            className="border-box px-2 py-1 text-sm text-blue-600 bg-blue-100 hover:bg-blue-200 border border-blue-600 rounded-sm mr-1"
+                        >
+                            Login
+                        </Link>
+                        <Link 
+                            href="/register"
+                            as="button"
+                            className="border-box px-2 py-1 text-sm text-white bg-blue-600 hover:bg-blue-700 border border-blue-600 rounded-sm mr-2"
+                        >
+                            Sign up
+                        </Link>
+                    </div>
+                )}
+
 
             </div>
           </div>

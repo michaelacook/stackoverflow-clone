@@ -1,10 +1,11 @@
 import React from "react" 
 import Navbar from "@/Components/Navbar"
 
-export default function Home() {
+export default function Home({ user }) {
   return (
       <div>
-          <Navbar />
+          <Navbar user={user} />
+
       </div>
   )
 }
