@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/inertia-react'
 
 export default function Navbar({ user }) {
   return (
-      <div>
+      <div className="sticky top-0 z-50">
           <div className="h-1 bg-yellow-600"></div>
           <div className="bg-gray-100 shadow">
             <div className="container md:w-4/5 lg:w-3/5 2xl:w-8/12 mx-auto flex flex-row justify-between">
