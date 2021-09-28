@@ -23,6 +23,9 @@ class QuestionController extends Controller
             $user = Auth::user();
         }
 
+        $question->views++;
+        $question->save();
+
         return Inertia::render('Question', [
             'user' => $user,
             'page' => 'questions',
