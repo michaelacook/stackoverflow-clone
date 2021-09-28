@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Question;
 use App\Models\Tag;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 
 class QuestionController extends Controller
 {
@@ -46,6 +48,42 @@ class QuestionController extends Controller
             'page' => 'questions',
             'tagSuggestions' => Tag::all()
         ]);
+    }
+
+    /**
+     * Handle request to save a new question
+     */
+    public function post(Request $request)
+    {
+        $question = new Question;
+
+        $question->title = $request->input('title');
+        $question->slug = Str::slug($request->input('title'));
+        $question->body = $request->input("body");
+        $question->user_id = Auth::id();
+        $question->save();
+
+        $tags = $request->input('tags');
+
+        foreach ($tags as $tag)
+        {
+            if (array_key_exists('id', $tag))
+            {
+                $question->tags()->attach($tag['id']);
+            }
+            else
+            {
+                $tag = Tag::create([
+                    'name' => $tag['name']
+                ]);
+
+                $question->tags()->attach($tag->id);
+            }
+        }
+
+        $url = "/questions" . "/" . $question->slug;
+
+        return redirect($url);
     }
 
     /**

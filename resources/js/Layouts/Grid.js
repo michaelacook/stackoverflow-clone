@@ -3,14 +3,14 @@ import { Link } from "@inertiajs/inertia-react"
 
 export default function Grid({ page, ...props }) {
   return (
-    <div className="flex flex-row h-screen container md:w-4/5 lg:w-3/5 2xl:w-8/12 mx-auto">
+    <div className="flex flex-row container md:w-4/5 lg:w-3/5 2xl:w-8/12 mx-auto">
 
-        <div id="sidebar" className="mx-2 border-r border-gray-300 w-48 pt-8">
+      <aside id="sidebar" className="h-screen fixed top-0 pt-20 mx-2 border-r border-gray-300 w-48">
 
-        <Link 
+        <Link
           href="/" 
           as="div" 
-          className={`w-full pl-1 py-1 text-gray-500 hover:text-gray-700 cursor-pointer ${page === "home" ? "active-sidebar-link" : null}`}
+          className={`pl-1 py-1 text-gray-500 hover:text-gray-700 cursor-pointer ${page === "home" ? "active-sidebar-link" : null}`}
         >
             Home
         </Link>
@@ -46,9 +46,9 @@ export default function Grid({ page, ...props }) {
           Users
         </Link>
         
-      </div>
+      </aside>
 
-      <main className="w-3/5">
+      <main className="w-3/5 relative left-52">
           {props.children}
       </main>
     </div>

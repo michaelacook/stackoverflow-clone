@@ -28,6 +28,7 @@
     },
     "dependencies": {
         "jodit-react": "^1.1.1",
+        "moment": "^2.29.1",
         "react-markdown": "^7.0.1",
         "react-syntax-highlighter": "^15.4.4"
     }
