@@ -109,4 +109,34 @@ class QuestionController extends Controller
             'questions' => $questions
         ]);
     }
+
+    /**
+     * Handle request to up-vote a question
+     */
+    public function upVote(Request $request)
+    {
+        $id = $request->input('id');
+        $question = Question::find($id);
+        $question->votes++;
+        $question->save();
+
+        $url = "/questions" . "/" . $question->slug;
+
+        return redirect($url);
+    }
+
+    /**
+     * Handle request to down-vote a question
+     */
+    public function downVote(Request $request)
+    {
+        $id = $request->input('id');
+        $question = Question::find($id);
+        $question->votes--;
+        $question->save();
+
+        $url = "/questions" . "/" . $question->slug;
+
+        return redirect($url);
+    }
 }

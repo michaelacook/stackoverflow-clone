@@ -19,3 +19,7 @@ p code {
     padding: 4px !important;
     border-radius: 3%;
 }
+
+#question-body p {
+    margin-bottom: 12px;
+}
