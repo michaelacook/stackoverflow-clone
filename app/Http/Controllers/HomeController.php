@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -18,12 +16,12 @@ class HomeController extends Controller
 
         if (Auth::check()) 
         {
-            $user = User::with(['questions', 'answers', 'comments'])
-                ->find(Auth::id());
+            $user = Auth::user();
         }
 
         return Inertia::render('Home', [
-            'user' =>  $user
+            'user' =>  $user,
+            'page' => "home"
         ]);
     }
 }

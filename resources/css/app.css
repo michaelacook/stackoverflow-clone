@@ -1,3 +1,21 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.active-sidebar-link {
+    @apply bg-gray-200 border-r-4 border-yellow-500 font-extrabold text-black;
+}
+
+.tag-editor {
+    border: none !important; 
+    box-shadow: none !important; 
+    outline: 0 !important;
+    padding: 0 !important;
+    background-color: transparent !important;
+}
+
+p code {
+    background-color: #E3E6E8 !important;
+    padding: 4px !important;
+    border-radius: 3%;
+}

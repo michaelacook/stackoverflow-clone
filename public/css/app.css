@@ -32103,6 +32103,31 @@ select {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.active-sidebar-link {
+  border-right-width: 4px;
+  --tw-border-opacity: 1;
+  border-color: rgba(245, 158, 11, var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
+  font-weight: 800;
+  --tw-text-opacity: 1;
+  color: rgba(0, 0, 0, var(--tw-text-opacity));
+}
+
+.tag-editor {
+  border: none !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+  padding: 0 !important;
+  background-color: transparent !important;
+}
+
+p code {
+  background-color: #E3E6E8 !important;
+  padding: 4px !important;
+  border-radius: 3%;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
@@ -188537,4 +188562,3 @@ select {
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
-

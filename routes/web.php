@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\QuestionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,5 +28,11 @@ Route::get('/', function () {
 });
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/account', [AccountController::class, 'index']);
+
+Route::get('/questions/new', [QuestionController::class, 'create']);
+Route::get('/questions', [QuestionController::class, 'all']);
+Route::get('/questions/{question:slug}', [QuestionController::class, 'index']);
+
 
 require __DIR__.'/auth.php';

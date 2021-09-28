@@ -6,9 +6,9 @@ export default function Navbar({ user }) {
       <div>
           <div className="h-1 bg-yellow-600"></div>
           <div className="bg-gray-100 shadow">
-            <div className="container md:w-4/5 lg:w-3/5 mx-auto flex flex-row justify-between">
-                <Link className="py-2 mx-2" href="/">
-                    <img src="favicon.ico" alt="logo" className="inline-block" />
+            <div className="container md:w-4/5 lg:w-3/5 2xl:w-8/12 mx-auto flex flex-row justify-between">
+                <Link className="px-4 mx-2 pt-1 hover:bg-gray-300" href="/">
+                    <img src="/favicon.ico" alt="logo" className="inline-block w-8 h-9" />
                     <h1 className="hidden xl:inline-block align-bottom">    
                         <span className="font-normal text-xl">clone</span> 
                         <span> </span>
@@ -16,7 +16,7 @@ export default function Navbar({ user }) {
                     </h1>
                 </Link>
 
-                <div className="inline-block relative w-3/5 xl:w-1/2 2xl:w-2/3 py-2">
+                <div className="inline-block flex-shrink relative w-2/5 xl:w-1/2 2xl:w-8/12 py-2 mx-auto">
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
                         className="h-5 w-5 absolute top-1/2 transform -translate-y-1/2 left-2 text-gray-400" 
@@ -44,11 +44,11 @@ export default function Navbar({ user }) {
                         <div className="hover:bg-gray-300">
 
                             <div className="inline-block px-2">
-                                <Link href="#">
+                                <Link href="/account">
                                     <img 
-                                        src="default-profile.png" 
+                                        src="/default-profile.png" 
                                         alt="profile picture"
-                                        className="w-7 h-7 rounded my-2"
+                                        className="w-6 h-6 rounded mt-3"
                                     />
                                 </Link>
                             </div>
@@ -60,7 +60,7 @@ export default function Navbar({ user }) {
                             <div className="inline-block px-2">
                                 <svg 
                                     xmlns="http://www.w3.org/2000/svg" 
-                                    className="h-7 w-7 text-gray-500 my-2"
+                                    className="h-6 w-6 text-gray-500 mt-3"
                                     viewBox="0 0 19 19" 
                                     fill="currentColor"
                                 >
