@@ -7,7 +7,7 @@ export default function Navbar({ user }) {
           <div className="h-1 bg-yellow-600"></div>
           <div className="bg-gray-100 shadow">
             <div className="container md:w-4/5 lg:w-3/5 2xl:w-8/12 mx-auto flex flex-row justify-between">
-                <Link className="px-4 mx-2 pt-1 hover:bg-gray-300" href="/">
+                <Link className="px-4 pt-1 hover:bg-gray-300" href="/">
                     <img src="/favicon.ico" alt="logo" className="inline-block w-8 h-9" />
                     <h1 className="hidden xl:inline-block align-bottom">    
                         <span className="font-normal text-xl">clone</span> 
