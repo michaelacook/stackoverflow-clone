@@ -101,12 +101,14 @@ class QuestionController extends Controller
             $user = Auth::user();
         }
 
-        $questions = Question::all();
+        $questions = Question::with(['answers', 'tags', 'user.answers'])->get();
+        $count = $questions->count();
 
         return Inertia::render('Questions', [
             'user' => $user,
             'page' => 'questions',
-            'questions' => $questions
+            'questions' => $questions,
+            'count' => $count
         ]);
     }
 

@@ -5,7 +5,11 @@ export default function Grid({ page, ...props }) {
   return (
     <div className="flex flex-row container md:w-4/5 lg:w-3/5 2xl:w-8/12 mx-auto">
 
-      <aside id="sidebar" className="h-screen fixed top-0 pt-20 mx-2 border-r border-gray-300 w-48">
+      <aside 
+        id="sidebar" 
+        className="h-screen fixed top-0 ml-2 border-r border-gray-300 w-48"
+        style={{ paddingTop: "78.4px" }}
+      >
 
         <Link
           href="/" 
@@ -48,7 +52,7 @@ export default function Grid({ page, ...props }) {
         
       </aside>
 
-      <main className="w-3/5 relative left-52">
+      <main className="w-3/5 relative left-48 ml-2">
           {props.children}
       </main>
     </div>
