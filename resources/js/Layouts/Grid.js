@@ -52,7 +52,7 @@ export default function Grid({ page, ...props }) {
         
       </aside>
 
-      <main className="w-3/5 relative left-48 ml-2">
+      <main className="relative left-48 ml-2 w-8/12">
           {props.children}
       </main>
     </div>
