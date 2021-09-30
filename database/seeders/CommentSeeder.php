@@ -17,7 +17,9 @@ class CommentSeeder extends Seeder
         DB::table('comments')->insert([
             'body' => 'Thanks for your answer!',
             'user_id' => 1,
-            'answer_id' => 1
+            'answer_id' => 1,
+            'created_at' => date('Y/m/d'),
+            'updated_at' => date('Y/m/d')
         ]);
     }
 }

@@ -39,7 +39,9 @@ class TagSeeder extends Seeder
         foreach ($tags as $tag)
         {
             DB::table('tags')->insert([
-                'name' => $tag
+                'name' => $tag,
+                'created_at' => date('Y/m/d'),
+                'updated_at' => date('Y/m/d')
             ]);
         }
     }
