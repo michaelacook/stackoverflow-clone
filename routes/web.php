@@ -31,6 +31,7 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/account', [AccountController::class, 'index']);
 
 Route::get('/questions/new', [QuestionController::class, 'create']);
+Route::post('/questions/comments', [QuestionController::class, 'postComment']);
 Route::post('/questions/upvote', [QuestionController::class, 'upVote']);
 Route::post('/questions/downvote', [QuestionController::class, 'downVote']);
 Route::post('/questions', [QuestionController::class, 'post']);

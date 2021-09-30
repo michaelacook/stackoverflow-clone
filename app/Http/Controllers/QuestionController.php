@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use App\Models\Question;
-use App\Models\Tag;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Tag;
+use App\Models\Question;
+use App\Models\Comment;
 
 class QuestionController extends Controller
 {
@@ -30,7 +31,8 @@ class QuestionController extends Controller
             'user' => $user,
             'page' => 'questions',
             'question' => $question,
-            'tags' => $question->tags()->get()
+            'tags' => $question->tags()->get(),
+            'comments' => $question->comments()->get()
         ]);
     }
 
@@ -110,6 +112,26 @@ class QuestionController extends Controller
             'questions' => $questions,
             'count' => $count
         ]);
+    }
+
+    /**
+     * Handle request to add a comment to a question
+     */
+    public function postComment(Request $request)
+    {
+        $userId = $request->input('user')['id'];
+        $commentBody = $request->input('comment');
+        $question = $request->input('question');
+
+        Comment::create([
+            'body' => $commentBody,
+            'user_id' => $userId, 
+            'question_id' => $question['id']
+        ]);
+
+        $url = '/questions' . '/' . $question['slug'];
+
+        return redirect($url);
     }
 
     /**

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Navbar from "@/Components/Navbar"
 import Grid from "@/Layouts/Grid"
 import Upvote from "../Components/Upvote"
@@ -7,23 +7,32 @@ import moment from "moment"
 import { Link } from "@inertiajs/inertia-react"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import {
-    dark,
-    funky,
-    okaidia,
-    twilight,
-    coy,
+    // dark,
+    // funky,
+    // okaidia,
+    // twilight,
+    // coy,
     solarizedlight,
-    tomorrow,
+    // tomorrow,
   } from "react-syntax-highlighter/dist/esm/styles/prism"
 import ReactMarkdown from "react-markdown"
 
-export default function Question({ user, page, question, tags }) {
+export default function Question({ 
+    user, 
+    page, 
+    question, 
+    tags, 
+    comments
+ }) {
+    const [addComment, setAddComment] = useState(false)
+    const [questionComment, setQuestionComment] = useState("")
+
     return (
         <>
             <Navbar user={user} />
             <Grid page={page}>
 
-                <div className="w-full mt-5 ml-4 mb-6">
+                <div className="w-full mt-5 ml-6 mb-6">
 
                     <h1 className="text-2xl mb-2">{question.title}</h1>
 
@@ -49,7 +58,7 @@ export default function Question({ user, page, question, tags }) {
                             />
                         </div>
 
-                        <div id="question-body" className="w-full mt-4">
+                        <div id="question-body" className="w-full mt-4 pb-12 border-b border-gray-200">
                             <ReactMarkdown
                                 children={question.body}
                                 components={{
@@ -81,43 +90,114 @@ export default function Question({ user, page, question, tags }) {
                                     </span>
                                 ))}
                             </div>
+
+                            
                         </div>
                     </div>
-
-
-                    <div className="mt-20">
-                        <p className="text-lg mb-5">Share a link to this question via email, Twitter, or Facebook.</p>
-                        <label for="question-body" className="text-2xl text-gray-700">Your Answer</label>
-                        <textarea 
-                            id="question-body" 
-                            className="w-full bg-gray-50 mt-3 border-gray-300 text-sm rounded-sm" 
-                            placeholder="Use markdown format..."
-                            rows="12"
-                        ></textarea>
-
-                        <button 
-                            type="button"
-                            className=" mt-4 px-3 py-3 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-sm shadow-sm"
-                        >
-                            Post Your Answer
-                        </button>
-                    </div> 
-
-                    <div className="mt-10">
-                        <p className="inline-block text-gray-700">Browse other questions tagged</p>&nbsp;
-                        {tags.map((tag) => (
-                            <span 
-                                className="py-1 px-2 rounded-sm bg-blue-100 text-blue-500 text-xs mr-1"
-                            >
-                                {tag.name}
-                            </span>
-                        ))}
-                        <p className="inline-block"> or <Link className="text-blue-600" href="/questions/new">ask your own question</Link>.</p>
-                    </div>                   
                     
+                    {comments.length ? (
+                        <div className="ml-14">
+                            {comments.map((comment) => (
+                                <div className="mt-1 pb-1 border-b border-gray-200">
+                                    <p className="text-sm text-gray-700 ml-6 mt-1">{comment.body}</p> 
+                                </div>
+                            ))}
+                        </div>
+                    ) 
+                    : null}
+
+                    <div className="ml-14 mt-2 mb-5">
+                        {!addComment ? (
+                            <span 
+                                onClick={() => setAddComment(true)}
+                                className="text-sm text-gray-400 hover:text-blue-400 cursor-pointer"
+                            >
+                                Add a comment
+                            </span>
+                        ) 
+                        : (
+                            <div className="flex flex-row justify-start">
+                                <input 
+                                    type="text" 
+                                    autoFocus={true}
+                                    value={questionComment}
+                                    onChange={(e) => setQuestionComment(e.target.value)}
+                                    className="w-2/3 mr-4 text-xs text-gray-700 border border-gray-200 self-start rounded-sm"
+                                    placeholder="comment..."
+                                />
+
+                                <Link 
+                                    href="/questions/comments"
+                                    method="post"
+                                    preserveScroll
+                                    data={{
+                                        user,
+                                        question,
+                                        comment: questionComment,
+                                    }}
+                                >
+                                    <button
+                                        onClick={() => {
+                                            setAddComment(false)
+                                            setQuestionComment("")
+                                        }} 
+                                        className="text-xs py-2 px-2 text-white bg-blue-500 rounded-sm shadow-sm self-start"
+                                    >
+                                        Add comment
+                                    </button>
+                                </Link> 
+
+                                <button 
+                                    onClick={() => {
+                                        setAddComment(false)
+                                        setQuestionComment("")
+                                    }}
+                                    className="text-xs ml-1 py-2 px-2 text-white bg-gray-500 rounded-sm shadow-sm self-start"
+                                >
+                                    Cancel
+                                </button>
+                             </div>
+                        )}
+                        
+                    </div>
+
+                    <hr />
+
+                    <div className="mt-5">
+                        <div>
+                            <p className="text-lg mb-5">Share a link to this question via email, Twitter, or Facebook.</p>
+                            <label for="question-body" className="text-2xl text-gray-700">Your Answer</label>
+                            <textarea 
+                                id="question-body" 
+                                className="w-full focus-within:bg-white bg-gray-50 mt-3 border-gray-300 text-sm rounded-sm" 
+                                placeholder="Use markdown format..."
+                                rows="12"
+                            ></textarea>
+
+                            <button 
+                                type="button"
+                                className=" mt-4 px-3 py-3 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-sm shadow-sm"
+                            >
+                                Post Your Answer
+                            </button>
+                        </div> 
+
+                        <div className="mt-6">
+                            <p className="inline-block text-gray-700">Browse other questions tagged</p>&nbsp;
+                            {tags.map((tag) => (
+                                <span 
+                                    className="py-1 px-2 rounded-sm bg-blue-100 text-blue-500 text-xs mr-1"
+                                >
+                                    {tag.name}
+                                </span>
+                            ))}
+                            <p className="inline-block"> or <Link className="text-blue-600" href="/questions/new">ask your own question</Link>.</p>
+                        </div>      
+
+                    </div>
                 </div>
 
-                
+
             </Grid>
         </>
 
