@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\QuestionController;
 use Illuminate\Foundation\Application;
@@ -28,7 +29,9 @@ Route::get('/', function () {
 });
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/account', [AccountController::class, 'index']);
+
+Route::post('/answers/upvote', [AnswerController::class, 'upVote']);
+Route::post('/answers/downvote', [AnswerController::class, 'downVote']);
 
 Route::get('/questions/new', [QuestionController::class, 'create']);
 Route::post('/questions/comments', [QuestionController::class, 'postComment']);

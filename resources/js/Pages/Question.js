@@ -21,6 +21,7 @@ export default function Question({
     user, 
     page, 
     question, 
+    answers,
     tags, 
     comments
  }) {
@@ -162,6 +163,68 @@ export default function Question({
                     </div>
 
                     <hr />
+
+                    {/* put answers here */}
+                    <p className="text-lg mt-4">
+                       {answers.length ? answers.length : null} 
+                       {answers.length ? (answers.length > 1 ? " Answers" : " Answer") : ("No answers yet")}
+                    </p>
+
+                    {answers.length ? (
+                        answers.map((answer) => (
+                            <div>
+                                <div className="flex flex-row">
+                                <div id="votes" className="inline-block mr-4 mt-4">
+                                    <Upvote
+                                        data={{answer, slug: question["slug"] }}
+                                        href="/answers/upvote" 
+                                    />
+                                    <span className="ml-3 text-gray-600 text-xl">{answer.votes}</span>
+                                    <Downvote
+                                        data={{answer, slug: question["slug"] }}
+                                        href="/answers/downvote" 
+                                    />
+                                </div>
+
+                                <div className="w-full mt-4 pb-12 border-b border-gray-200">
+                                    <ReactMarkdown
+                                        children={answer.body}
+                                        components={{
+                                        code({node, inline, className, children, ...props}) {
+                                            const match = /language-(\w+)/.exec(className || '')
+                                            return !inline && match ? (
+                                            <SyntaxHighlighter
+                                                children={String(children).replace(/\n$/, '')}
+                                                style={solarizedlight}
+                                                language={match[1]}
+                                                PreTag="div"
+                                                {...props}
+                                            />
+                                            ) : (
+                                            <code className={className} {...props}>
+                                                {children}
+                                            </code>
+                                            )
+                                        }
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                            
+                            {answer.comments.length ? (
+                                <div className="ml-14">
+                                    {answer.comments.map((comment) => (
+                                        <div className="mt-1 pb-1 border-b border-gray-200">
+                                            <p className="text-sm text-gray-700 ml-6 mt-1">{comment.body}</p> 
+                                        </div>
+                                    ))}
+                                </div>
+                            ) 
+                            : null}
+                        </div>
+                        ))
+
+                    ) : null}
 
                     <div className="mt-5">
                         <div>

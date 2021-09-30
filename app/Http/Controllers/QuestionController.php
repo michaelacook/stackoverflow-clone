@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Tag;
 use App\Models\Question;
 use App\Models\Comment;
+use App\Models\Answer;
 
 class QuestionController extends Controller
 {
@@ -27,11 +28,16 @@ class QuestionController extends Controller
         $question->views++;
         $question->save();
 
+        $answers = Answer::with('comments')
+            ->where('question_id', $question->id)
+            ->get();
+
         return Inertia::render('Question', [
             'user' => $user,
             'page' => 'questions',
             'question' => $question,
             'tags' => $question->tags()->get(),
+            'answers' => $answers,
             'comments' => $question->comments()->get()
         ]);
     }
