@@ -7,7 +7,7 @@ export default function Grid({ page, ...props }) {
 
       <aside 
         id="sidebar" 
-        className="h-screen fixed top-0 ml-2 border-r border-gray-300 w-48"
+        className="h-screen hidden lg:block fixed top-0 ml-2 border-r border-gray-300 w-48"
         style={{ paddingTop: "78.4px" }}
       >
 
@@ -52,7 +52,7 @@ export default function Grid({ page, ...props }) {
         
       </aside>
 
-      <main className="relative left-48 ml-2 w-8/12">
+      <main className="lg:relative lg:left-48 ml-2 w-4/5 lg:w-10/12 xl:w-8/12">
           {props.children}
       </main>
     </div>
