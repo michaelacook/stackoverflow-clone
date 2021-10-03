@@ -5,6 +5,7 @@ import Upvote from "../Components/Upvote"
 import Downvote from "../Components/Downvote"
 import moment from "moment"
 import { Link } from "@inertiajs/inertia-react"
+import { Inertia } from '@inertiajs/inertia'
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import {
     // dark,
@@ -27,6 +28,19 @@ export default function Question({
  }) {
     const [addComment, setAddComment] = useState(false)
     const [questionComment, setQuestionComment] = useState("")
+    const [answerBody, setAnswerBody] = useState("")
+
+    function postQuestion() {
+        if (answerBody) {
+            Inertia.post("/answers", {
+                question,
+                answer: {
+                    body: answerBody,
+                }
+            })
+            setAnswerBody("")
+        }
+    }
 
     return (
         <>
@@ -186,7 +200,7 @@ export default function Question({
                                     />
                                 </div>
 
-                                <div className="w-full mt-4 pb-12 border-b border-gray-200">
+                                <div className="w-full mt-4 pb-12">
                                     <ReactMarkdown
                                         children={answer.body}
                                         components={{
@@ -212,7 +226,7 @@ export default function Question({
                             </div>
                             
                             {answer.comments.length ? (
-                                <div className="ml-14">
+                                <div className="ml-14 mb-10">
                                     {answer.comments.map((comment) => (
                                         <div className="mt-1 pb-1 border-b border-gray-200">
                                             <p className="text-sm text-gray-700 ml-6 mt-1">{comment.body}</p> 
@@ -221,6 +235,7 @@ export default function Question({
                                 </div>
                             ) 
                             : null}
+                            <hr />
                         </div>
                         ))
 
@@ -232,6 +247,8 @@ export default function Question({
                             <label for="question-body" className="text-2xl text-gray-700">Your Answer</label>
                             <textarea 
                                 id="question-body" 
+                                value={answerBody}
+                                onChange={(e) => setAnswerBody(e.target.value)}
                                 className="w-full focus-within:bg-white bg-gray-50 mt-3 border-gray-300 text-sm rounded-sm" 
                                 placeholder="Use markdown format..."
                                 rows="12"
@@ -239,6 +256,7 @@ export default function Question({
 
                             <button 
                                 type="button"
+                                onClick={postQuestion}
                                 className=" mt-4 px-3 py-3 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-sm shadow-sm"
                             >
                                 Post Your Answer
