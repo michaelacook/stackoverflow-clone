@@ -114,8 +114,8 @@ export default function Question({
                     {comments.length ? (
                         <div className="ml-14">
                             {comments.map((comment) => (
-                                <div className="mt-1 pb-1 border-b border-gray-200">
-                                    <p className="inline-block text-sm text-gray-700 ml-6 mt-1">{comment.body}</p> 
+                                <div className="p-1 border-b border-gray-200">
+                                    <p className="inline-block text-sm text-gray-700 ml-6">{comment.body}</p> 
                                     &nbsp;–&nbsp; 
                                     <span className="text-blue-600 text-sm">
                                         {comment.user.name}
@@ -251,20 +251,18 @@ export default function Question({
                             {answer.comments.length ? (
                                 <div className="ml-14 mb-10">
                                     {answer.comments.map((comment) => (
-                                        <div className="mt-1 pb-1 border-b border-gray-200">
-                                            <p 
-                                                className="text-sm text-gray-700 ml-6 mt-1"
-                                            >
+                                        <div className="p-1 border-b border-gray-200">
+                                            <p className="inline-block text-sm text-gray-700 ml-6">
                                                 {comment.body} 
-                                                &nbsp;–&nbsp; 
-                                                <span className="text-blue-600 text-sm">
-                                                    {comment.user.name}
-                                                </span>
-                                                &nbsp; 
-                                                <span className="text-sm text-gray-400">
-                                                    {moment(comment.created_at, "YYYYMMDD").fromNow()}
-                                                </span>
                                             </p> 
+                                            &nbsp;–&nbsp; 
+                                            <span className="text-blue-600 text-sm">
+                                                {comment.user.name}
+                                            </span>
+                                            &nbsp; 
+                                            <span className="text-sm text-gray-400">
+                                                {moment(comment.created_at, "YYYYMMDD").fromNow()}
+                                            </span>
                                         </div>
                                     ))}
                                 </div>
