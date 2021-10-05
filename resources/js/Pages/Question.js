@@ -55,10 +55,10 @@ export default function Question({
 
                     <div className="mb-3">
                         <span className="text-xs text-gray-600">Asked <span className="text-gray-900">
-                            <RelativeDate phpDateTime={question.created_at} />
+                            <RelativeDate UTCTime={question.created_at} />
                         </span></span>
                         <span className="text-xs text-gray-600 ml-5">Active <span className="text-gray-900">
-                            <RelativeDate phpDateTime={question.updated_at} />
+                            <RelativeDate UTCTime={question.updated_at} />
                         </span></span>
                         <span className="text-xs text-gray-600 ml-5">Viewed <span className="text-gray-900">{question.views} times</span></span>
                     </div>
@@ -127,7 +127,7 @@ export default function Question({
                                     </span>
                                     &nbsp; 
                                     <span className="text-sm text-gray-400">
-                                        <RelativeDate phpDateTime={comment.created_at} />
+                                        <RelativeDate UTCTime={comment.created_at} />
                                     </span>
                                 </div>
                             ))}
@@ -266,7 +266,7 @@ export default function Question({
                                             </span>
                                             &nbsp; 
                                             <span className="text-sm text-gray-400">
-                                                <RelativeDate phpDateTime={comment.created_at} />
+                                                <RelativeDate UTCTime={comment.created_at} />
                                             </span>
                                         </div>
                                     ))}

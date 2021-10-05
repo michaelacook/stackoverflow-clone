@@ -4,7 +4,7 @@ import RelativeDate from "./RelativeDate"
 export default function UserAnswerWidget({ answer, className="" }) {
     return (
       <div className={`text-sm text-gray-500 lg:self-end lg:mr-6 ${className}`}>
-        answered <RelativeDate phpDateTime={answer.created_at} />
+        answered <RelativeDate UTCTime={answer.created_at} />
 
         <div className="flex flex-row justify-start mt-1">
           <img 

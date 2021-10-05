@@ -4,7 +4,7 @@ import RelativeDate from "./RelativeDate"
 export default function UserQuestionWidget({ question }) {
     return (
         <div className="text-xs text-gray-500 mt-2 lg:self-end lg:mt-0 lg:mr-6">
-          asked <RelativeDate phpDateTime={question.created_at} />
+          asked <RelativeDate UTCTime={question.created_at} />
 
         <div className="flex flex-row justify-start mt-1">
           <img 
