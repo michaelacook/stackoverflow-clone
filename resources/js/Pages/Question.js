@@ -18,6 +18,7 @@ import {
   } from "react-syntax-highlighter/dist/esm/styles/prism"
 import ReactMarkdown from "react-markdown"
 import UserAnswerWidget from "@/Components/UserAnswerWidget"
+import RelativeDate from "@/Components/RelativeDate"
 
 export default function Question({ 
     user, 
@@ -53,8 +54,12 @@ export default function Question({
                     <h1 className="text-2xl mb-2">{question.title}</h1>
 
                     <div className="mb-3">
-                        <span className="text-xs text-gray-600">Asked <span className="text-gray-900">{moment(question.created_at, "YYYYMMDD").fromNow()}</span></span>
-                        <span className="text-xs text-gray-600 ml-5">Active <span className="text-gray-900">{moment(question.updated_at, "YYYYMMDD").fromNow()}</span></span>
+                        <span className="text-xs text-gray-600">Asked <span className="text-gray-900">
+                            <RelativeDate phpDateTime={question.created_at} />
+                        </span></span>
+                        <span className="text-xs text-gray-600 ml-5">Active <span className="text-gray-900">
+                            <RelativeDate phpDateTime={question.updated_at} />
+                        </span></span>
                         <span className="text-xs text-gray-600 ml-5">Viewed <span className="text-gray-900">{question.views} times</span></span>
                     </div>
                     
@@ -122,7 +127,7 @@ export default function Question({
                                     </span>
                                     &nbsp; 
                                     <span className="text-sm text-gray-400">
-                                        {moment(comment.created_at, "YYYYMMDD").fromNow()}
+                                        <RelativeDate phpDateTime={comment.created_at} />
                                     </span>
                                 </div>
                             ))}
@@ -261,7 +266,7 @@ export default function Question({
                                             </span>
                                             &nbsp; 
                                             <span className="text-sm text-gray-400">
-                                                {moment(comment.created_at, "YYYYMMDD").fromNow()}
+                                                <RelativeDate phpDateTime={comment.created_at} />
                                             </span>
                                         </div>
                                     ))}

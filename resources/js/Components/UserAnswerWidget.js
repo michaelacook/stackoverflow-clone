@@ -1,10 +1,10 @@
 import React from "react"
-import moment from "moment"
+import RelativeDate from "./RelativeDate"
 
 export default function UserAnswerWidget({ answer, className="" }) {
     return (
       <div className={`text-sm text-gray-500 lg:self-end lg:mr-6 ${className}`}>
-        {`answered ${moment(answer.created_at, "YYYYMMDD").fromNow()}`}
+        answered <RelativeDate phpDateTime={answer.created_at} />
 
         <div className="flex flex-row justify-start mt-1">
           <img 
