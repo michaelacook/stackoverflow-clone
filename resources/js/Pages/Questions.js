@@ -3,6 +3,7 @@ import Navbar from "@/Components/Navbar"
 import Grid from "@/Layouts/Grid"
 import { Link } from "@inertiajs/inertia-react"
 import moment from "moment"
+import UserQuestionWidget from "@/Components/UserWidget"
 
 export default function Questions({ user, page, questions, count }) {
   return (
@@ -78,23 +79,7 @@ export default function Questions({ user, page, questions, count }) {
                         ))}
                       </div>
 
-                      <div className="text-xs text-gray-500 mt-2 lg:self-end lg:mt-0 lg:mr-6">
-                        {`asked ${moment(question.created_at, "YYYYMMDD").fromNow()}`}
-
-                        <div className="flex flex-row justify-start mt-1">
-                          <img 
-                            width="32" 
-                            height="32" 
-                            className="rounded-sm self-start"
-                            src="http://localhost:8000/default-profile.png" 
-                          />
-                          <div className="ml-2">
-                            <p className="text-blue-600 text-xs">{question.user.name}</p>
-                            <span className="font-bold text-sm">{question.user.answers.length}</span>
-                          </div>
-                          
-                        </div>
-                      </div>
+                      <UserQuestionWidget question={question} />
                     </div>
                     
                   </div>

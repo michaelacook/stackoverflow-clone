@@ -28,7 +28,7 @@ class QuestionController extends Controller
         $question->views++;
         $question->save();
 
-        $answers = Answer::with('comments')
+        $answers = Answer::with(['comments', 'user.answers'])
             ->where('question_id', $question->id)
             ->get();
 

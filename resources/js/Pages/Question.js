@@ -17,6 +17,7 @@ import {
     // tomorrow,
   } from "react-syntax-highlighter/dist/esm/styles/prism"
 import ReactMarkdown from "react-markdown"
+import UserAnswerWidget from "@/Components/UserAnswerWidget"
 
 export default function Question({ 
     user, 
@@ -188,42 +189,61 @@ export default function Question({
                         answers.map((answer) => (
                             <div>
                                 <div className="flex flex-row">
-                                <div id="votes" className="inline-block mr-4 mt-4">
-                                    <Upvote
-                                        data={{answer, slug: question["slug"] }}
-                                        href="/answers/upvote" 
-                                    />
-                                    <span className="ml-3 text-gray-600 text-xl">{answer.votes}</span>
-                                    <Downvote
-                                        data={{answer, slug: question["slug"] }}
-                                        href="/answers/downvote" 
-                                    />
-                                </div>
+                                    <div id="votes" className="inline-block mr-4 mt-4">
+                                        <Upvote
+                                            data={{answer, slug: question["slug"] }}
+                                            href="/answers/upvote" 
+                                        />
+                                        <span className="ml-3 text-gray-600 text-xl">{answer.votes}</span>
+                                        <Downvote
+                                            data={{answer, slug: question["slug"] }}
+                                            href="/answers/downvote" 
+                                        />
+                                    </div>
 
-                                <div className="w-full mt-4 pb-12">
-                                    <ReactMarkdown
-                                        children={answer.body}
-                                        components={{
-                                        code({node, inline, className, children, ...props}) {
-                                            const match = /language-(\w+)/.exec(className || '')
-                                            return !inline && match ? (
-                                            <SyntaxHighlighter
-                                                children={String(children).replace(/\n$/, '')}
-                                                style={solarizedlight}
-                                                language={match[1]}
-                                                PreTag="div"
-                                                {...props}
+                                    <div className="w-full mt-4 flex flex-col">
+                                        <ReactMarkdown
+                                            children={answer.body}
+                                            components={{
+                                            code({node, inline, className, children, ...props}) {
+                                                const match = /language-(\w+)/.exec(className || '')
+                                                return !inline && match ? (
+                                                <SyntaxHighlighter
+                                                    children={String(children).replace(/\n$/, '')}
+                                                    style={solarizedlight}
+                                                    language={match[1]}
+                                                    PreTag="div"
+                                                    {...props}
+                                                />
+                                                ) : (
+                                                <code className={className} {...props}>
+                                                    {children}
+                                                </code>
+                                                )
+                                            }
+                                            }}
+                                        />
+
+                                        <div className="w-full md:w-4/5 lg:w-9/12 flex flex-row justify-between mt-6 mb-12">
+                                            <div>
+                                                <span className="text-sm text-gray-500">Share </span>
+                                                <span className="text-sm text-gray-500 ml-3">Edit </span>
+                                                <span className="text-sm text-gray-500 ml-3">Follow</span>
+                                            </div>
+                                            <UserAnswerWidget 
+                                                answer={answer} 
                                             />
-                                            ) : (
-                                            <code className={className} {...props}>
-                                                {children}
-                                            </code>
-                                            )
-                                        }
-                                        }}
-                                    />
-                                </div>
+                                        </div>
+                                    </div>
+                                
                             </div>
+
+                           
+
+                            <hr className="ml-14" />
+
+                            
+                            
                             
                             {answer.comments.length ? (
                                 <div className="ml-14 mb-10">
