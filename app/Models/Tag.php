@@ -10,7 +10,9 @@ class Tag extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'created_at',
+        'updated_at'
     ];
 
     /**

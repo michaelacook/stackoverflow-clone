@@ -15,5 +15,5 @@ class Role extends Model
             ->using(RoleUser::class);
     }
 
-    protected $fillable = ['title'];
+    protected $fillable = ['title', 'created_at', 'updated_at'];
 }

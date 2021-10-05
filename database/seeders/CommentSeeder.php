@@ -18,8 +18,8 @@ class CommentSeeder extends Seeder
             'body' => 'Thanks for your answer!',
             'user_id' => 1,
             'answer_id' => 1,
-            'created_at' => date('Y/m/d'),
-            'updated_at' => date('Y/m/d')
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }

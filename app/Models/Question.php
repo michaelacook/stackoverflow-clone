@@ -36,6 +36,8 @@ class Question extends Model
         'body',
         'views',
         'votes',
-        'slug'
+        'slug',
+        'created_at',
+        'updated_at'
     ];
 }

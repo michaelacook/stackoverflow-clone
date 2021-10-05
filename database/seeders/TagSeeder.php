@@ -40,8 +40,8 @@ class TagSeeder extends Seeder
         {
             DB::table('tags')->insert([
                 'name' => $tag,
-                'created_at' => date('Y/m/d'),
-                'updated_at' => date('Y/m/d')
+                'created_at' => now(),
+                'updated_at' => now()
             ]);
         }
     }

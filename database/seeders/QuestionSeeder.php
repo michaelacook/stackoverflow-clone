@@ -24,8 +24,8 @@ Donec auctor a nisi ac tincidunt. Morbi augue libero, condimentum quis ante a, u
 
 Donec varius et lectus ut placerat. Aliquam convallis lacus eu fringilla congue. Vivamus sed pharetra turpis, nec imperdiet libero. Aenean ultrices laoreet neque, vitae condimentum lorem maximus eu. Donec elementum augue ac turpis luctus elementum. Duis tempor est eleifend turpis interdum, at scelerisque lectus ultricies. Praesent commodo orci suscipit sapien consectetur facilisis. Cras non velit imperdiet, convallis ante eget, convallis tortor. Curabitur ante justo, maximus sed mattis eu, luctus id erat. Nam nec nibh eu leo hendrerit molestie laoreet id est. Quisque ac egestas ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;',
             'slug' => Str::slug("A test question title?"),
-            'created_at' => date('Y/m/d'),
-            'updated_at' => date('Y/m/d')
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }

@@ -29,8 +29,8 @@ class UserSeeder extends Seeder
             'name' => 'Jane Doe',
             'email' => 'jane@doe.ca',
             'password' => Hash::make('whocares123'),
-            'created_at' => date('Y/m/d'),
-            'updated_at' => date('Y/m/d')
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }

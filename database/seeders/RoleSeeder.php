@@ -19,7 +19,9 @@ class RoleSeeder extends Seeder
         foreach ($roles as $role)
         {
             DB::table('roles')->insert([
-                'title' => $role
+                'title' => $role,
+                'created_at' => now(),
+                'updated_at' => now()
             ]);
         }
     }

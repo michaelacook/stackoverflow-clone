@@ -27,6 +27,8 @@ class Answer extends Model
     protected $fillable = [
         'body',
         'user_id',
-        'question_id'
+        'question_id',
+        'created_at',
+        'updated_at'
     ];
 }
