@@ -28,7 +28,11 @@ class QuestionController extends Controller
         $question->views++;
         $question->save();
 
-        $answers = Answer::with(['comments', 'user.answers'])
+        $answers = Answer::with(['comments.user', 'user.answers'])
+            ->where('question_id', $question->id)
+            ->get();
+
+        $questionComments = Comment::with('user')
             ->where('question_id', $question->id)
             ->get();
 
@@ -38,7 +42,7 @@ class QuestionController extends Controller
             'question' => $question,
             'tags' => $question->tags()->get(),
             'answers' => $answers,
-            'comments' => $question->comments()->get()
+            'comments' => $questionComments
         ]);
     }
 
