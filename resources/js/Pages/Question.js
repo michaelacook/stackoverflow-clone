@@ -19,6 +19,7 @@ import ReactMarkdown from "react-markdown"
 import UserAnswerWidget from "@/Components/UserAnswerWidget"
 import RelativeDate from "@/Components/RelativeDate"
 import QuestionTags from "@/Components/QuestionTags"
+import AnswerComments from "@/Components/AnswerComments"
 
 export default function Question({ 
     user, 
@@ -63,7 +64,6 @@ export default function Question({
                         <span className="text-xs text-gray-600 ml-5">Viewed <span className="text-gray-900">{question.views} times</span></span>
                     </div>
                     
-
                     <hr />
 
                     <div className="flex flex-row">
@@ -237,32 +237,14 @@ export default function Question({
                                             />
                                         </div>
                                     </div>
-                                
                             </div>
 
                             <hr className="ml-14" />
                             
-                            {answer.comments.length ? (
-                                <div className="ml-14 mb-10">
-                                    {answer.comments.map((comment) => (
-                                        <div className="p-1 border-b border-gray-200">
-                                            <p className="inline-block text-sm text-gray-700 ml-6">
-                                                {comment.body} 
-                                            </p> 
-                                            &nbsp;–&nbsp; 
-                                            <span className="text-blue-600 text-sm">
-                                                {comment.user.name}
-                                            </span>
-                                            &nbsp; 
-                                            <span className="text-sm text-gray-400">
-                                                <RelativeDate UTCTime={comment.created_at} />
-                                            </span>
-                                        </div>
-                                    ))}
-                                </div>
-                            ) 
-                            : null}
-                            <hr />
+                            <AnswerComments 
+                                answer={answer} 
+                                question={question}
+                            />
                         </div>
                         ))
 
@@ -304,10 +286,7 @@ export default function Question({
 
                     </div>
                 </div>
-
-
             </Grid>
         </>
-
     )
 }

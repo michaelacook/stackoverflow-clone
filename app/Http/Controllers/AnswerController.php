@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Answer;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 
 class AnswerController extends Controller
@@ -52,6 +53,24 @@ class AnswerController extends Controller
         $answer->save();
 
         $url = '/questions' . '/' . $request->input('slug');
+
+        return redirect($url);
+    }
+
+    /**
+     * handle request to add a comment to an answer
+     */
+    public function postComment(Request $request)
+    {
+        $values = $request->all();
+
+        Comment::create([
+            'body' => $values['comment'],
+            'user_id' => Auth::id(),
+            'answer_id' => $values['answer']['id'] 
+        ]);
+
+        $url = '/questions' . '/' . $request['question']['slug'];
 
         return redirect($url);
     }
