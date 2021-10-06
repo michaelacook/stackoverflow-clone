@@ -32122,6 +32122,10 @@ select {
   background-color: transparent !important;
 }
 
+code {
+  font-size: small !important;
+}
+
 p code {
   background-color: #E3E6E8 !important;
   padding: 4px !important;
