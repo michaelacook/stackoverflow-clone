@@ -18,9 +18,9 @@ class AccountController extends Controller
 
         if (Auth::check())
         {
-            $user = $user = User::with([
+            $user = User::with([
                 'questions', 
-                'answers.questions', 
+                'answers.question',
                 'comments'
             ])
             ->find(Auth::id());
