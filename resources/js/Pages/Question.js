@@ -3,7 +3,6 @@ import Navbar from "@/Components/Navbar"
 import Grid from "@/Layouts/Grid"
 import Upvote from "../Components/Upvote"
 import Downvote from "../Components/Downvote"
-import moment from "moment"
 import { Link } from "@inertiajs/inertia-react"
 import { Inertia } from '@inertiajs/inertia'
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
@@ -19,6 +18,7 @@ import {
 import ReactMarkdown from "react-markdown"
 import UserAnswerWidget from "@/Components/UserAnswerWidget"
 import RelativeDate from "@/Components/RelativeDate"
+import QuestionTags from "@/Components/QuestionTags"
 
 export default function Question({ 
     user, 
@@ -101,18 +101,7 @@ export default function Question({
                                 }
                                 }}
                             />
-
-                            <div className="mt-5">
-                                {tags.map((tag) => (
-                                    <span 
-                                        className="py-1 px-2 rounded-sm bg-blue-100 text-blue-500 text-xs mr-1"
-                                    >
-                                        {tag.name}
-                                    </span>
-                                ))}
-                            </div>
-
-                            
+                            <QuestionTags tags={tags} />
                         </div>
                     </div>
                     
