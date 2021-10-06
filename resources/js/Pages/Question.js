@@ -110,7 +110,7 @@ export default function Question({
                             {comments.map((comment) => (
                                 <div className="p-1 border-b border-gray-200">
                                     <div className="ml-6">
-                                        <p className="inline-block text-sm text-gray-700 break-words">
+                                        <p className="inline-block text-sm text-gray-700 break-all">
                                             {comment.body} –
                                             <span className="text-blue-600 text-sm">
                                                 &nbsp;{comment.user.name}
