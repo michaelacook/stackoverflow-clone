@@ -9,6 +9,23 @@ export default function NewQuestion({ user, page, tagSuggestions }) {
     const [title, setTitle] = useState("")
     const [body, setBody] = useState("")
     const [tagSuggestionsEnabled, setTagSuggestionsEnabled] = useState(false)
+    const [titleError, setTitleError] = useState(false)
+    const [bodyError, setBodyError] = useState(false)
+    const [tagsError, setTagsError] = useState(false)
+
+    function validate() {
+        if (!title) {
+            setTitleError(true)
+        }
+
+        if (!body) {
+            setBodyError(true)
+        }
+
+        if (!tags.length) {
+            setTagsError(true)
+        }
+    }
 
     function addTag(e) {
         if (tags.length > 4) return
@@ -66,9 +83,11 @@ export default function NewQuestion({ user, page, tagSuggestions }) {
                             onChange={(e) => setTitle(e.target.value)}
                             type="text" 
                             autoFocus={true}
+                            onFocus={() => setTitleError(false)}
                             placeholder="e.g. How do I create dynamic refs on React components?" 
-                            className="w-full mt-1 border-gray-300 rounded-sm bg-white text-xs mb-6"
+                            className={`w-full mt-1 rounded-sm mb-1 bg-white text-xs ${titleError ? "border-red-500" : "border-gray-300"}`}
                         />
+                        <p className={`${titleError ? null : "hidden"} text-sm text-red-600 mb-4`}>Please add a descriptive title.</p>
 
 
                         <label for="question-body" className="font-bold text-black text-sm">Body</label>
@@ -77,15 +96,19 @@ export default function NewQuestion({ user, page, tagSuggestions }) {
                             id="question-body" 
                             value={body}
                             onChange={(e) => setBody(e.target.value)}
-                            className="w-full mt-1 border-gray-300 text-sm rounded-sm mb-6" 
+                            onFocus={() => setBodyError(false)}
+                            className={`w-full mt-1 text-sm rounded-sm ${titleError ? "border-red-500" : "border-gray-300" }`} 
                             placeholder="Use markdown format..."
                             rows="12"
                         ></textarea>
+                        <p className={`${bodyError ? null : "hidden"} text-sm text-red-600 mb-4`}>A question body is required.</p>
 
                         <label for="tags" className="font-bold text-black text-sm">Tags</label>
                         <p className="text-gray-700 text-sm">Add up to 5 tags to describe what your question is about</p>
 
-                        <div className="w-full py-2 border border-gray-300 rounded-sm bg-white text-xs">
+                        <div 
+                            className={`w-full py-2 border rounded-sm bg-white text-xs ${tagsError ? "border-red-500" : "border-gray-300"}`}
+                        >
                             <span className="inline-flex flex-row flex-wrap justify-start">
                                 {tags.map((tag, i) => (
                                     <span 
@@ -110,13 +133,18 @@ export default function NewQuestion({ user, page, tagSuggestions }) {
                                     className="tag-editor inline-block text-xs ml-2 w-28"
                                     placeholder={`${!tagInput && !tags.length ? "e.g. reactjs, laravel" : ""}`}
                                     onChange={(e) => setTagInput(e.target.value)}
-                                    onFocus={() => setTagSuggestionsEnabled(true)}
+                                    onFocus={() => {
+                                        setTagSuggestionsEnabled(true)
+                                        setTagsError(false)
+                                    }}
                                     onBlur={disableTagSuggestions}
                                     value={tagInput}
                                     onKeyPress={addTag}
                                 />
                             </span>
                         </div>
+                        <p className={`${tagsError ? null : "hidden"} text-sm text-red-600 mt-1 mb-4`}>Please add at least one relevant tag.</p>
+
                         <div className={
                             `bg-white max-h-32 rounded shadow-lg overflow-y-scroll ${!tagSuggestionsEnabled ? "hidden" : null}`
                             } id="autoCompleteSuggestions">
@@ -139,7 +167,15 @@ export default function NewQuestion({ user, page, tagSuggestions }) {
 
                 <button 
                     type="button"
-                    onClick={post}
+                    onClick={() => {
+                        validate()
+                        
+                        if (titleError || bodyError || tagsError) {
+                            return
+                        }
+
+                        post()
+                    }}
                     className=" mt-8 px-3 py-3 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-sm shadow-sm"
                 >
                     Review your question
