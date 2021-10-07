@@ -12,17 +12,17 @@ export default function AnswerComments({ answer, question }) {
                 <div className="ml-14">
                     {answer.comments.map((comment) => (
                         <div className="p-1 border-b border-gray-200">
-                            <p className="inline-block text-sm text-gray-700 ml-6">
-                                {comment.body} 
-                            </p> 
-                            &nbsp;–&nbsp; 
-                            <span className="text-blue-600 text-sm">
-                                {comment.user.name}
-                            </span>
-                            &nbsp; 
-                            <span className="text-sm text-gray-400">
-                                <RelativeDate UTCTime={comment.created_at} />
-                            </span>
+                            <div className="ml-6">
+                                <p className="inline-block text-sm text-gray-700 break-all">
+                                    {comment.body} –
+                                    <span className="text-blue-600 text-sm">
+                                        &nbsp;{comment.user.name}
+                                    </span>
+                                    <span className="text-sm text-gray-400">
+                                        &nbsp;<RelativeDate UTCTime={comment.created_at} />
+                                    </span>
+                                </p>
+                            </div>
                         </div>
                     ))}
                 </div>
