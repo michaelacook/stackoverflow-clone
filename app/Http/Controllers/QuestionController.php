@@ -47,6 +47,29 @@ class QuestionController extends Controller
     }
 
     /**
+     * retrieve questions by tag name
+     */
+    public function getQuestionsByTag(Request $request, $tag)
+    {
+        $user = null; 
+
+        if (Auth::check())
+        {
+            $user = Auth::user();
+        }
+
+        $questionsByTag = Tag::with(['questions.answers', 'questions.tags', 'questions.user.answers'])
+            ->where('name', $tag)
+            ->get();
+
+        return Inertia::render('QuestionsByTag', [
+            'user' => $user, 
+            'page' => 'questions',
+            'tag' => $questionsByTag
+        ]);
+    }
+
+    /**
      * Render the new question page
      */
     public function create()

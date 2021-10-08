@@ -42,7 +42,9 @@ Route::post('/questions/upvote', [QuestionController::class, 'upVote']);
 Route::post('/questions/downvote', [QuestionController::class, 'downVote']);
 Route::post('/questions', [QuestionController::class, 'post']);
 Route::get('/questions', [QuestionController::class, 'all']);
+Route::get('/questions/by-tag/{tag}', [QuestionController::class, 'getQuestionsByTag']);
 Route::get('/questions/{question:slug}', [QuestionController::class, 'index']);
+
 
 
 require __DIR__.'/auth.php';
