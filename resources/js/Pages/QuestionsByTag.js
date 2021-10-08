@@ -58,7 +58,7 @@ export default function QuestionsByTag({ user, page, tag }) {
                     </div>
 
                     <div className="ml-6 align-top">
-                        <Link href={`questions/${question.slug}`}>
+                        <Link href={`/questions/${question.slug}`}>
                         <p className="text-blue-600 text-lg leading-tight font-medium">{question.title}</p>
                         </Link>
                         
