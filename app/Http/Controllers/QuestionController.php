@@ -112,7 +112,7 @@ class QuestionController extends Controller
             else
             {
                 $tag = Tag::create([
-                    'name' => $tag['name']
+                    'name' => preg_replace( '/[\W]/', '', $tag['name'])
                 ]);
 
                 $question->tags()->attach($tag->id);
