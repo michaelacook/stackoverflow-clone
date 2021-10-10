@@ -32126,6 +32126,15 @@ select {
   background-color: transparent !important;
 }
 
+input {
+  transition: all 0.3s ease !important;
+}
+
+input[type="text"]:focus, textarea:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 4px #BFDBFE !important;
+}
+
 code {
   font-size: small !important;
 }
