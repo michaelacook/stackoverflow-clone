@@ -1,6 +1,7 @@
 import React from "react"
 import Navbar from "@/Components/Navbar"
 import Grid from "@/Layouts/Grid"
+import Tag from "@/Components/Tag"
 import { Link } from "@inertiajs/inertia-react"
 import UserQuestionWidget from "@/Components/UserWidget"
 
@@ -70,11 +71,7 @@ export default function QuestionsByTag({ user, page, tag }) {
                         <div className="mt-1 flex flex-col xl:flex-row xl:justify-between">
                         <div>
                             {question.tags.map((tag) => (
-                                <span 
-                                    className="py-1 px-2 rounded-sm bg-blue-100 text-blue-500 text-xs mr-1"
-                                >
-                                    {tag.name}
-                                </span>
+                                <Tag tag={tag} />
                             ))}
                         </div>
 

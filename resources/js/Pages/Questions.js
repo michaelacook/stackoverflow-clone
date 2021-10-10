@@ -2,7 +2,7 @@ import React from "react"
 import Navbar from "@/Components/Navbar"
 import Grid from "@/Layouts/Grid"
 import { Link } from "@inertiajs/inertia-react"
-import moment from "moment"
+import Tag from "@/Components/Tag"
 import UserQuestionWidget from "@/Components/UserWidget"
 
 export default function Questions({ user, page, questions, count }) {
@@ -71,11 +71,7 @@ export default function Questions({ user, page, questions, count }) {
                     <div className="mt-1 flex flex-col xl:flex-row xl:justify-between">
                       <div>
                         {question.tags.map((tag) => (
-                            <span 
-                                className="py-1 px-2 rounded-sm bg-blue-100 text-blue-500 text-xs mr-1"
-                            >
-                                {tag.name}
-                            </span>
+                            <Tag tag={tag} />
                         ))}
                       </div>
 

@@ -20,6 +20,7 @@ import UserAnswerWidget from "@/Components/UserAnswerWidget"
 import RelativeDate from "@/Components/RelativeDate"
 import QuestionTags from "@/Components/QuestionTags"
 import AnswerComments from "@/Components/AnswerComments"
+import Tag from "@/Components/Tag"
 
 export default function Question({ 
     user, 
@@ -277,11 +278,7 @@ export default function Question({
                         <div className="mt-6">
                             <p className="inline-block text-gray-700">Browse other questions tagged</p>&nbsp;
                             {tags.map((tag) => (
-                                <span 
-                                    className="py-1 px-2 rounded-sm bg-blue-100 text-blue-500 text-xs mr-1"
-                                >
-                                    {tag.name}
-                                </span>
+                                <Tag tag={tag} />
                             ))}
                             <p className="inline-block"> or <Link className="text-blue-600" href="/questions/new">ask your own question</Link>.</p>
                         </div>      
