@@ -46,7 +46,7 @@ export default function Tags({ user, page, tags }) {
                         />
                     </div>
 
-                    <div className="flex flex-wrap w-full mt-6">
+                    <div className="flex flex-row flex-grow flex-wrap w-full mt-6">
                         {tags
                             .filter((tag) => {
                                 if (filterTerm) {
@@ -58,7 +58,9 @@ export default function Tags({ user, page, tags }) {
                                 return true
                             })
                             .map((tag) => (
-                                <div className="w-auto py-4 px-3 border mb-3 mr-3 border-gray-300 rounded">
+                                <div 
+                                    className="py-4 px-3 border mb-3 mr-3 border-gray-300 rounded w-23/100"
+                                >
                                     <Tag tag={tag} />
 
                                     <div className="mt-4 flex flex-row">
