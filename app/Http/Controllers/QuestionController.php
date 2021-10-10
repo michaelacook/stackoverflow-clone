@@ -136,7 +136,9 @@ class QuestionController extends Controller
             $user = Auth::user();
         }
 
-        $questions = Question::with(['answers', 'tags', 'user.answers'])->get();
+        $questions = Question::with(['answers', 'tags', 'user.answers'])
+            ->orderBy('created_at', 'desc')
+            ->get();
         $count = $questions->count();
 
         return Inertia::render('Questions', [
