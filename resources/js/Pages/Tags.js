@@ -46,7 +46,7 @@ export default function Tags({ user, page, tags }) {
                         />
                     </div>
 
-                    <div className="flex flex-row flex-grow flex-wrap w-full mt-6">
+                    <div className="flex flex-wrap mt-6">
                         {tags
                             .filter((tag) => {
                                 if (filterTerm) {
@@ -59,12 +59,12 @@ export default function Tags({ user, page, tags }) {
                             })
                             .map((tag) => (
                                 <div 
-                                    className="py-4 px-3 border mb-3 mr-3 border-gray-300 rounded w-23/100"
+                                    className="w-full md:w-2/5 xl:w-23/100 py-4 px-3 border mb-3 mr-3 border-gray-300 rounded"
                                 >
                                     <Tag tag={tag} />
 
-                                    <div className="mt-4 flex flex-row">
-                                        <span className="inline-block mr-5 text-xs text-gray-500">
+                                    <div className="mt-4 flex flex-row justify-between">
+                                        <span className="text-xs text-gray-500">
                                             {tag.questions.length} questions
                                         </span>
 
