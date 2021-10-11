@@ -13,7 +13,7 @@ export default function QuestionsByTag({ user, page, tag }) {
             <Grid
                 page={page}
             >
-                <div className="w-full mt-5 mb-5">
+                <div className="mt-5 mb-5 w-5/6">
                     <div className="w-full flex flex-row justify-between">
                     <h1 className="text-3xl mb-8 ml-5">Questions tagged [{tag[0].name}]</h1>
 
@@ -25,6 +25,10 @@ export default function QuestionsByTag({ user, page, tag }) {
                         Ask Question
                     </Link>
                     </div>
+
+                    <p className="ml-5 mb-7 text-sm text-gray-700">
+                        {tag[0].guidance}
+                    </p>
                     
 
                     <span className="inline-block text-lg text-gray-800 ml-5">
