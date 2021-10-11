@@ -11,6 +11,7 @@ class Tag extends Model
 
     protected $fillable = [
         'name',
+        'guidance',
         'created_at',
         'updated_at'
     ];
