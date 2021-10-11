@@ -65,7 +65,7 @@ export default function Tags({ user, page, tags }) {
                                         <Tag tag={tag} />
 
                                         <p className="mt-3 text-xs text-gray-700">
-                                            {tag.guidance.substr(0, 120)}...
+                                            {tag.guidance ? tag.guidance.substr(0, 120) + "..." : null}
                                         </p>
                                     </div>
 
