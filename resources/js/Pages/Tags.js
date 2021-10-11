@@ -74,7 +74,7 @@ export default function Tags({ user, page, tags }) {
                                             {tag.questions.length} questions
                                         </span>
 
-                                        <p className="text-xs w-2/5 text-gray-500">
+                                        <p className="text-xs w-3/5 text-gray-500">
                                             Created <RelativeDate UTCTime={tag.created_at} />
                                         </p>
                                     </div>
