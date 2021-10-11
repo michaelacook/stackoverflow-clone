@@ -59,18 +59,24 @@ export default function Tags({ user, page, tags }) {
                             })
                             .map((tag) => (
                                 <div 
-                                    className="w-full md:w-2/5 xl:w-23/100 py-4 px-3 border mb-3 mr-3 border-gray-300 rounded"
+                                    className="w-full flex flex-col justify-between md:w-2/5 xl:w-23/100 py-4 px-3 border mb-3 mr-3 border-gray-300 rounded"
                                 >
-                                    <Tag tag={tag} />
+                                    <div>
+                                        <Tag tag={tag} />
+
+                                        <p className="mt-3 text-xs text-gray-700">
+                                            {tag.guidance.substr(0, 120)}...
+                                        </p>
+                                    </div>
 
                                     <div className="mt-4 flex flex-row justify-between">
-                                        <span className="text-xs text-gray-500">
+                                        <span className="inline-block w-1/3 text-xs text-gray-500">
                                             {tag.questions.length} questions
                                         </span>
 
-                                        <span className="text-xs text-gray-500">
+                                        <p className="text-xs w-2/5 text-gray-500">
                                             Created <RelativeDate UTCTime={tag.created_at} />
-                                        </span>
+                                        </p>
                                     </div>
                                 </div>
                         ))}
