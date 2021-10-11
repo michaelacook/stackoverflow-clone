@@ -15,15 +15,15 @@ export default function QuestionsByTag({ user, page, tag }) {
             >
                 <div className="mt-5 mb-5 w-5/6">
                     <div className="w-full flex flex-row justify-between">
-                    <h1 className="text-3xl mb-8 ml-5">Questions tagged [{tag[0].name}]</h1>
+                        <h1 className="text-3xl mb-8 ml-5">Questions tagged [{tag[0].name}]</h1>
 
-                    <Link 
-                        as="button" 
-                        href="/questions/new"
-                        className="px-2 py-3 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-sm shadow-sm self-start"
-                    >
-                        Ask Question
-                    </Link>
+                        <Link 
+                            as="button" 
+                            href="/questions/new"
+                            className="px-2 py-3 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-sm shadow-sm self-start"
+                        >
+                            Ask Question
+                        </Link>
                     </div>
 
                     <p className="ml-5 mb-7 text-sm text-gray-700">
@@ -31,16 +31,17 @@ export default function QuestionsByTag({ user, page, tag }) {
                     </p>
                     
 
-                    <span className="inline-block text-lg text-gray-800 ml-5">
+                    <p className="inline-block text-lg text-gray-800 ml-5 mb-5">
                     {new Intl.NumberFormat().format(tag[0].questions.length)} questions
-                    </span>
+                    </p>
+                    <hr />
                 </div>
 
-                <hr />
+                
 
                 <div id="questions">
                 {tag[0].questions.map((question) => (
-                    <div className="flex flex-row justify-start border-b border-gray-300 bottom-1 py-4">
+                    <div className="w-5/6 flex flex-row justify-start border-b border-gray-300 bottom-1 py-4">
                     
                     <div className="ml-6 text-center">
                         <p className="text-gray-500 font-semibold">
