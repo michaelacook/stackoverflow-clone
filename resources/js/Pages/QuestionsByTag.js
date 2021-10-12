@@ -33,7 +33,9 @@ export default function QuestionsByTag({ user, page, tag }) {
                             : 
                             (
                                 <span>
-                                    The <Tag tag={tag[0]} />tag has no usage guidance, can you <Link className="text-blue-600" href="#">help us create it</Link>?
+                                    The <Tag 
+                                        tag={tag[0]} />
+                                        tag has no usage guidance, can you <Link className="text-blue-600" href={`/tags/edit/${tag[0].name}`}>help us create it</Link>?
                                 </span>
                             )
                         }

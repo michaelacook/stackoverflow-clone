@@ -37,6 +37,9 @@ Route::post('/answers', [AnswerController::class, 'store']);
 Route::post('/answers/upvote', [AnswerController::class, 'upVote']);
 Route::post('/answers/downvote', [AnswerController::class, 'downVote']);
 
+Route::get('/tags/edit/{tag}', [TagController::class, 'editTag']);
+Route::post('/tags/edit', [TagController::class, 'addGuidance']);
+
 Route::get('/questions/new', [QuestionController::class, 'create']);
 Route::post('/questions/comments', [QuestionController::class, 'postComment']);
 Route::post('/questions/upvote', [QuestionController::class, 'upVote']);
