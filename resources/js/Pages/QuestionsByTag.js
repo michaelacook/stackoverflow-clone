@@ -27,7 +27,16 @@ export default function QuestionsByTag({ user, page, tag }) {
                     </div>
 
                     <p className="ml-5 mb-7 text-sm text-gray-700">
-                        {tag[0].guidance}
+                        {tag[0].guidance 
+                            ? 
+                            tag[0].guidance 
+                            : 
+                            (
+                                <span>
+                                    The <Tag tag={tag[0]} />tag has no usage guidance, can you <Link className="text-blue-600" href="#">help us create it</Link>?
+                                </span>
+                            )
+                        }
                     </p>
                     
 
