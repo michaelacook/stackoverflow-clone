@@ -34,6 +34,15 @@ class User extends Authenticatable
     }
 
     /**
+     * Get a user's watched tags
+     */
+    public function tags()
+    {
+        return $this->belognsToMany(Role::class)
+            ->using(TagUser::class);
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var string[]

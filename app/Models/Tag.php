@@ -17,6 +17,15 @@ class Tag extends Model
     ];
 
     /**
+     * Get the user associated with a watched tag
+     */
+    public function user()
+    {
+        return $this->belongsToMany(User::class)
+            ->using(RoleUser::class);
+    }
+
+    /**
      * Retrieve question records through QuestionTag junction table
      * 
      * @return app\Models\Question instances
