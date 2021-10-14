@@ -70,6 +70,34 @@ class QuestionController extends Controller
     }
 
     /**
+     * Get a user's watched questions
+     * 
+     * If no authenticated user or no watched quetsions, just newest
+     */
+    public function getQuestionsByWatched(Request $request)
+    {
+        // for now just get newest, query watched once table created
+        $user = null;
+
+        if (Auth::check())
+        {
+            $user = Auth::user();
+        }
+
+        $questions = Question::with(['answers', 'tags', 'user.answers'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $count = $questions->count();
+
+        return Inertia::render('Home', [
+            'user' => $user,
+            'page' => 'home',
+            'questions' => $questions,
+            'count' => $count
+        ]);
+    }
+
+    /**
      * Render the new question page
      */
     public function create()

@@ -29,7 +29,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [QuestionController::class, 'getQuestionsByWatched']);
 Route::get('/account', [AccountController::class, 'index']);
 
 Route::post('/answers/comments', [AnswerController::class, 'postComment']);
