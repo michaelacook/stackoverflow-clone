@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Models\Tag;
 use Inertia\Inertia;
 
@@ -48,6 +49,34 @@ class TagController extends Controller
             'page' => 'tags',
             'tag' => $tag
         ]);
+    }
+
+    /**
+     * Add a tag to a user's watched tags
+     */
+    public function watchTag(Request $request)
+    {
+        $tag = $request->input('tag');
+
+        $user = User::find(Auth::user()->id);
+
+        $user->tags()->attach($tag['id']);
+
+        return redirect($request->input('redirect'));
+    }
+
+    /**
+     * Remove a tag to a user's watched tags
+     */
+    public function unwatchTag(Request $request)
+    {
+        $tag = $request->input('tag');
+
+        $user = User::find(Auth::user()->id);
+
+        $user->tags()->detach($tag['id']);
+
+        return redirect($request->input('redirect'));
     }
 
     /**

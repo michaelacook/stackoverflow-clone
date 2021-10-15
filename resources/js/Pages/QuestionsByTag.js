@@ -4,15 +4,14 @@ import Grid from "@/Layouts/Grid"
 import Tag from "@/Components/Tag"
 import { Link } from "@inertiajs/inertia-react"
 import UserQuestionWidget from "@/Components/UserWidget"
+import WatchTagButton from "@/Components/WatchTagButton"
 
-export default function QuestionsByTag({ user, page, tag }) {
+export default function QuestionsByTag({ user, page, tag, watched }) {
     return (
         <>
             <Navbar user={user} />
 
-            <Grid
-                page={page}
-            >
+            <Grid page={page}>
                 <div className="mt-5 mb-5 w-5/6">
                     <div className="w-full flex flex-row justify-between">
                         <h1 className="text-3xl mb-8 ml-5">Questions tagged [{tag[0].name}]</h1>
@@ -26,7 +25,7 @@ export default function QuestionsByTag({ user, page, tag }) {
                         </Link>
                     </div>
 
-                    <p className="ml-5 mb-7 text-sm text-gray-700">
+                    <p className="ml-5 mb-4 text-sm text-gray-700">
                         {tag[0].guidance 
                             ? 
                             tag[0].guidance 
@@ -40,6 +39,13 @@ export default function QuestionsByTag({ user, page, tag }) {
                             )
                         }
                     </p>
+
+                    <WatchTagButton
+                        tag={tag[0]}
+                        watched={watched}
+                        redirect={`/questions/by-tag/${tag[0].name}`}
+                        className={"block ml-5 mb-8"}
+                     />
                     
 
                     <p className="inline-block text-lg text-gray-800 ml-5 mb-5">

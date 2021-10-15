@@ -53,11 +53,13 @@ class QuestionController extends Controller
      */
     public function getQuestionsByTag(Request $request, $tag)
     {
-        $user = null; 
+        $user = null;
+        $watched = null;
 
         if (Auth::check())
         {
-            $user = Auth::user();
+            $user = User::find(Auth::user()->id);
+            $watched = $user->tags()->pluck('name');
         }
 
         $questionsByTag = Tag::with(['questions.answers', 'questions.tags', 'questions.user.answers'])
@@ -67,7 +69,8 @@ class QuestionController extends Controller
         return Inertia::render('QuestionsByTag', [
             'user' => $user, 
             'page' => 'questions',
-            'tag' => $questionsByTag
+            'tag' => $questionsByTag,
+            'watched' => $watched
         ]);
     }
 

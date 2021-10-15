@@ -39,6 +39,8 @@ Route::post('/answers/downvote', [AnswerController::class, 'downVote']);
 
 Route::get('/tags/edit/{tag}', [TagController::class, 'editTag']);
 Route::post('/tags/edit', [TagController::class, 'addGuidance']);
+Route::post('tags/watch', [TagController::class, 'watchTag']);
+Route::post('tags/unwatch', [TagController::class, 'unwatchTag']);
 
 Route::get('/questions/new', [QuestionController::class, 'create']);
 Route::post('/questions/comments', [QuestionController::class, 'postComment']);
