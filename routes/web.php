@@ -5,6 +5,7 @@ use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -52,6 +53,8 @@ Route::get('/questions/by-tag/{tag}', [QuestionController::class, 'getQuestionsB
 Route::get('/questions/{question:slug}', [QuestionController::class, 'index']);
 
 Route::get('/tags', [TagController::class, 'index']);
+
+Route::get('/search', [SearchController::class, 'index']);
 
 
 
