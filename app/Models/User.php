@@ -38,7 +38,7 @@ class User extends Authenticatable
      */
     public function tags()
     {
-        return $this->belognsToMany(Role::class)
+        return $this->belongsToMany(Tag::class)
             ->using(TagUser::class);
     }
 

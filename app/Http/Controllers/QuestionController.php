@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Collection;
+use App\Models\User;
 use App\Models\Tag;
 use App\Models\Question;
 use App\Models\Comment;
@@ -73,27 +75,56 @@ class QuestionController extends Controller
      * Get a user's watched questions
      * 
      * If no authenticated user or no watched quetsions, just newest
+     * 
+     * The query to get tags is not ideal and is just a work-around 
+     * 
+     * It needs fixing
+     * 
+     * https://stackoverflow.com/questions/69578939/how-to-write-an-eloquent-query-in-laravel-8-for-an-unknown-number-of-orwhere-con/69578992?noredirect=1
      */
     public function getQuestionsByWatched(Request $request)
     {
-        // for now just get newest, query watched once table created
         $user = null;
+        $tags = null;
 
         if (Auth::check())
         {
-            $user = Auth::user();
+            $user = User::find(Auth::user()->id);
+            $tags = $user->tags()->pluck('name');
         }
 
-        $questions = Question::with(['answers', 'tags', 'user.answers'])
-            ->orderBy('created_at', 'desc')
+        $questions = collect();
+
+        foreach($tags as $name)
+        {
+            $result = Tag::with([
+                'questions.answers', 
+                'questions.user.answers',
+                'questions.tags'
+            ])
+            ->where('name', $name)
             ->get();
-        $count = $questions->count();
+
+            $questions->push($result[0]->questions);
+        }
+
+        // try this instead:
+        // $questionsByWatchedTag = Tag::with([
+        //     'questions.answers', 
+        //     'questions.user.answers',
+        //     'questions.tags'
+        // ])
+        // ->whereIn('name', $tags)
+        // ->get();
 
         return Inertia::render('Home', [
             'user' => $user,
             'page' => 'home',
-            'questions' => $questions,
-            'count' => $count
+            'watched' => $tags,
+            'questionsByTag' => $questions
+                ->flatten()
+                ->unique('id')
+                ->all()
         ]);
     }
 

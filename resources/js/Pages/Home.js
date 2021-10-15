@@ -2,16 +2,16 @@ import React from "react"
 import Navbar from "@/Components/Navbar"
 import Grid from "@/Layouts/Grid"
 import Tag from "@/Components/Tag"
-import UserQuestionWidget from "@/Components/UserWidget"
+import RelativeDate from "@/Components/RelativeDate"
 import { Link } from "@inertiajs/inertia-react"
 
-export default function Home({ user, page, questions }) {
+export default function Home({ user, page, watched, questionsByTag, allQuestions = null }) {
   return (
     <>
         <Navbar user={user} />
 
         <Grid page={page}>
-          <div className="mt-5 mb-5 w-5/6">
+          <div className="mt-5 mb-1 w-5/6">
             <div className="w-full flex flex-row justify-between">
                 <h1 className="text-3xl mb-8 ml-5">Top Questions</h1>
 
@@ -23,79 +23,67 @@ export default function Home({ user, page, questions }) {
                     Ask Question
                 </Link>
             </div>
-
-            {/* <p className="ml-5 mb-7 text-sm text-gray-700">
-                {tag[0].guidance 
-                    ? 
-                    tag[0].guidance 
-                    : 
-                    (
-                        <span>
-                            The <Tag 
-                                tag={tag[0]} />
-                                tag has no usage guidance, can you <Link className="text-blue-600" href={`/tags/edit/${tag[0].name}`}>help us create it</Link>?
-                        </span>
-                    )
-                }
-            </p> */}
             
-
-            <p className="inline-block text-lg text-gray-800 ml-5 mb-5">
-            {new Intl.NumberFormat().format(questions.length)} questions
-            </p>
             <hr />
           </div>
 
                 
 
-          <div id="questions">
-          {questions.map((question) => (
-              <div className="w-5/6 flex flex-row justify-start border-b border-gray-300 bottom-1 py-4">
-              
-              <div className="ml-6 text-center">
-                  <p className="text-gray-500 font-semibold">
-                  {question.votes}
-                  <span className="block text-xs text-gray-500">votes</span>
-                  </p>
-                  
+            <div id="questions">
+                {Object.values(questionsByTag).length ? Object.values(questionsByTag).reverse().map((question) => (
+                    <div className="w-5/6 flex flex-row justify-start border-b border-gray-300 bottom-1 py-4">
+                        
+                        <div className="w-1/4 ml-6 flex flex-row justify-between">
+                            <p className="text-gray-500 text-lg font-semibold text-center">
+                                {question.votes}
+                                <span className="block text-xs text-gray-500">votes</span>
+                            </p>
+                            
 
-                  <p className="mt-2 text-gray-500 font-semibold">
-                  {question.answers.length}
-                  <span className="block text-xs text-gray-500">answers</span>
-                  </p>
-                  
+                            <p className="text-gray-500 text-lg font-semibold text-center">
+                                {question.answers.length}
+                                <span className="block text-xs text-gray-500">answers</span>
+                            </p>
+                            
 
-                  <div className="flex flex-row justify-start mt-3">
-                  <p className="text-xs text-gray-500">{question.views}</p>
-                  <span className="text-xs text-gray-500 ml-1">views</span>
-                  </div>
-                  
-              </div>
+                            <p className="text-gray-500 text-lg font-semibold text-center">
+                                {question.views}
+                                <span className="block text-xs text-gray-500">views</span>
+                            </p>
+                            
+                        </div>
 
-              <div className="ml-6 align-top w-full">
-                  <Link href={`/questions/${question.slug}`}>
-                  <p className="text-blue-600 text-lg leading-tight font-medium">{question.title}</p>
-                  </Link>
-                  
+                        <div className="ml-7 w-full">
+                            <Link href={`/questions/${question.slug}`}>
+                                <p className="text-blue-600 text-lg leading-tight font-medium">{question.title}</p>
+                            </Link>
 
-                  <p className="text-sm text-gray-800 mt-2">
-                  {question.body.substr(0, 170).replace(/[^\w\s]/gi, "")}...
-                  </p>
+                            <div className="mt-2 flex flex-col xl:flex-row xl:justify-between">
+                                <div>
+                                    {question.tags.map((tag) => (
+                                        <Tag tag={tag} />
+                                    ))}
+                                </div>
 
-                  <div className="mt-1 flex flex-col xl:flex-row xl:justify-between">
-                  <div>
-                      {question.tags.map((tag) => (
-                          <Tag tag={tag} />
-                      ))}
-                  </div>
+                                <p className="text-gray-500 text-sm self-end">
+                                    Question asked <RelativeDate UTCTime={question.created_at} />
 
-                  <UserQuestionWidget question={question} />
-                  </div>
-                  
-              </div>
-              </div>
-          ))}
-          </div>
+                                    <Link href={`/users/${question.user.name}`}>
+                                        <span className="text-blue-600"> {user.name}</span>
+
+                                        <span className="font-bold text-gray-500"> {question.user.answers.length}</span>
+                                    </Link>
+                                    
+                                </p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                )) : (
+                    null
+                    // here render a view of all questions
+                )}
+            </div>
         </Grid>
     </>
   )
