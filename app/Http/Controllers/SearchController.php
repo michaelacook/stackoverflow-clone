@@ -24,7 +24,7 @@ class SearchController extends Controller
         $query = $request->query('q');
 
         $questions = Question::with(['answers', 'tags', 'user'])
-            ->where('title', 'like', $query)
+            ->where('title', 'like', '%' . $query . '%')
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -34,7 +34,8 @@ class SearchController extends Controller
             'user' => $user, 
             'page' => 'questions',
             'questions' => $questions,
-            'count' => $count
+            'count' => $count,
+            'query' => $query
         ]);
     }
 }

@@ -1,9 +1,26 @@
-import React from "react" 
+import React, { useState } from "react" 
 import { Link } from '@inertiajs/inertia-react'
+import { Inertia } from "@inertiajs/inertia"
 
 export default function Navbar({ user }) {
+  const [query, setQuery] = useState("")
+
+  function submit(e) {
+      if (query) {
+          e.preventDefault()
+          Inertia.get(`/search?q=${query}`)
+      }
+  }
+
   return (
-      <div className="sticky top-0 z-50">
+      <div 
+        className="sticky top-0 z-50"
+        onKeyDown={(e) => {
+            if (e.key === "Enter") {
+                submit(e)
+            }
+        }}
+      >
           <div className="h-1 bg-yellow-600"></div>
           <div className="bg-gray-100 shadow">
             <div className="container md:w-4/5 lg:w-3/5 2xl:w-8/12 mx-auto flex flex-row justify-between">
@@ -35,6 +52,8 @@ export default function Navbar({ user }) {
                     <input 
                         type="text" 
                         placeholder="Search..." 
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
                         className="inline-block w-full border-gray-300 bg-white rounded pl-8 placeholder-gray-400 text-xs"
                     />
                 </div>
