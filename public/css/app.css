@@ -32126,6 +32126,10 @@ select {
   background-color: transparent !important;
 }
 
+.contains-watched {
+  background-color: #FDF7E2 !important;
+}
+
 input {
   transition: all 0.3s ease !important;
 }

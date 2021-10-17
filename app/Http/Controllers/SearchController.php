@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use App\Models\User;
 use App\Models\Question;
 
 class SearchController extends Controller
@@ -15,10 +16,12 @@ class SearchController extends Controller
     public function index(Request $request)
     {
         $user = null;
+        $watched = null;
 
         if (Auth::check())
         {
             $user = Auth::user();
+            $watched = User::find(Auth::id())->tags()->pluck('name');
         }
 
         $query = $request->query('q');
@@ -35,7 +38,8 @@ class SearchController extends Controller
             'page' => 'questions',
             'questions' => $questions,
             'count' => $count,
-            'query' => $query
+            'query' => $query,
+            'watched' => $watched
         ]);
     }
 }
