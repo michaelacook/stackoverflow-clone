@@ -41,7 +41,7 @@ export default function Login({ status, canResetPassword }) {
 
             <div className="h-screen flex flex-row justify-center bg-gray-100">
 
-                <div className="absolute top-60 lg:w-2/5 xl:w-1/5">
+                <div className="absolute top-56 lg:w-2/5 xl:w-1/5">
                     <form onSubmit={submit}>
 
                         <div className="flex flex-row justify-center mb-6">
