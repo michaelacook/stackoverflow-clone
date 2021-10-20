@@ -18,6 +18,14 @@
     background-color: #FDF7E2 !important;
 }
 
+.bg-facebook {
+    background-color: #3b5998 !important;
+}
+
+.bg-facebook-dark {
+    background-color: #314A86 !important;
+}
+
 input {
     transition: all 0.3s ease !important;
 }

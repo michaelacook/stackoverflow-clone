@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Link } from '@inertiajs/inertia-react'
 import { Inertia } from "@inertiajs/inertia"
 
-export default function Navbar({ user }) {
+export default function Navbar({ user, className = "", sticky = true }) {
   const [query, setQuery] = useState("")
 
   function submit(e) {
@@ -14,7 +14,7 @@ export default function Navbar({ user }) {
 
   return (
       <div 
-        className="sticky top-0 z-50"
+        className={`${sticky ? "sticky top-0 z-50" : "block"} ${className}`}
         onKeyDown={(e) => {
             if (e.key === "Enter") {
                 submit(e)

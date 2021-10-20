@@ -6797,6 +6797,10 @@ select {
   width: 8rem;
 }
 
+.w-35 {
+  width: 35%;
+}
+
 .w-36 {
   width: 9rem;
 }
@@ -32130,6 +32134,14 @@ select {
   background-color: #FDF7E2 !important;
 }
 
+.bg-facebook {
+  background-color: #3b5998 !important;
+}
+
+.bg-facebook-dark {
+  background-color: #314A86 !important;
+}
+
 input {
   transition: all 0.3s ease !important;
 }
@@ -38210,6 +38222,10 @@ p code {
 
   .sm\:w-32 {
     width: 8rem;
+  }
+
+  .sm\:w-35 {
+    width: 35%;
   }
 
   .sm\:w-36 {
@@ -69503,6 +69519,10 @@ p code {
     width: 8rem;
   }
 
+  .md\:w-35 {
+    width: 35%;
+  }
+
   .md\:w-36 {
     width: 9rem;
   }
@@ -100792,6 +100812,10 @@ p code {
 
   .lg\:w-32 {
     width: 8rem;
+  }
+
+  .lg\:w-35 {
+    width: 35%;
   }
 
   .lg\:w-36 {
@@ -132085,6 +132109,10 @@ p code {
     width: 8rem;
   }
 
+  .xl\:w-35 {
+    width: 35%;
+  }
+
   .xl\:w-36 {
     width: 9rem;
   }
@@ -163374,6 +163402,10 @@ p code {
 
   .\32xl\:w-32 {
     width: 8rem;
+  }
+
+  .\32xl\:w-35 {
+    width: 35%;
   }
 
   .\32xl\:w-36 {
