@@ -82,7 +82,7 @@ export default function Login({ status, canResetPassword }) {
                                     className="mt-1 block w-full text-sm rounded bg-white border border-gray-400"
                                     autoComplete="username"
                                     isFocused={true}
-                                    handleChange={onHandleChange}
+                                    onChange={onHandleChange}
                                 />
                             </div>
 
@@ -106,7 +106,7 @@ export default function Login({ status, canResetPassword }) {
                                     value={data.password}
                                     className="mt-1 block w-full text-sm rounded bg-white border-gray-400"
                                     autoComplete="current-password"
-                                    handleChange={onHandleChange}
+                                    onChange={onHandleChange}
                                 />
                             </div>
 
