@@ -4,8 +4,11 @@ import Grid from "@/Layouts/Grid"
 import Tag from "@/Components/Tag"
 import RelativeDate from "@/Components/RelativeDate"
 import { Link } from "@inertiajs/inertia-react"
+import { usePage } from '@inertiajs/inertia-react'
 
 export default function Home({ user, page, watched, questionsByTag, allQuestions = null }) {
+  const { auth } = usePage().props
+  
   return (
     <>
         <Navbar user={user} />
