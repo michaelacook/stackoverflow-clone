@@ -3,12 +3,12 @@ import Navbar from "@/Components/Navbar"
 import Grid from "@/Layouts/Grid"
 import { Link, usePage } from "@inertiajs/inertia-react"
 
-export default function Account({ user, page }) {
+export default function Account({ page }) {
     const { auth } = usePage().props
 
     return (
         <>
-            <Navbar user={user} />
+            <Navbar user={auth.user} />
 
             <Grid page={page}>
                 <div className="p-6">
@@ -18,7 +18,7 @@ export default function Account({ user, page }) {
                         <img src="default-profile.png" alt="profile-image" className="w-36 h-36 shadow-md rounded-sm" />
 
                         <div className="ml-5">
-                            <h1 className="text-4xl mt-3">{user.name}</h1>
+                            <h1 className="text-4xl mt-3">{auth.user.name}</h1>
                             <Link 
                                 href={route('logout')} 
                                 method="post" 
@@ -38,7 +38,7 @@ export default function Account({ user, page }) {
                     </div>
 
                     <div className="mt-5">
-                        <h1 className="font-bold text-blue-600">Answers <span className="text-gray-500">({user.answers.length})</span></h1>
+                        <h1 className="font-bold text-blue-600">Answers <span className="text-gray-500">({auth.user.answers.length})</span></h1>
                         <hr />
                         
                         <div>
