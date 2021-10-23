@@ -152,7 +152,7 @@ export default function Question({
                                     method="post"
                                     preserveScroll
                                     data={{
-                                        user,
+                                        user: auth.user,
                                         question,
                                         comment: questionComment,
                                     }}
