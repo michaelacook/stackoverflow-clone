@@ -22,8 +22,7 @@ import QuestionTags from "@/Components/QuestionTags"
 import AnswerComments from "@/Components/AnswerComments"
 import Tag from "@/Components/Tag"
 
-export default function Question({ 
-    user, 
+export default function Question({
     page, 
     question, 
     answers,
@@ -49,7 +48,7 @@ export default function Question({
 
     return (
         <>
-            <Navbar user={user} />
+            <Navbar user={auth.user} />
             <Grid page={page}>
 
                 <div className="w-full mt-5 ml-6 mb-6">

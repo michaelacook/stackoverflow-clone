@@ -5,12 +5,12 @@ import { Link, usePage } from "@inertiajs/inertia-react"
 import Tag from "@/Components/Tag"
 import UserQuestionWidget from "@/Components/UserWidget"
 
-export default function Questions({ user, page, questions, count }) {
+export default function Questions({ page, questions, count }) {
   const { auth } = usePage().props
   
   return (
       <React.Fragment>
-        <Navbar user={user} />
+        <Navbar user={auth.user} />
 
         <Grid page={page}>
             <div className="w-full mt-5 mb-5">

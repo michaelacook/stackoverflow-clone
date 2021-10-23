@@ -3,7 +3,7 @@ import Navbar from "@/Components/Navbar"
 import { Inertia } from "@inertiajs/inertia"
 import { Link, usePage } from "@inertiajs/inertia-react"
 
-export default function NewQuestion({ user, page, tagSuggestions }) {
+export default function NewQuestion({ page, tagSuggestions }) {
     const { auth } = usePage().props
     const [tags, setTags] = useState([])
     const [tagInput, setTagInput] = useState("")
@@ -68,7 +68,7 @@ export default function NewQuestion({ user, page, tagSuggestions }) {
 
     return (
         <div className="h-screen overflow-auto" style={{ background: "#F1F2F3" }}>
-            <Navbar user={user} />
+            <Navbar user={auth.user} />
 
             <div className="container md:w-4/5 lg:w-3/5 2xl:w-8/12 mx-auto p-7">
                     

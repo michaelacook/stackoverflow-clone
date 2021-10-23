@@ -20,13 +20,6 @@ class QuestionController extends Controller
      */
     public function index(Question $question)
     {
-        $user = null;
-
-        if (Auth::check())
-        {
-            $user = Auth::user();
-        }
-
         $question->views++;
         $question->save();
 
@@ -39,7 +32,6 @@ class QuestionController extends Controller
             ->get();
 
         return Inertia::render('Question', [
-            'user' => $user,
             'page' => 'questions',
             'question' => $question,
             'tags' => $question->tags()->get(),
@@ -53,24 +45,17 @@ class QuestionController extends Controller
      */
     public function getQuestionsByTag(Request $request, $tag)
     {
-        $user = null;
-        $watched = null;
-
-        if (Auth::check())
-        {
-            $user = User::find(Auth::user()->id);
-            $watched = $user->tags()->pluck('name');
-        }
-
-        $questionsByTag = Tag::with(['questions.answers', 'questions.tags', 'questions.user.answers'])
+        $questionsByTag = Tag::with([
+            'questions.answers', 
+            'questions.tags', 
+            'questions.user.answers'
+        ])
             ->where('name', $tag)
             ->get();
 
         return Inertia::render('QuestionsByTag', [
-            'user' => $user, 
             'page' => 'questions',
             'tag' => $questionsByTag,
-            'watched' => $watched
         ]);
     }
 
@@ -87,13 +72,13 @@ class QuestionController extends Controller
      */
     public function getQuestionsByWatched(Request $request)
     {
-        $user = null;
         $tags = null;
 
         if (Auth::check())
         {
-            $user = User::find(Auth::user()->id);
-            $tags = $user->tags()->pluck('name');
+            $tags = User::find(Auth::user()->id)
+                ->tags()
+                ->pluck('name');
         }
 
         $questions = collect();
@@ -121,7 +106,6 @@ class QuestionController extends Controller
         // ->get();
 
         return Inertia::render('Home', [
-            'user' => $user,
             'page' => 'home',
             'watched' => $tags,
             'questionsByTag' => $questions
@@ -136,15 +120,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        $user = null;
-
-        if (Auth::check())
-        {
-            $user = Auth::user();
-        }
-
         return Inertia::render('NewQuestion', [
-            'user' => $user,
             'page' => 'questions',
             'tagSuggestions' => Tag::all()
         ]);
@@ -191,20 +167,12 @@ class QuestionController extends Controller
      */
     public function all()
     {
-        $user = null;
-
-        if (Auth::check())
-        {
-            $user = Auth::user();
-        }
-
         $questions = Question::with(['answers', 'tags', 'user.answers'])
             ->orderBy('created_at', 'desc')
             ->get();
         $count = $questions->count();
 
         return Inertia::render('Questions', [
-            'user' => $user,
             'page' => 'questions',
             'questions' => $questions,
             'count' => $count

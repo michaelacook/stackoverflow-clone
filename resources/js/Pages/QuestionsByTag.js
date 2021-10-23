@@ -6,12 +6,12 @@ import { Link, usePage } from "@inertiajs/inertia-react"
 import UserQuestionWidget from "@/Components/UserWidget"
 import WatchTagButton from "@/Components/WatchTagButton"
 
-export default function QuestionsByTag({ user, page, tag, watched }) {
+export default function QuestionsByTag({ page, tag }) {
     const { auth } = usePage().props
     
     return (
         <>
-            <Navbar user={user} />
+            <Navbar user={auth.user} />
 
             <Grid page={page}>
                 <div className="mt-5 mb-5 w-5/6">
@@ -44,7 +44,7 @@ export default function QuestionsByTag({ user, page, tag, watched }) {
 
                     <WatchTagButton
                         tag={tag[0]}
-                        watched={watched}
+                        watched={auth.watchedTags.map((tag) => tag.name)}
                         redirect={`/questions/by-tag/${tag[0].name}`}
                         className={"block ml-5 mb-8"}
                      />

@@ -6,12 +6,12 @@ import RelativeDate from "@/Components/RelativeDate"
 import { Link } from "@inertiajs/inertia-react"
 import { usePage } from '@inertiajs/inertia-react'
 
-export default function Home({ user, page, watched, questionsByTag, allQuestions = null }) {
+export default function Home({ page, questionsByTag, allQuestions = null }) {
   const { auth } = usePage().props
   
   return (
     <>
-        <Navbar user={user} />
+        <Navbar user={auth.user} />
 
         <Grid page={page}>
           <div className="mt-5 mb-1 w-5/6">
@@ -72,7 +72,7 @@ export default function Home({ user, page, watched, questionsByTag, allQuestions
                                     Question asked <RelativeDate UTCTime={question.created_at} />
 
                                     <Link href={`/users/${question.user.name}`}>
-                                        <span className="text-blue-600"> {user.name}</span>
+                                        <span className="text-blue-600"> {question.user.name}</span>
 
                                         <span className="font-bold text-gray-500"> {question.user.answers.length}</span>
                                     </Link>
