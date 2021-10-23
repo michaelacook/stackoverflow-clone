@@ -3,7 +3,7 @@ import Navbar from "@/Components/Navbar"
 import Grid from "@/Layouts/Grid"
 import Upvote from "../Components/Upvote"
 import Downvote from "../Components/Downvote"
-import { Link } from "@inertiajs/inertia-react"
+import { Link, usePage } from "@inertiajs/inertia-react"
 import { Inertia } from '@inertiajs/inertia'
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import {
@@ -30,6 +30,7 @@ export default function Question({
     tags, 
     comments
  }) {
+    const { auth } = usePage().props
     const [addComment, setAddComment] = useState(false)
     const [questionComment, setQuestionComment] = useState("")
     const [answerBody, setAnswerBody] = useState("")

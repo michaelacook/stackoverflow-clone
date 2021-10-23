@@ -1,9 +1,10 @@
 import React, { useState, useRef } from "react"
 import Navbar from "@/Components/Navbar"
 import { Inertia } from "@inertiajs/inertia"
-import { Link } from "@inertiajs/inertia-react"
+import { Link, usePage } from "@inertiajs/inertia-react"
 
 export default function NewQuestion({ user, page, tagSuggestions }) {
+    const { auth } = usePage().props
     const [tags, setTags] = useState([])
     const [tagInput, setTagInput] = useState("")
     const [title, setTitle] = useState("")

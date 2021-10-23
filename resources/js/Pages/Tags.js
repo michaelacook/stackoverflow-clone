@@ -3,8 +3,10 @@ import Grid from "@/Layouts/Grid"
 import Navbar from "@/Components/Navbar"
 import Tag from "@/Components/Tag"
 import RelativeDate from "@/Components/RelativeDate"
+import { usePage } from "@inertiajs/inertia-react"
 
 export default function Tags({ user, page, tags }) {
+    const { auth } = usePage().props
     const [filterTerm, setFilterTerm] = useState("")
 
     return (

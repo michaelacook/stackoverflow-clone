@@ -1,11 +1,12 @@
 import React from "react"
-import { Link } from "@inertiajs/inertia-react"
+import { Link, usePage } from "@inertiajs/inertia-react"
 import RelativeDate from "@/Components/RelativeDate"
 import Navbar from "@/Components/Navbar"
 import Grid from "@/Layouts/Grid"
 import Tag from "@/Components/Tag"
 
 export default function SearchResults({ user, page, questions, count, query, watched }) {
+    const { auth } = usePage().props
 
     function containsTag(questionTags, watched) {
         for (let tag of questionTags) {

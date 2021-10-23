@@ -1,11 +1,13 @@
 import React from "react"
 import Navbar from "@/Components/Navbar"
 import Grid from "@/Layouts/Grid"
-import { Link } from "@inertiajs/inertia-react"
+import { Link, usePage } from "@inertiajs/inertia-react"
 import Tag from "@/Components/Tag"
 import UserQuestionWidget from "@/Components/UserWidget"
 
 export default function Questions({ user, page, questions, count }) {
+  const { auth } = usePage().props
+  
   return (
       <React.Fragment>
         <Navbar user={user} />

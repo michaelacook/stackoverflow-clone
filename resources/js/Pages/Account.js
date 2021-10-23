@@ -1,9 +1,11 @@
 import React from "react"
 import Navbar from "@/Components/Navbar"
 import Grid from "@/Layouts/Grid"
-import { Link } from "@inertiajs/inertia-react"
+import { Link, usePage } from "@inertiajs/inertia-react"
 
 export default function Account({ user, page }) {
+    const { auth } = usePage().props
+
     return (
         <>
             <Navbar user={user} />

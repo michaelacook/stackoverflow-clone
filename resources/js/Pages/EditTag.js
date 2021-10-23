@@ -3,8 +3,10 @@ import Navbar from "@/Components/Navbar"
 import Grid from "@/Layouts/Grid"
 import Tag from "@/Components/Tag"
 import { Inertia } from "@inertiajs/inertia"
+import { usePage } from "@inertiajs/inertia-react"
 
 export default function EditTag({ user, page, tag }) {
+    const { auth } = usePage().props
     const [body, setBody] = useState("")
     const [bodyError, setBodyError] = useState(false)
 
