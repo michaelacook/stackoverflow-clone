@@ -192,7 +192,7 @@ export default function Question({
 
                     {answers.length ? (
                         answers.map((answer) => (
-                            <div>
+                            <div id={answer.id}>
                                 <div className="flex flex-row">
                                     <div id="votes" className="inline-block mr-4 mt-4">
                                         <Upvote
