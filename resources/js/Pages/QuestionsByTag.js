@@ -14,9 +14,9 @@ export default function QuestionsByTag({ page, tag }) {
             <Navbar user={auth.user} />
 
             <Grid page={page}>
-                <div className="mt-5 mb-5 w-5/6">
+                <div className="mt-5 mb-5 lg:w-5/6 w-11/12">
                     <div className="w-full flex flex-row justify-between">
-                        <h1 className="text-3xl mb-8 ml-5">Questions tagged [{tag[0].name}]</h1>
+                        <h1 className="text-lg lg:text-3xl mb-8 ml-5">Questions tagged [{tag[0].name}]</h1>
 
                         <Link 
                             as="button" 
