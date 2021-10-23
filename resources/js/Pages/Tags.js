@@ -5,13 +5,13 @@ import Tag from "@/Components/Tag"
 import RelativeDate from "@/Components/RelativeDate"
 import { usePage } from "@inertiajs/inertia-react"
 
-export default function Tags({ user, page, tags }) {
+export default function Tags({ page, tags }) {
     const { auth } = usePage().props
     const [filterTerm, setFilterTerm] = useState("")
 
     return (
         <>
-            <Navbar user={user} />
+            <Navbar user={auth.user} />
 
             <Grid page={page}>
                 <div className="w-full mt-5 ml-6 mb-6">

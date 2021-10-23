@@ -5,7 +5,7 @@ import Tag from "@/Components/Tag"
 import { Inertia } from "@inertiajs/inertia"
 import { usePage } from "@inertiajs/inertia-react"
 
-export default function EditTag({ user, page, tag }) {
+export default function EditTag({ page, tag }) {
     const { auth } = usePage().props
     const [body, setBody] = useState("")
     const [bodyError, setBodyError] = useState(false)
@@ -21,7 +21,7 @@ export default function EditTag({ user, page, tag }) {
 
     return (
         <>
-            <Navbar user={user} />
+            <Navbar user={auth.user} />
 
             <Grid page={page}>
                 <div className="m-5">

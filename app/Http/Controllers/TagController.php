@@ -15,18 +15,10 @@ class TagController extends Controller
      */
     public function index()
     {
-        $user = null;
-
-        if (Auth::check())
-        {
-            $user = Auth::user();
-        }
-
         $tags = Tag::with('questions')->get();
 
         return Inertia::render('Tags', [
             'tags' => $tags,
-            'user' => $user, 
             'page' => 'tags'
         ]);
     }
@@ -35,17 +27,9 @@ class TagController extends Controller
      * render the page to add tag guidance
      */
     public function editTag($tag) {
-        $user = null;
-
         $tag = Tag::where('name', $tag)->get();
 
-        if (Auth::check())
-        {
-            $user = Auth::user();
-        }
-
         return Inertia::render('EditTag', [
-            'user' => $user,
             'page' => 'tags',
             'tag' => $tag
         ]);
