@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use App\Models\User;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -33,11 +35,23 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request)
     {
+        $user = null;
+
+        if (Auth::check())
+        {
+            $user = User::with([
+                'questions', 
+                'answers.question',
+                'comments'
+            ])
+            ->find(Auth::id());
+        }
+
         return array_merge(parent::share($request), [
-            'auth' => [
-                'user' => $request->user(),
+            'auth' => $user ? [
+                'user' => $user,
                 'watchedTags' => $request->user()->tags()->get()
-            ],
+            ] : $user,
         ]);
     }
 }
