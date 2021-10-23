@@ -5,10 +5,12 @@ import Navbar from "@/Components/Navbar"
 import Grid from "@/Layouts/Grid"
 import Tag from "@/Components/Tag"
 
-export default function SearchResults({ user, page, questions, count, query, watched }) {
+export default function SearchResults({ page, questions, count, query }) {
     const { auth } = usePage().props
 
     function containsTag(questionTags, watched) {
+        watched = watched.map((watched) => watched.name)
+
         for (let tag of questionTags) {
             if (watched.includes(tag.name)) {
                 return true
@@ -19,7 +21,7 @@ export default function SearchResults({ user, page, questions, count, query, wat
 
     return (
         <>
-            <Navbar user={user} />
+            <Navbar user={auth.user} />
 
             <Grid page={page}>
                 <div className="mt-5 w-5/6">
@@ -46,7 +48,7 @@ export default function SearchResults({ user, page, questions, count, query, wat
                     {questions.length ? questions.map((question) => (
                         <div className={
                             `w-5/6 px-3 flex flex-row justify-start border-b border-gray-300 bottom-1 py-4
-                            ${containsTag(question.tags, watched) ? "contains-watched" : ""}
+                            ${containsTag(question.tags, auth.watchedTags) ? "contains-watched" : ""}
                             `
                         }>
                             <div className="flex flex-col justify-between">
@@ -58,7 +60,7 @@ export default function SearchResults({ user, page, questions, count, query, wat
                                     
                                     <p className={`
                                         p-2 mt-2 font-semibold text-center rounded
-                                        ${containsTag(question.tags, watched) ? "bg-green-400 text-white" : "border border-green-400 text-gray-500"}
+                                        ${containsTag(question.tags, auth.watchedTags) ? "bg-green-400 text-white" : "border border-green-400 text-gray-500"}
                                     `}>
                                         {question.answers.length}
                                         <span className="block text-xs">answers</span>
@@ -86,7 +88,7 @@ export default function SearchResults({ user, page, questions, count, query, wat
                                         Question asked <RelativeDate UTCTime={question.created_at} />
 
                                         <Link href={`/users/${question.user.name}`}>
-                                            <span className="text-blue-600"> {user.name}</span>
+                                            <span className="text-blue-600"> {question.user.name}</span>
                                         </Link>
                                         
                                     </p>
