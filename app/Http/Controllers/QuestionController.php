@@ -73,27 +73,26 @@ class QuestionController extends Controller
     public function getQuestionsByWatched(Request $request)
     {
         $tags = null;
+        $questions = collect();
 
         if (Auth::check())
         {
             $tags = User::find(Auth::user()->id)
                 ->tags()
                 ->pluck('name');
-        }
 
-        $questions = collect();
-
-        foreach($tags as $name)
-        {
-            $result = Tag::with([
-                'questions.answers', 
-                'questions.user.answers',
-                'questions.tags'
-            ])
-            ->where('name', $name)
-            ->get();
-
-            $questions->push($result[0]->questions);
+            foreach($tags as $name)
+            {
+                $result = Tag::with([
+                    'questions.answers', 
+                    'questions.user.answers',
+                    'questions.tags'
+                ])
+                ->where('name', $name)
+                ->get();
+    
+                $questions->push($result[0]->questions);
+            }
         }
 
         // try this instead:
