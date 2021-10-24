@@ -20,8 +20,14 @@ class QuestionController extends Controller
      */
     public function index(Question $question)
     {
-        $question->views++;
-        $question->save();
+        $currentUrl = url()->current();
+        $previousUrl = url()->previous();
+
+        if ($currentUrl !== $previousUrl)
+        {
+            $question->views++;
+            $question->save();
+        }
 
         $answers = Answer::with(['comments.user', 'user.answers'])
             ->where('question_id', $question->id)
