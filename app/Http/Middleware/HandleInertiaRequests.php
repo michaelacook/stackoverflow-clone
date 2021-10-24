@@ -48,10 +48,12 @@ class HandleInertiaRequests extends Middleware
         }
 
         return array_merge(parent::share($request), [
-            'auth' => $user ? [
-                'user' => $user,
-                'watchedTags' => $request->user()->tags()->get()
-            ] : $user,
+            'auth' => [
+                'user' => $user ? $user : null,
+                'watchedTags' => $user 
+                    ? $request->user()->tags()->get() 
+                    : null
+            ],
         ]);
     }
 }
