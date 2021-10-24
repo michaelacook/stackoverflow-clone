@@ -42,13 +42,15 @@ export default function QuestionsByTag({ page, tag }) {
                         }
                     </p>
 
-                    <WatchTagButton
-                        tag={tag[0]}
-                        watched={auth.watchedTags.map((tag) => tag.name)}
-                        redirect={`/questions/by-tag/${tag[0].name}`}
-                        className={"block ml-5 mb-8"}
-                     />
-                    
+                    {auth.user ? (
+                        <WatchTagButton
+                            tag={tag[0]}
+                            watched={auth.watchedTags.map((tag) => tag.name)}
+                            redirect={`/questions/by-tag/${tag[0].name}`}
+                            className={"block ml-5 mb-8"}
+                        />
+                    ) : null}
+                
 
                     <p className="inline-block text-lg text-gray-800 ml-5 mb-5">
                     {new Intl.NumberFormat().format(tag[0].questions.length)} questions
