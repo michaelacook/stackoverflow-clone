@@ -12,6 +12,7 @@ use App\Models\Tag;
 use App\Models\Question;
 use App\Models\Comment;
 use App\Models\Answer;
+use App\Models\QuestionVote;
 
 class QuestionController extends Controller
 {
@@ -211,8 +212,30 @@ class QuestionController extends Controller
     {
         $id = $request->input('id');
         $question = Question::find($id);
-        $question->votes++;
-        $question->save();
+        $upVote = QuestionVote::where('user_id', Auth::id())
+            ->where('direction', 1)
+            ->where('question_id', $question->id);
+
+        if ($upVote->doesntExist()) 
+        {
+            $vote = new QuestionVote;
+            $vote->direction = 1;
+            $vote->user_id = Auth::id();
+            $vote->question_id = $question->id;
+            $vote->save();
+
+            $downVote = QuestionVote::where('user_id', Auth::id())
+                ->where('direction', 0)
+                ->where('question_id', $question->id);
+            
+            if ($downVote->exists())
+            {
+                $downVote->delete();
+            }
+
+            $question->votes++;
+            $question->save();
+        }
 
         $url = "/questions" . "/" . $question->slug;
 
@@ -226,8 +249,31 @@ class QuestionController extends Controller
     {
         $id = $request->input('id');
         $question = Question::find($id);
-        $question->votes--;
-        $question->save();
+        $downVote = QuestionVote::where('user_id', Auth::id())
+            ->where('direction', 0)
+            ->where('question_id', $question->id);
+
+        if ($downVote->doesntExist()) 
+        {
+            $vote = new QuestionVote;
+            $vote->direction = 0;
+            $vote->user_id = Auth::id();
+            $vote->question_id = $question->id;
+            $vote->save();
+
+            $upVote = QuestionVote::where('user_id', Auth::id())
+                ->where('direction', 1)
+                ->where('question_id', $question->id);
+            
+            if ($upVote->exists())
+            {
+                $upVote->delete();
+            }
+
+            $question->votes--;
+            $question->save();
+        }
+        
 
         $url = "/questions" . "/" . $question->slug;
 

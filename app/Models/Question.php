@@ -30,6 +30,11 @@ class Question extends Model
             ->using(QuestionTag::class);
     }
 
+    public function votes()
+    {
+        return $this->hasMany(QuestionVote::class);
+    }
+
     protected $fillable = [
         'user_id',
         'title',
