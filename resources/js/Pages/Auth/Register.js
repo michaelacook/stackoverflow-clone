@@ -18,18 +18,18 @@ export default function Register() {
     useEffect(() => {
         return () => {
             reset('password', 'password_confirmation');
-        };
-    }, []);
+        }
+    }, [])
 
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
-    };
+    }
 
     const submit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        post(route('register'));
-    };
+        post(route('register'))
+    }
 
     return (
         <div className="h-screen">
@@ -40,7 +40,7 @@ export default function Register() {
 
             <div className="h-screen flex flex-row justify-center bg-gray-100">
 
-                <div className="absolute w-full top-52 flex flex-row justify-center bg-gray-100">
+                <div className="absolute w-full top-48 flex flex-row justify-center bg-gray-100">
                     <div className="lg:w-2/5 xl:w-1/5">
                         <div className="flex flex-row justify-center mb-6">
                             <svg aria-hidden="true" width="32" height="37" viewBox="0 0 32 37">
