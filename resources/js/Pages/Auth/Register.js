@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
-import Button from '@/Components/Button';
-import Navbar from '@/Components/Navbar';
-import FacebookIcon from '@/Components/FacebookIcon';
-import GoogleIcon from '@/Components/GoogleIcon';
-import GitHubIcon from '@/Components/GitHubIcon';
-import Label from '@/Components/Label';
-import ValidationErrors from '@/Components/ValidationErrors';
-import { Head, Link, useForm } from '@inertiajs/inertia-react';
+import React, { useEffect } from 'react'
+import Navbar from '@/Components/Navbar'
+import FacebookIcon from '@/Components/FacebookIcon'
+import GoogleIcon from '@/Components/GoogleIcon'
+import GitHubIcon from '@/Components/GitHubIcon'
+import Label from '@/Components/Label'
+import ValidationErrors from '@/Components/ValidationErrors'
+import { Head, Link, useForm } from '@inertiajs/inertia-react'
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -142,5 +141,5 @@ export default function Register() {
                 </div>
             </div>
         </div>
-    );
+    )
 }
