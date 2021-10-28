@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import RelativeDate from "./RelativeDate"
 import { Link } from "@inertiajs/inertia-react"
 
-export default function AnswerComments({ answer, question }) {
+export default function AnswerComments({ answer, question, auth }) {
     const [addComment, setAddComment] = useState(false)
     const [answerComment, setAnswerComment] = useState("")
 
@@ -30,7 +30,7 @@ export default function AnswerComments({ answer, question }) {
             : null}
 
             <div className="ml-14 mt-2 mb-5">
-                {!addComment ? (
+                {!addComment && auth ? (
                     <span 
                         onClick={() => setAddComment(true)}
                         className="text-sm text-gray-400 hover:text-blue-400 cursor-pointer"
@@ -38,7 +38,7 @@ export default function AnswerComments({ answer, question }) {
                         Add a comment
                     </span>
                 ) 
-                : (
+                : auth ? (
                     <div className="flex flex-row justify-start">
                         <input 
                             type="text" 
@@ -80,7 +80,7 @@ export default function AnswerComments({ answer, question }) {
                             Cancel
                         </button>
                         </div>
-                    )}  
+                    ) : null}  
                 </div>
             <hr />
         </>

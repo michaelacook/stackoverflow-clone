@@ -128,7 +128,8 @@ export default function Question({
                     : null}
 
                     <div className="ml-14 mt-2 mb-5">
-                        {!addComment ? (
+                        
+                        {(!addComment && auth.user) ? (
                             <span 
                                 onClick={() => setAddComment(true)}
                                 className="text-sm text-gray-400 hover:text-blue-400 cursor-pointer"
@@ -136,7 +137,7 @@ export default function Question({
                                 Add a comment
                             </span>
                         ) 
-                        : (
+                        : auth.user ? (
                             <div className="flex flex-row justify-start">
                                 <input 
                                     type="text" 
@@ -178,11 +179,14 @@ export default function Question({
                                     Cancel
                                 </button>
                              </div>
-                        )}
+                        ) : null}
                         
                     </div>
 
-                    <hr />
+                    {auth.user || comments.length ? (
+                        <hr />
+                    ) : null}
+
 
                     {/* put answers here */}
                     <p className="text-lg mt-4">
@@ -245,6 +249,7 @@ export default function Question({
                             <hr className="ml-14" />
                             
                             <AnswerComments 
+                                auth={auth.user}
                                 answer={answer} 
                                 question={question}
                             />
