@@ -51,6 +51,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profileUrl',
         'created_at',
         'updated_at'
     ];
