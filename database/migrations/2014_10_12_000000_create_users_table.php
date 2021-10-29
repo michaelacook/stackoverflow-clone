@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->id()->autoIncrement();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('profileUrl')->default('default-profile.png');
             $table->boolean('isAdmin')->default(0);
             $table->boolean('isModerator')->default(0);
             $table->timestamp('email_verified_at')->nullable();
