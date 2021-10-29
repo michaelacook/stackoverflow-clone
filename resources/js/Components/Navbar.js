@@ -65,7 +65,7 @@ export default function Navbar({ user, className = "", sticky = true }) {
                             <div className="inline-block px-2">
                                 <Link href="/account">
                                     <img 
-                                        src="/default-profile.png" 
+                                        src={`/${user.profileUrl}`} 
                                         alt="profile picture"
                                         className="w-6 h-6 rounded mt-3"
                                     />

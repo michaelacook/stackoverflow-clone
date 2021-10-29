@@ -16,7 +16,7 @@ export default function Account({ page }) {
 
                     <div className="flex flex-row justify-start">
 
-                        <img src="default-profile.png" alt="profile-image" className="w-36 h-36 shadow-md rounded-sm" />
+                        <img src={`/${auth.user.profileUrl}`} alt="profile-image" className="w-36 h-36 shadow-md rounded-sm" />
 
                         <div className="ml-5">
                             <h1 className="text-4xl mt-3">{auth.user.name}</h1>
