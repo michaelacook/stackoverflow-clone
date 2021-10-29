@@ -33,21 +33,21 @@ Route::get('/', function () {
 Route::get('/', [QuestionController::class, 'getQuestionsByWatched']);
 Route::get('/account', [AccountController::class, 'index']);
 
-Route::post('/answers/comments', [AnswerController::class, 'postComment']);
-Route::post('/answers', [AnswerController::class, 'store']);
-Route::post('/answers/upvote', [AnswerController::class, 'upVote']);
-Route::post('/answers/downvote', [AnswerController::class, 'downVote']);
+Route::post('/answers/comments', [AnswerController::class, 'postComment'])->middleware('auth');
+Route::post('/answers', [AnswerController::class, 'store'])->middleware('auth');
+Route::post('/answers/upvote', [AnswerController::class, 'upVote'])->middleware('auth');
+Route::post('/answers/downvote', [AnswerController::class, 'downVote'])->middleware('auth');
 
 Route::get('/tags/edit/{tag}', [TagController::class, 'editTag']);
-Route::post('/tags/edit', [TagController::class, 'addGuidance']);
-Route::post('tags/watch', [TagController::class, 'watchTag']);
-Route::post('tags/unwatch', [TagController::class, 'unwatchTag']);
+Route::post('/tags/edit', [TagController::class, 'addGuidance'])->middleware('auth');
+Route::post('tags/watch', [TagController::class, 'watchTag'])->middleware('auth');
+Route::post('tags/unwatch', [TagController::class, 'unwatchTag'])->middleware('auth');
 
-Route::get('/questions/new', [QuestionController::class, 'create']);
-Route::post('/questions/comments', [QuestionController::class, 'postComment']);
-Route::post('/questions/upvote', [QuestionController::class, 'upVote']);
-Route::post('/questions/downvote', [QuestionController::class, 'downVote']);
-Route::post('/questions', [QuestionController::class, 'post']);
+Route::get('/questions/new', [QuestionController::class, 'create'])->middleware('auth');
+Route::post('/questions/comments', [QuestionController::class, 'postComment'])->middleware('auth');
+Route::post('/questions/upvote', [QuestionController::class, 'upVote'])->middleware('auth');
+Route::post('/questions/downvote', [QuestionController::class, 'downVote'])->middleware('auth');
+Route::post('/questions', [QuestionController::class, 'post'])->middleware('auth');
 Route::get('/questions', [QuestionController::class, 'all']);
 Route::get('/questions/by-tag/{tag}', [QuestionController::class, 'getQuestionsByTag']);
 Route::get('/questions/{question:slug}', [QuestionController::class, 'index']);
