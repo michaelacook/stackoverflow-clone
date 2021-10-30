@@ -2,10 +2,10 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AnswerController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -51,6 +51,8 @@ Route::post('/questions', [QuestionController::class, 'post'])->middleware('auth
 Route::get('/questions', [QuestionController::class, 'all']);
 Route::get('/questions/by-tag/{tag}', [QuestionController::class, 'getQuestionsByTag']);
 Route::get('/questions/{question:slug}', [QuestionController::class, 'index']);
+
+Route::get('/users', [UserController::class, 'index']);
 
 Route::get('/tags', [TagController::class, 'index']);
 
