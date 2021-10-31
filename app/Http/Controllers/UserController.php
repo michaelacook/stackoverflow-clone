@@ -15,7 +15,7 @@ class UserController extends Controller
     {
         return Inertia::render('Users', [
             'page' => 'users',
-            'users' => User::paginate(20)
+            'users' => User::paginate(36)
         ]);
     }
 }
