@@ -175,13 +175,11 @@ class QuestionController extends Controller
     {
         $questions = Question::with(['answers', 'tags', 'user.answers'])
             ->orderBy('created_at', 'desc')
-            ->get();
-        $count = $questions->count();
+            ->paginate(15);
 
         return Inertia::render('Questions', [
             'page' => 'questions',
-            'questions' => $questions,
-            'count' => $count
+            'questions' => $questions
         ]);
     }
 

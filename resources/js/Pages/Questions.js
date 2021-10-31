@@ -4,8 +4,9 @@ import Grid from "@/Layouts/Grid"
 import { Link, usePage } from "@inertiajs/inertia-react"
 import Tag from "@/Components/Tag"
 import UserQuestionWidget from "@/Components/UserWidget"
+import PaginationLinks from "@/Components/PaginationLinks"
 
-export default function Questions({ page, questions, count }) {
+export default function Questions({ page, questions }) {
   const { auth } = usePage().props
   
   return (
@@ -28,14 +29,14 @@ export default function Questions({ page, questions, count }) {
                 
 
                 <span className="inline-block text-lg text-gray-800 ml-5">
-                  {new Intl.NumberFormat().format(count)} questions
+                  {new Intl.NumberFormat().format(questions.total)} questions
                 </span>
             </div>
 
             <hr />
 
             <div id="questions">
-              {questions.map((question) => (
+              {questions.data.map((question) => (
                 <div className="flex flex-row justify-start border-b border-gray-300 bottom-1 py-4">
                   
                   <div className="ml-6 text-center">
@@ -83,6 +84,14 @@ export default function Questions({ page, questions, count }) {
                   </div>
                 </div>
               ))}
+
+              <div className="flex flex-row justify-end">
+                <PaginationLinks 
+                  links={questions.links} 
+                  className={`mt-5 mb-5`}
+                />
+              </div>
+              
             </div>
         </Grid>
       </React.Fragment>
