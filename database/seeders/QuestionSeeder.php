@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Question;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -27,5 +28,9 @@ Donec varius et lectus ut placerat. Aliquam convallis lacus eu fringilla congue.
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        Question::factory()
+            ->count(100)
+            ->create();
     }
 }
