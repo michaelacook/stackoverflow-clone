@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import Grid from "@/Layouts/Grid"
 import Navbar from "@/Components/Navbar"
+import PaginationLinks from "@/Components/PaginationLinks"
 import { usePage, Link } from "@inertiajs/inertia-react"
 
 export default function Users({ page, users }) {
@@ -42,7 +43,7 @@ export default function Users({ page, users }) {
                     </div>
 
                     <div className="mt-14 flex flex-wrap">
-                        {users
+                        {users.data
                             .filter((user) => {
                                 if (filterTerm) {
                                     if (user.name.includes(filterTerm)) {
@@ -60,6 +61,8 @@ export default function Users({ page, users }) {
                             ))
                         }
                     </div>
+
+                    <PaginationLinks links={users.links} />
                 </div>
             </Grid>
         </>
