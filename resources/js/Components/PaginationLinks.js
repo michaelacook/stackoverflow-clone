@@ -16,7 +16,7 @@ export default function PaginationLinks({ links, className }) {
                                     ${link.active ? 
                                         "bg-yellow-500 text-white border-yellow-500" 
                                         : 
-                                        "text-gray-600 border-gray-300"}
+                                        "text-gray-700 border-gray-300"}
                                     `}
                     >
                     </button>  
