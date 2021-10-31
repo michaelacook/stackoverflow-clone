@@ -15,7 +15,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::with('questions')->get();
+        $tags = Tag::with('questions')->paginate(20);
 
         return Inertia::render('Tags', [
             'tags' => $tags,

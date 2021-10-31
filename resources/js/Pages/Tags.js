@@ -3,6 +3,7 @@ import Grid from "@/Layouts/Grid"
 import Navbar from "@/Components/Navbar"
 import Tag from "@/Components/Tag"
 import RelativeDate from "@/Components/RelativeDate"
+import PaginationLinks from "@/Components/PaginationLinks"
 import { usePage } from "@inertiajs/inertia-react"
 
 export default function Tags({ page, tags }) {
@@ -49,7 +50,7 @@ export default function Tags({ page, tags }) {
                     </div>
 
                     <div className="flex flex-wrap mt-6">
-                        {tags
+                        {tags.data
                             .filter((tag) => {
                                 if (filterTerm) {
                                     if (tag.name.includes(filterTerm)) {
@@ -83,6 +84,8 @@ export default function Tags({ page, tags }) {
                                 </div>
                         ))}
                     </div>
+
+                    <PaginationLinks links={tags.links} />
                 </div>
             </Grid>
         </>
