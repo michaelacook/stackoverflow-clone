@@ -13,6 +13,7 @@ use App\Models\Question;
 use App\Models\Comment;
 use App\Models\Answer;
 use App\Models\QuestionVote;
+use Illuminate\Database\Eloquent\Builder;
 
 class QuestionController extends Controller
 {
@@ -52,17 +53,18 @@ class QuestionController extends Controller
      */
     public function getQuestionsByTag(Request $request, $tag)
     {
-        $questionsByTag = Tag::with([
-            'questions.answers', 
-            'questions.tags', 
-            'questions.user.answers'
+        $questionsByTag = Question::with([
+            'answers', 
+            'tags', 
+            'user.answers'
         ])
-            ->where('name', $tag)
-            ->get();
+            ->whereRelation('tags', 'name', $tag)
+            ->paginate(15);
 
         return Inertia::render('QuestionsByTag', [
             'page' => 'questions',
-            'tag' => $questionsByTag,
+            'tag' => Tag::where('name', $tag)->get(),
+            'questions' => $questionsByTag,
         ]);
     }
 

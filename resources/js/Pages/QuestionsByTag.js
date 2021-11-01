@@ -5,8 +5,9 @@ import Tag from "@/Components/Tag"
 import { Link, usePage } from "@inertiajs/inertia-react"
 import UserQuestionWidget from "@/Components/UserWidget"
 import WatchTagButton from "@/Components/WatchTagButton"
+import PaginationLinks from "@/Components/PaginationLinks"
 
-export default function QuestionsByTag({ page, tag }) {
+export default function QuestionsByTag({ page, tag, questions }) {
     const { auth } = usePage().props
     
     return (
@@ -53,7 +54,7 @@ export default function QuestionsByTag({ page, tag }) {
                 
 
                     <p className="inline-block text-lg text-gray-800 ml-5 mb-5">
-                    {new Intl.NumberFormat().format(tag[0].questions.length)} questions
+                    {new Intl.NumberFormat().format(questions.total)} questions
                     </p>
                     <hr />
                 </div>
@@ -61,7 +62,7 @@ export default function QuestionsByTag({ page, tag }) {
                 
 
                 <div id="questions">
-                {tag[0].questions.map((question) => (
+                {questions.data.map((question) => (
                     <div className="w-5/6 flex flex-row justify-start border-b border-gray-300 bottom-1 py-4">
                     
                     <div className="ml-6 text-center">
@@ -107,6 +108,13 @@ export default function QuestionsByTag({ page, tag }) {
                     </div>
                     </div>
                 ))}
+
+                    <div className="w-5/6 flex flex-row justify-end">
+                        <PaginationLinks 
+                            className={`mt-5 mb-5`}
+                            links={questions.links} 
+                        />
+                    </div>
                 </div>                
             </Grid>
         </>
