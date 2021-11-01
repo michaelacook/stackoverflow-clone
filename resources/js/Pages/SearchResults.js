@@ -4,6 +4,7 @@ import RelativeDate from "@/Components/RelativeDate"
 import Navbar from "@/Components/Navbar"
 import Grid from "@/Layouts/Grid"
 import Tag from "@/Components/Tag"
+import PaginationLinks from "@/Components/PaginationLinks"
 
 export default function SearchResults({ page, questions, count, query }) {
     const { auth } = usePage().props
@@ -39,13 +40,13 @@ export default function SearchResults({ page, questions, count, query }) {
 
                     <p className="ml-5 mb-6 text-gray-500 text-sm">Results for "{query}"</p>
 
-                    <p className="ml-5 mb-6 text-gray-700">{count} {count < 1 ? "Results" : count > 1 ? "Results" : "Result"}</p>
+                    <p className="ml-5 mb-6 text-gray-700">{questions.total} {questions.total < 1 ? "Results" : questions.total > 1 ? "Results" : "Result"}</p>
                     
                     <hr />
                 </div>
 
                 <div>
-                    {questions.length ? questions.map((question) => (
+                    {questions.data.length ? questions.data.map((question) => (
                         <div className={
                             `w-5/6 px-3 flex flex-row justify-start border-b border-gray-300 bottom-1 py-4
                             ${containsTag(question.tags, auth.watchedTags) ? "contains-watched" : ""}
@@ -99,6 +100,13 @@ export default function SearchResults({ page, questions, count, query }) {
                     )) : (
                         <p className="text-gray-700 ml-5 mt-3">No questions matched your query.</p>
                     )}
+                    <div className="w-5/6 flex flex-row justify-end">
+                        <PaginationLinks 
+                            className={`mt-5 mb-5`}
+                            links={questions.links} 
+                        />
+                    </div>
+                    
                 </div>
             </Grid>
         </>

@@ -18,7 +18,7 @@ class SearchController extends Controller
         $questions = Question::with(['answers', 'tags', 'user'])
             ->where('title', 'like', '%' . $query . '%')
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(15);
 
         $count = $questions->count();
 
