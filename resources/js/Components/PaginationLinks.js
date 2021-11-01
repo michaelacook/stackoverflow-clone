@@ -1,7 +1,7 @@
 import React from "react"
 
 export default function PaginationLinks({ links, className }) {
-    return (
+    return links.to > links.total ? (
         <div className={className}>
             {links.map((link, i) => (
                 <a href={link.url}>
@@ -23,5 +23,5 @@ export default function PaginationLinks({ links, className }) {
                 </a>
             ))}
         </div>
-    )
+    ) : null
 }
