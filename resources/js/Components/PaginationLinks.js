@@ -1,7 +1,7 @@
 import React from "react"
 
 export default function PaginationLinks({ links, className }) {
-    return links.to > links.total ? (
+    return links.length > 3 ? (
         <div className={className}>
             {links.map((link, i) => (
                 <a href={link.url}>
