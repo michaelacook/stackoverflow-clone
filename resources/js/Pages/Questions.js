@@ -14,7 +14,7 @@ export default function Questions({ page, questions }) {
         <Navbar user={auth.user} />
 
         <Grid page={page}>
-            <div className="w-full mt-5 mb-5">
+            <div className="mt-5 mb-1 w-5/6">
                 <div className="w-full flex flex-row justify-between">
                   <h1 className="text-3xl mb-8 ml-5">All Questions</h1>
 
@@ -28,16 +28,18 @@ export default function Questions({ page, questions }) {
                 </div>
                 
 
-                <span className="inline-block text-lg text-gray-800 ml-5">
+                <p className="inline-block text-lg text-gray-800 ml-5 mb-2">
                   {new Intl.NumberFormat().format(questions.total)} questions
-                </span>
+                </p>
+
+                <hr />
             </div>
 
-            <hr />
+            
 
             <div id="questions">
               {questions.data.map((question) => (
-                <div className="flex flex-row justify-start border-b border-gray-300 bottom-1 py-4">
+                <div className="w-5/6 flex flex-row justify-start border-b border-gray-300 bottom-1 py-4">
                   
                   <div className="ml-6 text-center">
                     <p className="text-gray-500 font-semibold">
@@ -85,7 +87,7 @@ export default function Questions({ page, questions }) {
                 </div>
               ))}
 
-              <div className="flex flex-row justify-end">
+              <div className="w-5/6 flex flex-row justify-end">
                 <PaginationLinks 
                   links={questions.links} 
                   className={`mt-5 mb-5`}
