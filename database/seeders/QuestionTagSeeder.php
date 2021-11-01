@@ -14,12 +14,17 @@ class QuestionTagSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i < 5; $i++)
+        for ($i = 1; $i < 102; $i++)
         {
-            DB::table('question_tag')->insert([
-                'question_id' => 1, 
-                'tag_id' => $i
-            ]);
+            $randInt = random_int(2, 5);
+
+            for ($j = 1; $j < $randInt; $j++)
+            {
+                DB::table('question_tag')->insert([
+                    'question_id' => $i, 
+                    'tag_id' => random_int(1, 28)
+                ]);
+            }
         }
     }
 }
