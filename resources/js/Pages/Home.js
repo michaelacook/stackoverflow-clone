@@ -3,10 +3,11 @@ import Navbar from "@/Components/Navbar"
 import Grid from "@/Layouts/Grid"
 import Tag from "@/Components/Tag"
 import RelativeDate from "@/Components/RelativeDate"
+import PaginationLinks from "@/Components/PaginationLinks"
 import { Link } from "@inertiajs/inertia-react"
 import { usePage } from '@inertiajs/inertia-react'
 
-export default function Home({ page, questionsByTag, allQuestions = null }) {
+export default function Home({ page, questions }) {
   const { auth } = usePage().props
   
   return (
@@ -33,7 +34,7 @@ export default function Home({ page, questionsByTag, allQuestions = null }) {
                 
 
             <div id="questions">
-                {Object.values(questionsByTag).length ? Object.values(questionsByTag).reverse().map((question) => (
+                {questions.data.map((question) => (
                     <div className="w-5/6 flex flex-row justify-start border-b border-gray-300 bottom-1 py-4">
                         
                         <div className="w-1/4 ml-6 flex flex-row justify-between">
@@ -82,10 +83,14 @@ export default function Home({ page, questionsByTag, allQuestions = null }) {
                             
                         </div>
                     </div>
-                )) : (
-                    null
-                    // here render a view of all questions
-                )}
+                ))}
+
+                <div className="w-5/6 flex flex-row justify-end">
+                    <PaginationLinks 
+                        links={questions.links} 
+                        className={`mt-5 mb-5`}
+                    />
+                </div>
             </div>
         </Grid>
     </>

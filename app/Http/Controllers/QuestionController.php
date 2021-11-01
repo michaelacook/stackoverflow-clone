@@ -78,11 +78,10 @@ class QuestionController extends Controller
     public function getQuestionsByWatched(Request $request)
     {
         $tags = null;
-        $questions = collect();
+        $questions = null;
         $allQuestions = Question::with(['answers', 'tags', 'user.answers'])
             ->orderByDesc('created_at')
-            ->limit(100)
-            ->get();
+            ->paginate(15);
 
         if (Auth::check())
         {
@@ -90,29 +89,23 @@ class QuestionController extends Controller
                 ->tags()
                 ->pluck('name');
 
-            if (count($tags) > 0)
-            {
-                foreach($tags as $name)
-                {
-                    $result = Tag::with([
-                        'questions.answers', 
-                        'questions.user.answers',
-                        'questions.tags'
-                    ])
-                        ->where('name', $name)
-                        ->get();
-        
-                    $questions->push($result[0]->questions);
-                }
 
-                $questions = $questions
-                    ->flatten()
-                    ->unique('id')
-                    ->all();
+            if (count($tags) === 0)
+            {
+                $questions = $allQuestions;
             }
             else 
             {
-                $questions = $allQuestions;
+                $questions = Question::with([
+                    'answers', 
+                    'tags', 
+                    'user.answers'
+                ])
+                ->whereHas('tags', function (Builder $query) use($tags) {
+                    $query->whereIn('name', $tags);
+                })
+                ->orderByDesc('created_at')
+                ->paginate(15);
             }
         }
         else 
@@ -123,7 +116,7 @@ class QuestionController extends Controller
         return Inertia::render('Home', [
             'page' => 'home',
             'watched' => $tags,
-            'questionsByTag' => $questions
+            'questions' => $questions
         ]);
     }
 
