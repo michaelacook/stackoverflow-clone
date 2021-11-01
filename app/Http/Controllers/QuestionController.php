@@ -71,16 +71,16 @@ class QuestionController extends Controller
      * 
      * If no authenticated user or no watched quetsions, just newest
      * 
-     * The query to get tags is not ideal and is just a work-around 
-     * 
-     * It needs fixing
-     * 
-     * https://stackoverflow.com/questions/69578939/how-to-write-an-eloquent-query-in-laravel-8-for-an-unknown-number-of-orwhere-con/69578992?noredirect=1
+     * The query to get tags is not ideal and is just a work-around
      */
     public function getQuestionsByWatched(Request $request)
     {
         $tags = null;
         $questions = collect();
+        $allQuestions = Question::with(['answers', 'tags', 'user.answers'])
+            ->orderByDesc('created_at')
+            ->limit(100)
+            ->get();
 
         if (Auth::check())
         {
@@ -88,36 +88,40 @@ class QuestionController extends Controller
                 ->tags()
                 ->pluck('name');
 
-            foreach($tags as $name)
+            if (count($tags) > 0)
             {
-                $result = Tag::with([
-                    'questions.answers', 
-                    'questions.user.answers',
-                    'questions.tags'
-                ])
-                ->where('name', $name)
-                ->get();
-    
-                $questions->push($result[0]->questions);
+                foreach($tags as $name)
+                {
+                    $result = Tag::with([
+                        'questions.answers', 
+                        'questions.user.answers',
+                        'questions.tags'
+                    ])
+                        ->where('name', $name)
+                        ->get();
+        
+                    $questions->push($result[0]->questions);
+                }
+
+                $questions = $questions
+                    ->flatten()
+                    ->unique('id')
+                    ->all();
+            }
+            else 
+            {
+                $questions = $allQuestions;
             }
         }
-
-        // try this instead:
-        // $questionsByWatchedTag = Tag::with([
-        //     'questions.answers', 
-        //     'questions.user.answers',
-        //     'questions.tags'
-        // ])
-        // ->whereIn('name', $tags)
-        // ->get();
+        else 
+        {
+            $questions = $allQuestions;
+        }
 
         return Inertia::render('Home', [
             'page' => 'home',
             'watched' => $tags,
             'questionsByTag' => $questions
-                ->flatten()
-                ->unique('id')
-                ->all()
         ]);
     }
 
