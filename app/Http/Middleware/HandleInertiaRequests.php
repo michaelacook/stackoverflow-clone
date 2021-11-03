@@ -36,6 +36,9 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request)
     {
         $user = null;
+        $tags = null;
+        $watched = null; 
+        $ignored = null;
 
         if (Auth::check())
         {
@@ -45,14 +48,23 @@ class HandleInertiaRequests extends Middleware
                 'comments'
             ])
             ->find(Auth::id());
+
+            $tags = $request->user()->tags()->get(); 
+
+            $watched = $tags->filter(function ($value, $key) {
+                return $value->ignored === false || is_null($value->ignored); 
+            });
+
+            $ignored = $tags->filter(function ($value, $key) {
+                return $value->ignored === true; 
+            });
         }
 
         return array_merge(parent::share($request), [
             'auth' => [
                 'user' => $user ? $user : null,
-                'watchedTags' => $user 
-                    ? $request->user()->tags()->get() 
-                    : null
+                'watchedTags' => $watched,
+                'ignoredTags' => $ignored
             ],
         ]);
     }
