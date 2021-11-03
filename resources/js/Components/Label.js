@@ -1,9 +1,12 @@
-import React from 'react';
+import React from "react"
 
 export default function Label({ forInput, value, className, children }) {
     return (
-        <label htmlFor={forInput} className={`block text-gray-700 ` + className}>
+        <label
+            htmlFor={forInput}
+            className={`block text-gray-700 ` + className}
+        >
             {value ? value : { children }}
         </label>
-    );
+    )
 }

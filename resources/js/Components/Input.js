@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react"
 
 export default function Input({
-    type = 'text',
+    type = "text",
     name,
     value,
     className,
@@ -10,13 +10,13 @@ export default function Input({
     isFocused,
     handleChange,
 }) {
-    const input = useRef();
+    const input = useRef()
 
     useEffect(() => {
         if (isFocused) {
-            input.current.focus();
+            input.current.focus()
         }
-    }, []);
+    }, [])
 
     return (
         <div className="flex flex-col items-start">
@@ -34,5 +34,5 @@ export default function Input({
                 onChange={(e) => handleChange(e)}
             />
         </div>
-    );
+    )
 }

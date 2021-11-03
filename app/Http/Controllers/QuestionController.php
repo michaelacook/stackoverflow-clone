@@ -116,7 +116,8 @@ class QuestionController extends Controller
         return Inertia::render('Home', [
             'page' => 'home',
             'watched' => $tags,
-            'questions' => $questions
+            'questions' => $questions,
+            'tagSuggestions' => Tag::all()
         ]);
     }
 

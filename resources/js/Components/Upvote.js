@@ -3,17 +3,12 @@ import { Link } from "@inertiajs/inertia-react"
 
 export default function Update({ href, data }) {
     return (
-        <Link 
-            preserveScroll 
-            method="post" 
-            href={href} 
-            data={data}
-        >
-            <svg 
-                fill="#BABFC4" 
-                aria-hidden="true" 
-                width="36" 
-                height="36" 
+        <Link preserveScroll method="post" href={href} data={data}>
+            <svg
+                fill="#BABFC4"
+                aria-hidden="true"
+                width="36"
+                height="36"
                 viewBox="0 0 36 36"
                 className="cursor-pointer"
             >

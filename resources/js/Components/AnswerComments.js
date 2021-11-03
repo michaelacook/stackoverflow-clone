@@ -19,29 +19,30 @@ export default function AnswerComments({ answer, question, auth }) {
                                         &nbsp;{comment.user.name}
                                     </span>
                                     <span className="text-sm text-gray-400">
-                                        &nbsp;<RelativeDate UTCTime={comment.created_at} />
+                                        &nbsp;
+                                        <RelativeDate
+                                            UTCTime={comment.created_at}
+                                        />
                                     </span>
                                 </p>
                             </div>
                         </div>
                     ))}
                 </div>
-            ) 
-            : null}
+            ) : null}
 
             <div className="ml-14 mt-2 mb-5">
                 {!addComment && auth ? (
-                    <span 
+                    <span
                         onClick={() => setAddComment(true)}
                         className="text-sm text-gray-400 hover:text-blue-400 cursor-pointer"
                     >
                         Add a comment
                     </span>
-                ) 
-                : auth ? (
+                ) : auth ? (
                     <div className="flex flex-row justify-start">
-                        <input 
-                            type="text" 
+                        <input
+                            type="text"
                             autoFocus={true}
                             value={answerComment}
                             onChange={(e) => setAnswerComment(e.target.value)}
@@ -49,7 +50,7 @@ export default function AnswerComments({ answer, question, auth }) {
                             placeholder="comment..."
                         />
 
-                        <Link 
+                        <Link
                             href="/answers/comments"
                             method="post"
                             preserveScroll
@@ -63,14 +64,14 @@ export default function AnswerComments({ answer, question, auth }) {
                                 onClick={() => {
                                     setAddComment(false)
                                     setAnswerComment("")
-                                }} 
+                                }}
                                 className="text-xs py-2 px-2 text-white bg-blue-500 rounded-sm shadow-sm self-start"
                             >
                                 Add comment
                             </button>
-                        </Link> 
+                        </Link>
 
-                        <button 
+                        <button
                             onClick={() => {
                                 setAddComment(false)
                                 setanswerComment("")
@@ -79,9 +80,9 @@ export default function AnswerComments({ answer, question, auth }) {
                         >
                             Cancel
                         </button>
-                        </div>
-                    ) : null}  
-                </div>
+                    </div>
+                ) : null}
+            </div>
             <hr />
         </>
     )
