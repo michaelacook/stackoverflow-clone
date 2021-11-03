@@ -20,6 +20,7 @@ class CreateTagUsersTable extends Migration
             $table->foreignId('user_id')->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->boolean('ignored')->nullable();
         });
     }
 

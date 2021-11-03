@@ -15,5 +15,5 @@ class TagUser extends Pivot
 {
     use HasFactory;
 
-    protected $fillable = ['tag_id', 'user_id'];
+    protected $fillable = ['tag_id', 'user_id', 'ignored'];
 }
