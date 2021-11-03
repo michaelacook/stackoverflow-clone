@@ -15,7 +15,7 @@ export default function Tags({ page, tags }) {
             <Navbar user={auth.user} />
 
             <Grid page={page}>
-                <div className="w-full mt-5 ml-6 mb-6">
+                <div className="w-5/6 mt-5 ml-6 mb-6">
                     <h1 className="text-2xl mb-2">Tags</h1>
 
                     <p className="w-3/4 mt-5 text-gray-700">

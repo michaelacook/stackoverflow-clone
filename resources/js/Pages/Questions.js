@@ -14,7 +14,7 @@ export default function Questions({ page, questions }) {
             <Navbar user={auth.user} />
 
             <Grid page={page}>
-                <div className="mt-5 mb-1 w-5/6">
+                <div className="mt-5 mb-1 w-4/6">
                     <div className="w-full flex flex-row justify-between">
                         <h1 className="text-3xl mb-8 ml-5">All Questions</h1>
 
@@ -37,7 +37,7 @@ export default function Questions({ page, questions }) {
 
                 <div id="questions">
                     {questions.data.map((question) => (
-                        <div className="w-5/6 flex flex-row justify-start border-b border-gray-300 bottom-1 py-4">
+                        <div className="w-4/6 flex flex-row justify-start border-b border-gray-300 bottom-1 py-4">
                             <div className="ml-6 text-center">
                                 <p className="text-gray-500 font-semibold">
                                     {question.votes}
@@ -90,7 +90,7 @@ export default function Questions({ page, questions }) {
                         </div>
                     ))}
 
-                    <div className="w-5/6 flex flex-row justify-end">
+                    <div className="w-4/6 flex flex-row justify-end">
                         <PaginationLinks
                             links={questions.links}
                             className={`mt-5 mb-5`}

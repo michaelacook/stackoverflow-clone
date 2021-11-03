@@ -13,7 +13,7 @@ export default function Users({ page, users }) {
             <Navbar user={auth.user} />
 
             <Grid page={page}>
-                <div className="w-full mt-5 ml-6 mb-6">
+                <div className="w-5/6 mt-5 ml-6 mb-6">
                     <h1 className="text-3xl mb-2">Users</h1>
 
                     <div className="relative mt-7">

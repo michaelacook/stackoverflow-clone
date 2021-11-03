@@ -15,7 +15,7 @@ export default function QuestionsByTag({ page, tag, questions }) {
             <Navbar user={auth.user} />
 
             <Grid page={page}>
-                <div className="mt-5 mb-5 lg:w-5/6 w-11/12">
+                <div className="mt-5 mb-5 lg:w-4/6 w-11/12">
                     <div className="w-full flex flex-row justify-between">
                         <h1 className="text-lg lg:text-3xl mb-8 ml-5">
                             Questions tagged [{tag[0].name}]
@@ -66,7 +66,7 @@ export default function QuestionsByTag({ page, tag, questions }) {
 
                 <div id="questions">
                     {questions.data.map((question) => (
-                        <div className="w-5/6 flex flex-row justify-start border-b border-gray-300 bottom-1 py-4">
+                        <div className="w-4/6 flex flex-row justify-start border-b border-gray-300 bottom-1 py-4">
                             <div className="ml-6 text-center">
                                 <p className="text-gray-500 font-semibold">
                                     {question.votes}
@@ -119,7 +119,7 @@ export default function QuestionsByTag({ page, tag, questions }) {
                         </div>
                     ))}
 
-                    <div className="w-5/6 flex flex-row justify-end">
+                    <div className="w-4/6 flex flex-row justify-end">
                         <PaginationLinks
                             className={`mt-5 mb-5`}
                             links={questions.links}
