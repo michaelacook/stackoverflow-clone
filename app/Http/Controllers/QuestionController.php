@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Collection;
 use App\Models\User;
 use App\Models\Tag;
 use App\Models\Question;
@@ -85,28 +84,53 @@ class QuestionController extends Controller
 
         if (Auth::check())
         {
-            $tags = User::find(Auth::user()->id)
+            $user = User::find(Auth::user()->id);
+            $tags = $user
                 ->tags()
                 ->pluck('name');
+            $watched = $user
+                ->watched()
+                ->pluck('name');
+            $ignored = $user 
+                ->ignored()
+                ->pluck('name');
 
-
-            if (count($tags) === 0)
-            {
-                $questions = $allQuestions;
-            }
-            else 
+            if (count($watched) > 0)
             {
                 $questions = Question::with([
                     'answers', 
                     'tags', 
                     'user.answers'
                 ])
-                ->whereHas('tags', function (Builder $query) use($tags) {
-                    $query->whereIn('name', $tags);
+                ->whereHas('tags', function (Builder $query) use($watched) {
+                    $query->whereIn('name', $watched);
+                })
+                ->whereDoesntHave('tags', function (Builder $query) use ($ignored) {
+                    $query->whereIn('name', $ignored);
                 })
                 ->orderByDesc('created_at')
                 ->paginate(15);
             }
+
+            else if (count($ignored) > 0 && count($watched) === 0)
+            {
+                $questions = Question::with([
+                    'answers', 
+                    'tags', 
+                    'user.answers'
+                ])
+                ->whereDoesntHave('tags', function (Builder $query) use ($ignored) {
+                    $query->whereIn('name', $ignored);
+                })
+                ->orderByDesc('created_at')
+                ->paginate(15);
+            }
+
+            else if (count($tags) === 0)
+            {
+                $questions = $allQuestions;
+            }
+            
         }
         else 
         {

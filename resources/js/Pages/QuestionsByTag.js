@@ -5,6 +5,7 @@ import Tag from "@/Components/Tag"
 import { Link, usePage } from "@inertiajs/inertia-react"
 import UserQuestionWidget from "@/Components/UserWidget"
 import WatchTagButton from "@/Components/WatchTagButton"
+import IgnoreTagButton from "@/Components/IgnoreTagButton"
 import PaginationLinks from "@/Components/PaginationLinks"
 
 export default function QuestionsByTag({ page, tag, questions }) {
@@ -48,14 +49,25 @@ export default function QuestionsByTag({ page, tag, questions }) {
                         )}
                     </p>
 
-                    {auth.user ? (
-                        <WatchTagButton
-                            tag={tag[0]}
-                            watched={auth.watchedTags.map((tag) => tag.name)}
-                            redirect={`/questions/by-tag/${tag[0].name}`}
-                            className={"block ml-5 mb-8"}
-                        />
-                    ) : null}
+                    <div>
+                        {auth.user ? (
+                            <WatchTagButton
+                                tag={tag[0]}
+                                watched={auth.watchedTags.map((tag) => tag.name)}
+                                redirect={`/questions/by-tag/${tag[0].name}`}
+                                className={"inline-block ml-5 mb-8"}
+                            />
+                        ) : null}
+
+                        {auth.user ? (
+                            <IgnoreTagButton 
+                                tag={tag[0]}
+                                ignored={auth.ignoredTags.map((tag) => tag.name)}
+                                redirect={`/questions/by-tag/${tag[0].name}`}
+                            />
+                        ) : null}
+                    </div>
+                    
 
                     <p className="inline-block text-lg text-gray-800 ml-5 mb-5">
                         {new Intl.NumberFormat().format(questions.total)}{" "}

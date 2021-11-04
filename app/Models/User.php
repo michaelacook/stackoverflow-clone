@@ -34,12 +34,30 @@ class User extends Authenticatable
     }
 
     /**
-     * Get a user's watched tags
+     * Get all of a user's tags
      */
     public function tags()
     {
         return $this->belongsToMany(Tag::class)
             ->using(TagUser::class);
+    }
+
+    /**
+     * Get only watched tags
+     */
+    public function watched()
+    {
+        return $this->belongsToMany(Tag::class)
+            ->wherePivot('ignored', null);
+    }
+
+    /**
+     * Get only ignored tags
+     */
+    public function ignored()
+    {
+        return $this->belongsToMany(Tag::class)
+            ->wherePivot('ignored', true);
     }
 
     /**

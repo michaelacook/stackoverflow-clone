@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Tag;
 use Inertia\Inertia;
@@ -44,7 +45,11 @@ class TagController extends Controller
 
         $user = User::find(Auth::user()->id);
 
-        $user->tags()->attach($tag['id']);
+        DB::table('tag_user')
+            ->updateOrInsert(
+                ['user_id' => $user->id, 'tag_id' => $tag['id'], 'ignored' => true],
+                ['ignored' => null]
+            );
 
         return redirect($request->input('redirect'));
     }
@@ -59,6 +64,24 @@ class TagController extends Controller
         $user = User::find(Auth::user()->id);
 
         $user->tags()->detach($tag['id']);
+
+        return redirect($request->input('redirect'));
+    }
+
+    /**
+     * Update or create a new pivot record to mark a tag as ignored
+     */
+    public function ignoreTag(Request $request)
+    {
+        $tag = $request->input('tag');
+
+        $user = User::find(Auth::user()->id);
+
+        DB::table('tag_user')
+            ->updateOrInsert(
+                ['user_id' => $user->id, 'tag_id' => $tag['id']],
+                ['ignored' => true]
+            );
 
         return redirect($request->input('redirect'));
     }

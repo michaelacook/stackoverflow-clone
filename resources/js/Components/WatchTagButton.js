@@ -19,7 +19,9 @@ export default function WatchTagButton({
                         border-blue-600 
                         text-blue-600 
                         hover:text-blue-800 
-                        px-2 py-2 
+                        px-3 py-3 
+                        h-12
+                        w-25
                         rounded-sm
                         ${className}
                     `}
@@ -52,17 +54,19 @@ export default function WatchTagButton({
             ) : (
                 <button
                     className={`
-                        text-xs 
-                        bg-blue-200 
-                        hover:bg-blue-400 
-                        border 
-                        border-blue-600 
-                        text-blue-600 
-                        hover:text-blue-800 
-                        px-2 py-2 
-                        rounded-sm
-                        ${className}
-                    `}
+                    text-xs 
+                    bg-blue-200 
+                    hover:bg-blue-400 
+                    border 
+                    border-blue-600 
+                    text-blue-600 
+                    hover:text-blue-800 
+                    px-3 py-3 
+                    h-12
+                    w-25
+                    rounded-sm
+                    ${className}
+                `}
                 >
                     <Link
                         method="post"

@@ -40,8 +40,9 @@ Route::post('/answers/downvote', [AnswerController::class, 'downVote'])->middlew
 
 Route::get('/tags/edit/{tag}', [TagController::class, 'editTag']);
 Route::post('/tags/edit', [TagController::class, 'addGuidance'])->middleware('auth');
-Route::post('tags/watch', [TagController::class, 'watchTag'])->middleware('auth');
-Route::post('tags/unwatch', [TagController::class, 'unwatchTag'])->middleware('auth');
+Route::post('/tags/watch', [TagController::class, 'watchTag'])->middleware('auth');
+Route::post('/tags/unwatch', [TagController::class, 'unwatchTag'])->middleware('auth');
+Route::post('/tags/ignore', [TagController::class, 'ignoreTag'])->middleware('auth');
 
 Route::get('/questions/new', [QuestionController::class, 'create'])->middleware('auth');
 Route::post('/questions/comments', [QuestionController::class, 'postComment'])->middleware('auth');
