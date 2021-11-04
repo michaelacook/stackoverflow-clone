@@ -7,6 +7,7 @@ import PaginationLinks from "@/Components/PaginationLinks"
 import { Link } from "@inertiajs/inertia-react"
 import { usePage } from "@inertiajs/inertia-react"
 import WatchedTagsWidget from "@/Components/WatchedTagsWidget"
+import IgnoredTagsWidget from "@/Components/IgnoredTagsWidget"
 
 export default function Home({ page, questions, tagSuggestions }) {
     const { auth } = usePage().props
@@ -119,9 +120,14 @@ export default function Home({ page, questions, tagSuggestions }) {
                     <div id="col-2" className="w-1/3">
                         <WatchedTagsWidget
                             auth={auth}
-                            watched={auth.watchedTags}
                             tagSuggestions={tagSuggestions}
                             className={`ml-7`}
+                        />
+
+                        <IgnoredTagsWidget
+                            auth={auth}
+                            tagSuggestions={tagSuggestions}
+                            className={`ml-7 mt-8`}
                         />
                     </div>
                 </div>
