@@ -44,7 +44,7 @@ export default function Question({ page, question, answers, tags, comments }) {
         <>
             <Navbar user={auth.user} />
             <Grid page={page}>
-                <div className="w-full mt-5 ml-6 mb-6">
+                <div className="w-4/6 mt-5 ml-6 mb-6">
                     <h1 className="text-2xl mb-2">{question.title}</h1>
 
                     <div className="mb-3">
