@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ExampleMail;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 

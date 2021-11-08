@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ExampleMail;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
@@ -13,6 +14,7 @@ use App\Models\Comment;
 use App\Models\Answer;
 use App\Models\QuestionVote;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Mail;
 
 class QuestionController extends Controller
 {
