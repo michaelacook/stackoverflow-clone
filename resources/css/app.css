@@ -26,6 +26,10 @@
     background-color: #314A86 !important;
 }
 
+.btn-disabled { 
+    cursor: not-allowed; 
+}
+
 input {
     transition: all 0.3s ease !important;
 }

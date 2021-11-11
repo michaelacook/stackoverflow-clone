@@ -57,14 +57,14 @@ export default function IgnoredTagsWidget({ auth, className, tagSuggestions }) {
                                 className={`
                                     text-xs 
                                     bg-blue-200 
-                                    hover:bg-blue-400 
                                     border 
                                     border-blue-600 
                                     text-blue-600 
-                                    hover:text-blue-800 
                                     px-2 py-2 
                                     rounded-sm
+                                    ${!auth.user.email_verified_at ? "btn-disabled" : " hover:text-blue-800 hover:bg-blue-400"}
                                 `}
+                                disabled={!auth.user.email_verified_at ? true : false}
                             >
                                 Add an ignored tag
                             </button>

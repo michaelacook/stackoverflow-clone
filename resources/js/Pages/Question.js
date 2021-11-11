@@ -72,19 +72,24 @@ export default function Question({ page, question, answers, tags, comments }) {
 
                     <div className="flex flex-row">
                         <div id="votes" className="inline-block mr-4 mt-4">
-                            <Upvote data={question} href="/questions/upvote" />
+                            <Upvote 
+                                data={question} 
+                                auth={auth} 
+                                href="/questions/upvote" 
+                            />
                             <span className="ml-3 text-gray-600 text-xl">
                                 {question.votes}
                             </span>
                             <Downvote
                                 data={question}
+                                auth={auth}
                                 href="/questions/downvote"
                             />
                         </div>
 
                         <div
                             id="question-body"
-                            className="w-full mt-4 pb-12 border-b border-gray-200"
+                            className="w-full mt-4 pb-12"
                         >
                             <ReactMarkdown
                                 children={question.body}
@@ -147,60 +152,63 @@ export default function Question({ page, question, answers, tags, comments }) {
                         </div>
                     ) : null}
 
-                    <div className="ml-14 mt-2 mb-5">
-                        {!addComment && auth.user ? (
-                            <span
-                                onClick={() => setAddComment(true)}
-                                className="text-sm text-gray-400 hover:text-blue-400 cursor-pointer"
-                            >
-                                Add a comment
-                            </span>
-                        ) : auth.user ? (
-                            <div className="flex flex-row justify-start">
-                                <input
-                                    type="text"
-                                    autoFocus={true}
-                                    value={questionComment}
-                                    onChange={(e) =>
-                                        setQuestionComment(e.target.value)
-                                    }
-                                    className="w-2/3 mr-4 text-xs text-gray-700 border border-gray-200 self-start rounded-sm"
-                                    placeholder="comment..."
-                                />
-
-                                <Link
-                                    href="/questions/comments"
-                                    method="post"
-                                    preserveScroll
-                                    data={{
-                                        user: auth.user,
-                                        question,
-                                        comment: questionComment,
-                                    }}
+                    {(auth.user && auth.user.email_verified_at) ? (
+                        <div className="ml-14 mt-2 mb-5">
+                            {!addComment && auth.user ? (
+                                <span
+                                    onClick={() => setAddComment(true)}
+                                    className="text-sm text-gray-400 hover:text-blue-400 cursor-pointer"
                                 >
+                                    Add a comment
+                                </span>
+                            ) : auth.user ? (
+                                <div className="flex flex-row justify-start">
+                                    <input
+                                        type="text"
+                                        autoFocus={true}
+                                        value={questionComment}
+                                        onChange={(e) =>
+                                            setQuestionComment(e.target.value)
+                                        }
+                                        className="w-2/3 mr-4 text-xs text-gray-700 border border-gray-200 self-start rounded-sm"
+                                        placeholder="comment..."
+                                    />
+
+                                    <Link
+                                        href="/questions/comments"
+                                        method="post"
+                                        preserveScroll
+                                        data={{
+                                            user: auth.user,
+                                            question,
+                                            comment: questionComment,
+                                        }}
+                                    >
+                                        <button
+                                            onClick={() => {
+                                                setAddComment(false)
+                                                setQuestionComment("")
+                                            }}
+                                            className="text-xs py-2 px-2 text-white bg-blue-500 rounded-sm shadow-sm self-start"
+                                        >
+                                            Add comment
+                                        </button>
+                                    </Link>
+
                                     <button
                                         onClick={() => {
                                             setAddComment(false)
                                             setQuestionComment("")
                                         }}
-                                        className="text-xs py-2 px-2 text-white bg-blue-500 rounded-sm shadow-sm self-start"
+                                        className="text-xs ml-1 py-2 px-2 text-white bg-gray-500 rounded-sm shadow-sm self-start"
                                     >
-                                        Add comment
+                                        Cancel
                                     </button>
-                                </Link>
+                                </div>
+                            ) : null}
+                        </div>
+                    ) : null}
 
-                                <button
-                                    onClick={() => {
-                                        setAddComment(false)
-                                        setQuestionComment("")
-                                    }}
-                                    className="text-xs ml-1 py-2 px-2 text-white bg-gray-500 rounded-sm shadow-sm self-start"
-                                >
-                                    Cancel
-                                </button>
-                            </div>
-                        ) : null}
-                    </div>
 
                     {auth.user || comments.length ? <hr /> : null}
 
@@ -227,6 +235,7 @@ export default function Question({ page, question, answers, tags, comments }) {
                                                   answer,
                                                   slug: question["slug"],
                                               }}
+                                              auth={auth}
                                               href="/answers/upvote"
                                           />
                                           <span className="ml-3 text-gray-600 text-xl">
@@ -237,6 +246,7 @@ export default function Question({ page, question, answers, tags, comments }) {
                                                   answer,
                                                   slug: question["slug"],
                                               }}
+                                              auth={auth}
                                               href="/answers/downvote"
                                           />
                                       </div>
@@ -334,15 +344,32 @@ export default function Question({ page, question, answers, tags, comments }) {
                                 id="question-body"
                                 value={answerBody}
                                 onChange={(e) => setAnswerBody(e.target.value)}
-                                className="w-full focus-within:bg-white bg-gray-50 mt-3 border-gray-300 text-sm rounded-sm"
+                                className={`w-full 
+                                    focus-within:bg-white 
+                                    bg-gray-50 mt-3 
+                                    border-gray-300 
+                                    text-sm 
+                                    rounded-sm
+                                    ${auth.user && auth.user.email_verified_at ? null : "btn-disabled"}
+                                `}
                                 placeholder="Use markdown format..."
                                 rows="12"
+                                disabled={(auth.user && auth.user.email_verified_at) ? false : true}
                             ></textarea>
 
                             <button
                                 type="button"
                                 onClick={postQuestion}
-                                className=" mt-4 px-3 py-3 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-sm shadow-sm"
+                                className={`
+                                    mt-4 
+                                    px-3 py-3 
+                                    bg-blue-500
+                                    text-white 
+                                    text-sm 
+                                    rounded-sm 
+                                    shadow-sm
+                                    ${(auth.user && auth.user.email_verified_at) ? "hover:bg-blue-600" : "btn-disabled"}
+                                `}
                             >
                                 Post Your Answer
                             </button>
@@ -360,8 +387,8 @@ export default function Question({ page, question, answers, tags, comments }) {
                                 {" "}
                                 or{" "}
                                 <Link
-                                    className="text-blue-600"
-                                    href="/questions/new"
+                                    className={`text-blue-600 ${auth.user && auth.user.email_verified_at ? null : "btn-disabled"}`}
+                                    href={`${(auth.user && auth.user.email_verified_at) ? "/questions/new" : ""}`}
                                 >
                                     ask your own question
                                 </Link>

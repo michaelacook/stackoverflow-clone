@@ -25,7 +25,10 @@ export default function QuestionsByTag({ page, tag, questions }) {
                         <Link
                             as="button"
                             href="/questions/new"
-                            className="px-2 py-3 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-sm shadow-sm self-start"
+                            className={`px-2 py-3 bg-blue-500 text-white text-sm rounded-sm shadow-sm self-start
+                                ${auth.user && !auth.user.email_verified_at ? "btn-disabled" : "hover:bg-blue-600"}
+                            `}
+                            disabled={auth.user && !auth.user.email_verified_at ? true : false}
                         >
                             Ask Question
                         </Link>
@@ -49,15 +52,16 @@ export default function QuestionsByTag({ page, tag, questions }) {
                         )}
                     </p>
 
-                    <div>
+                    <div className="w-full pl-5 mb-8">
                         {auth.user ? (
                             <WatchTagButton
                                 tag={tag[0]}
+                                auth={auth}
                                 watched={auth.watchedTags.map(
                                     (tag) => tag.name
                                 )}
                                 redirect={`/questions/by-tag/${tag[0].name}`}
-                                className={"inline-block ml-5 mb-8"}
+                                // className={"inline-block ml-5 mb-8"}
                             />
                         ) : null}
 
@@ -67,6 +71,7 @@ export default function QuestionsByTag({ page, tag, questions }) {
                                 ignored={auth.ignoredTags.map(
                                     (tag) => tag.name
                                 )}
+                                auth={auth}
                                 redirect={`/questions/by-tag/${tag[0].name}`}
                             />
                         ) : null}

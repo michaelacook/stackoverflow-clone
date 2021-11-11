@@ -21,7 +21,10 @@ export default function Questions({ page, questions }) {
                         <Link
                             as="button"
                             href="/questions/new"
-                            className="px-2 py-3 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-sm shadow-sm self-start"
+                            className={`px-2 py-3 bg-blue-500 text-white text-sm rounded-sm shadow-sm self-start
+                                        ${auth.user && !auth.user.email_verified_at ? "btn-disabled" : "hover:bg-blue-600"}
+                            `}
+                            disabled={auth.user && !auth.user.email_verified_at ? true : false}
                         >
                             Ask Question
                         </Link>
