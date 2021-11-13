@@ -31,7 +31,7 @@ export default function ResetPassword({ token, email }) {
     }
 
     return (
-        <Guest>
+        <>
             <Head title="Reset Password" />
 
             <ValidationErrors errors={errors} />
@@ -86,6 +86,6 @@ export default function ResetPassword({ token, email }) {
                     </Button>
                 </div>
             </form>
-        </Guest>
+        </>
     )
 }
