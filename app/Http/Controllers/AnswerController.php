@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Answer;
+use App\Models\AnswerVote;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,9 +35,32 @@ class AnswerController extends Controller
      */
     public function upVote(Request $request)
     {
-        $answer = Answer::find($request->input('answer')['id']);
-        $answer->votes++;
-        $answer->save();
+        $answerId = $request->input('answer')['id'];
+        $answer = Answer::find($answerId);
+        $upVote = AnswerVote::where('user_id', Auth::id())
+            ->where('direction', 1)
+            ->where('answer_id', $answer->id);
+
+        if ($upVote->doesntExist())
+        {
+            $vote = new AnswerVote;
+            $vote->direction = 1;
+            $vote->answer_id = $answer->id;
+            $vote->user_id = Auth::id();
+            $vote->save();
+
+            $downVote = AnswerVote::where('user_id', Auth::id())
+                ->where('direction', 0)
+                ->where('answer_id', $answer->id);
+
+            if ($downVote->exists())
+            {
+                $downVote->delete();
+            }
+
+            $answer->votes++;
+            $answer->save();
+        }
 
         $url = '/questions' . '/' . $request->input('slug');
 
@@ -48,9 +72,32 @@ class AnswerController extends Controller
      */
     public function downVote(Request $request)
     {
-        $answer = Answer::find($request->input('answer')['id']);
-        $answer->votes--;
-        $answer->save();
+        $answerId = $request->input('answer')['id'];
+        $answer = Answer::find($answerId);
+        $downVote = AnswerVote::where('user_id', Auth::id())
+            ->where('direction', 0)
+            ->where('answer_id', $answer->id);
+
+        if ($downVote->doesntExist())
+        {
+            $vote = new AnswerVote;
+            $vote->direction = 0;
+            $vote->answer_id = $answer->id;
+            $vote->user_id = Auth::id();
+            $vote->save();
+
+            $upVote = AnswerVote::where('user_id', Auth::id())
+                ->where('direction', 1)
+                ->where('answer_id', $answer->id);
+
+            if ($upVote->exists())
+            {
+                $upVote->delete();
+            }
+
+            $answer->votes--;
+            $answer->save();
+        }
 
         $url = '/questions' . '/' . $request->input('slug');
 
