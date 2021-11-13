@@ -22,7 +22,7 @@ export default function ForgotPassword({ status }) {
     }
 
     return (
-        <div className="bg-gray-600">
+        <div>
             <Head title="Forgot Password" />
             <Navbar user={auth.user} />
 
