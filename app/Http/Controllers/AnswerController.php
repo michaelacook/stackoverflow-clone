@@ -37,30 +37,35 @@ class AnswerController extends Controller
     {
         $answerId = $request->input('answer')['id'];
         $answer = Answer::find($answerId);
-        $upVote = AnswerVote::where('user_id', Auth::id())
+
+        if ($answer->user_id !== Auth::id())
+        {
+            $upVote = AnswerVote::where('user_id', Auth::id())
             ->where('direction', 1)
             ->where('answer_id', $answer->id);
 
-        if ($upVote->doesntExist())
-        {
-            $vote = new AnswerVote;
-            $vote->direction = 1;
-            $vote->answer_id = $answer->id;
-            $vote->user_id = Auth::id();
-            $vote->save();
-
-            $downVote = AnswerVote::where('user_id', Auth::id())
-                ->where('direction', 0)
-                ->where('answer_id', $answer->id);
-
-            if ($downVote->exists())
+            if ($upVote->doesntExist())
             {
-                $downVote->delete();
-            }
+                $vote = new AnswerVote;
+                $vote->direction = 1;
+                $vote->answer_id = $answer->id;
+                $vote->user_id = Auth::id();
+                $vote->save();
 
-            $answer->votes++;
-            $answer->save();
+                $downVote = AnswerVote::where('user_id', Auth::id())
+                    ->where('direction', 0)
+                    ->where('answer_id', $answer->id);
+
+                if ($downVote->exists())
+                {
+                    $downVote->delete();
+                }
+
+                $answer->votes++;
+                $answer->save();
+            }
         }
+        
 
         $url = '/questions' . '/' . $request->input('slug');
 
@@ -74,30 +79,35 @@ class AnswerController extends Controller
     {
         $answerId = $request->input('answer')['id'];
         $answer = Answer::find($answerId);
-        $downVote = AnswerVote::where('user_id', Auth::id())
+
+        if ($answer->user_id !== Auth::id())
+        {
+            $downVote = AnswerVote::where('user_id', Auth::id())
             ->where('direction', 0)
             ->where('answer_id', $answer->id);
 
-        if ($downVote->doesntExist())
-        {
-            $vote = new AnswerVote;
-            $vote->direction = 0;
-            $vote->answer_id = $answer->id;
-            $vote->user_id = Auth::id();
-            $vote->save();
-
-            $upVote = AnswerVote::where('user_id', Auth::id())
-                ->where('direction', 1)
-                ->where('answer_id', $answer->id);
-
-            if ($upVote->exists())
+            if ($downVote->doesntExist())
             {
-                $upVote->delete();
-            }
+                $vote = new AnswerVote;
+                $vote->direction = 0;
+                $vote->answer_id = $answer->id;
+                $vote->user_id = Auth::id();
+                $vote->save();
 
-            $answer->votes--;
-            $answer->save();
+                $upVote = AnswerVote::where('user_id', Auth::id())
+                    ->where('direction', 1)
+                    ->where('answer_id', $answer->id);
+
+                if ($upVote->exists())
+                {
+                    $upVote->delete();
+                }
+
+                $answer->votes--;
+                $answer->save();
+            }
         }
+
 
         $url = '/questions' . '/' . $request->input('slug');
 
