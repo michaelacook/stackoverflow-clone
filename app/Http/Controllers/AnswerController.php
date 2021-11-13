@@ -41,8 +41,8 @@ class AnswerController extends Controller
         if ($answer->user_id !== Auth::id())
         {
             $upVote = AnswerVote::where('user_id', Auth::id())
-            ->where('direction', 1)
-            ->where('answer_id', $answer->id);
+                ->where('direction', 1)
+                ->where('answer_id', $answer->id);
 
             if ($upVote->doesntExist())
             {
@@ -66,7 +66,6 @@ class AnswerController extends Controller
             }
         }
         
-
         $url = '/questions' . '/' . $request->input('slug');
 
         return redirect($url);
@@ -107,7 +106,6 @@ class AnswerController extends Controller
                 $answer->save();
             }
         }
-
 
         $url = '/questions' . '/' . $request->input('slug');
 
