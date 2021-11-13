@@ -13,7 +13,9 @@ export default function IgnoreTagButton({
             {!ignored.includes(tag.name) ? (
                 <Link
                     method={`${auth.user.email_verified_at ? "post" : ""}`}
-                    href={`${auth.user.email_verified_at ? "/tags/ignore" : ""}`}
+                    href={`${
+                        auth.user.email_verified_at ? "/tags/ignore" : ""
+                    }`}
                     data={{
                         redirect,
                         tag,
@@ -50,7 +52,9 @@ export default function IgnoreTagButton({
             ) : (
                 <Link
                     method={`${auth.user.email_verified_at ? "post" : ""}`}
-                    href={`${auth.user.email_verified_at ? "/tags/unwatch" : ""}`}
+                    href={`${
+                        auth.user.email_verified_at ? "/tags/unwatch" : ""
+                    }`}
                     data={{
                         redirect,
                         tag,

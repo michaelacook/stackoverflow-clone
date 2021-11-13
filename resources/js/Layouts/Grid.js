@@ -24,7 +24,9 @@ export default function Grid({ page, ...props }) {
                         Home
                     </Link>
 
-                    <h1 className="mt-4 text-gray-500 text-xs ml-1 mb-2">PUBLIC</h1>
+                    <h1 className="mt-4 text-gray-500 text-xs ml-1 mb-2">
+                        PUBLIC
+                    </h1>
 
                     <Link
                         href="/questions"
@@ -71,15 +73,19 @@ export default function Grid({ page, ...props }) {
                     </Link>
                 </aside>
 
-                
-
-                <main 
+                <main
                     className={`
                         lg:relative 
                         lg:left-48 
                         ml-2 
                         w-full 
-                        ${auth.user && auth.user.email_verified_at ? "" : auth.user ? "mb-10" : ""}`}
+                        ${
+                            auth.user && auth.user.email_verified_at
+                                ? ""
+                                : auth.user
+                                ? "mb-10"
+                                : ""
+                        }`}
                 >
                     {props.children}
                 </main>

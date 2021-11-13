@@ -30,8 +30,8 @@ export default function ForgotPassword({ status }) {
                 <div className="flex flex-row justify-center">
                     <div className="w-3/5 md:w-1/3 lg:w-2/6 xl:w-1/6 p-6 bg-white shadow-lg rounded-lg top-60">
                         <p className="w-full mb-4 text-sm text-gray-800">
-                            Forgot your account’s password? 
-                            Enter your email address and we’ll send you a recovery link.
+                            Forgot your account’s password? Enter your email
+                            address and we’ll send you a recovery link.
                         </p>
 
                         {status && (
@@ -43,7 +43,9 @@ export default function ForgotPassword({ status }) {
                         <ValidationErrors errors={errors} />
 
                         <form onSubmit={submit}>
-                            <label className="font-bold" htmlFor="email">Email</label>
+                            <label className="font-bold" htmlFor="email">
+                                Email
+                            </label>
                             <Input
                                 id="email"
                                 type="text"
@@ -55,7 +57,10 @@ export default function ForgotPassword({ status }) {
                             />
 
                             <div className="flex items-center justify-end mt-4">
-                                <button className="w-full px-1 py-2 bg-blue-500 text-white rounded-sm shadow-innersssssssssssssssssssssssssssssssssssssssssssssssss" processing={processing}>
+                                <button
+                                    className="w-full px-1 py-2 bg-blue-500 text-white rounded-sm shadow-innersssssssssssssssssssssssssssssssssssssssssssssssss"
+                                    processing={processing}
+                                >
                                     Email Password Reset Link
                                 </button>
                             </div>

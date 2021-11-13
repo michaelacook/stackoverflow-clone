@@ -70,7 +70,9 @@ export default function ResetPassword({ token, email }) {
                             </div>
 
                             <div className="mt-4">
-                                <label htmlFor="pass-confirm">Confirm Password</label>
+                                <label htmlFor="pass-confirm">
+                                    Confirm Password
+                                </label>
 
                                 <Input
                                     id="pass-confirm"
@@ -84,7 +86,10 @@ export default function ResetPassword({ token, email }) {
                             </div>
 
                             <div className="flex items-center justify-end mt-4">
-                                <button className="w-full bg-blue-500 text-white px-1 py-2 shadow-inner rounded" processing={processing}>
+                                <button
+                                    className="w-full bg-blue-500 text-white px-1 py-2 shadow-inner rounded"
+                                    processing={processing}
+                                >
                                     Reset Password
                                 </button>
                             </div>

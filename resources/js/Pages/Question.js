@@ -72,10 +72,10 @@ export default function Question({ page, question, answers, tags, comments }) {
 
                     <div className="flex flex-row">
                         <div id="votes" className="inline-block mr-4 mt-4">
-                            <Upvote 
-                                data={question} 
-                                auth={auth} 
-                                href="/questions/upvote" 
+                            <Upvote
+                                data={question}
+                                auth={auth}
+                                href="/questions/upvote"
                             />
                             <span className="ml-3 text-gray-600 text-xl">
                                 {question.votes}
@@ -87,10 +87,7 @@ export default function Question({ page, question, answers, tags, comments }) {
                             />
                         </div>
 
-                        <div
-                            id="question-body"
-                            className="w-full mt-4 pb-12"
-                        >
+                        <div id="question-body" className="w-full mt-4 pb-12">
                             <ReactMarkdown
                                 children={question.body}
                                 components={{
@@ -152,7 +149,7 @@ export default function Question({ page, question, answers, tags, comments }) {
                         </div>
                     ) : null}
 
-                    {(auth.user && auth.user.email_verified_at) ? (
+                    {auth.user && auth.user.email_verified_at ? (
                         <div className="ml-14 mt-2 mb-5">
                             {!addComment && auth.user ? (
                                 <span
@@ -208,7 +205,6 @@ export default function Question({ page, question, answers, tags, comments }) {
                             ) : null}
                         </div>
                     ) : null}
-
 
                     {auth.user || comments.length ? <hr /> : null}
 
@@ -350,11 +346,19 @@ export default function Question({ page, question, answers, tags, comments }) {
                                     border-gray-300 
                                     text-sm 
                                     rounded-sm
-                                    ${auth.user && auth.user.email_verified_at ? null : "btn-disabled"}
+                                    ${
+                                        auth.user && auth.user.email_verified_at
+                                            ? null
+                                            : "btn-disabled"
+                                    }
                                 `}
                                 placeholder="Use markdown format..."
                                 rows="12"
-                                disabled={(auth.user && auth.user.email_verified_at) ? false : true}
+                                disabled={
+                                    auth.user && auth.user.email_verified_at
+                                        ? false
+                                        : true
+                                }
                             ></textarea>
 
                             <button
@@ -368,7 +372,11 @@ export default function Question({ page, question, answers, tags, comments }) {
                                     text-sm 
                                     rounded-sm 
                                     shadow-sm
-                                    ${(auth.user && auth.user.email_verified_at) ? "hover:bg-blue-600" : "btn-disabled"}
+                                    ${
+                                        auth.user && auth.user.email_verified_at
+                                            ? "hover:bg-blue-600"
+                                            : "btn-disabled"
+                                    }
                                 `}
                             >
                                 Post Your Answer
@@ -387,8 +395,16 @@ export default function Question({ page, question, answers, tags, comments }) {
                                 {" "}
                                 or{" "}
                                 <Link
-                                    className={`text-blue-600 ${auth.user && auth.user.email_verified_at ? null : "btn-disabled"}`}
-                                    href={`${(auth.user && auth.user.email_verified_at) ? "/questions/new" : ""}`}
+                                    className={`text-blue-600 ${
+                                        auth.user && auth.user.email_verified_at
+                                            ? null
+                                            : "btn-disabled"
+                                    }`}
+                                    href={`${
+                                        auth.user && auth.user.email_verified_at
+                                            ? "/questions/new"
+                                            : ""
+                                    }`}
                                 >
                                     ask your own question
                                 </Link>

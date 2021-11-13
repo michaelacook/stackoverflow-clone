@@ -22,9 +22,18 @@ export default function Questions({ page, questions }) {
                             as="button"
                             href="/questions/new"
                             className={`px-2 py-3 bg-blue-500 text-white text-sm rounded-sm shadow-sm self-start
-                                        ${auth.user && !auth.user.email_verified_at ? "btn-disabled" : "hover:bg-blue-600"}
+                                        ${
+                                            auth.user &&
+                                            !auth.user.email_verified_at
+                                                ? "btn-disabled"
+                                                : "hover:bg-blue-600"
+                                        }
                             `}
-                            disabled={auth.user && !auth.user.email_verified_at ? true : false}
+                            disabled={
+                                auth.user && !auth.user.email_verified_at
+                                    ? true
+                                    : false
+                            }
                         >
                             Ask Question
                         </Link>

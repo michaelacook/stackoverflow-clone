@@ -27,9 +27,12 @@ export default function WatchTagButton({
                         text-blue-600 
                         rounded-sm
                         ${className}
-                        ${!auth.user.email_verified_at ? "btn-disabled" : "hover:text-blue-800 hover:bg-blue-400"}
+                        ${
+                            !auth.user.email_verified_at
+                                ? "btn-disabled"
+                                : "hover:text-blue-800 hover:bg-blue-400"
+                        }
                     `}
-                    
                     preserveScroll={true}
                 >
                     <svg
@@ -50,7 +53,9 @@ export default function WatchTagButton({
             ) : (
                 <Link
                     method={`${auth.user.email_verified_at ? "post" : ""}`}
-                    href={`${auth.user.email_verified_at ? "/tags/unwatch" : ""}`}
+                    href={`${
+                        auth.user.email_verified_at ? "/tags/unwatch" : ""
+                    }`}
                     data={{
                         redirect,
                         tag,
@@ -66,7 +71,11 @@ export default function WatchTagButton({
                         w-25
                         rounded-sm
                         ${className}
-                        ${!auth.user.email_verified_at ? "btn-disabled" : "hover:text-blue-800 hover:bg-blue-400"}
+                        ${
+                            !auth.user.email_verified_at
+                                ? "btn-disabled"
+                                : "hover:text-blue-800 hover:bg-blue-400"
+                        }
                     `}
                     preserveScroll={true}
                 >
