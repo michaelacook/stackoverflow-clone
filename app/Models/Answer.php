@@ -24,6 +24,11 @@ class Answer extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function votes()
+    {
+        return $this->hasMany(AnswerVote::class);
+    }
+
     protected $fillable = [
         'body',
         'user_id',
