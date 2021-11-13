@@ -1,7 +1,5 @@
 import React, { useEffect } from "react"
-import Button from "@/Components/Button"
 import Input from "@/Components/Input"
-import Label from "@/Components/Label"
 import ValidationErrors from "@/Components/ValidationErrors"
 import { Head, useForm, usePage } from "@inertiajs/inertia-react"
 import Navbar from "@/Components/Navbar"
