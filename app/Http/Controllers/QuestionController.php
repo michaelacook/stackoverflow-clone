@@ -26,6 +26,8 @@ class QuestionController extends Controller
         $currentUrl = url()->current();
         $previousUrl = url()->previous();
 
+        // dd($currentUrl);
+
         if ($currentUrl !== $previousUrl)
         {
             $question->views++;

@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewAnswer;
 use Illuminate\Http\Request;
 use App\Models\Answer;
 use App\Models\AnswerVote;
 use App\Models\Comment;
+use App\Models\Question;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class AnswerController extends Controller
 {
@@ -16,18 +20,27 @@ class AnswerController extends Controller
     public function store(Request $request)
     {
         $userId = Auth::id();
-        $question = $request->input('question');
+        $question = Question::find($request->input('question')['id']);
+        $questionAuthor = User::find($question->user_id);
         $answer = $request->input('answer');
 
-        Answer::create([
-            'body' => $answer['body'],
-            'user_id' => $userId,
-            'question_id' => $question['id']
-        ]);
+        $newAnswer = new Answer; 
+        $newAnswer->body = $answer['body'];
+        $newAnswer->user_id = $userId;
+        $newAnswer->question_id = $question->id;
+        $newAnswer->save();
 
-        $url = '/questions' . '/' . $question['slug'];
+        Mail::to($questionAuthor)->send(new NewAnswer(
+            $questionAuthor, 
+            $newAnswer,
+            $question
+        ));
 
-        return redirect($url);
+        $url = url("/questions/{$question->slug}");
+
+        return redirect($url)->withFragment($newAnswer->id);
+        // $r = redirect($url)->withFragment($newAnswer->id); 
+        // dd($r->getTargetUrl());
     }
 
     /**
