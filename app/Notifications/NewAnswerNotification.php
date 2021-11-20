@@ -8,6 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\Question;
 use App\Models\Answer;
+use App\Models\User;
 
 class NewAnswerNotification extends Notification
 {
@@ -64,7 +65,7 @@ class NewAnswerNotification extends Notification
             'headline' => 'You have a new answer to your question',
             'question_title' => $this->question->title,
             'answer_preview' => substr($this->answer->body, 0, 50),
-            'answer_author' => $this->answer->user()->name
+            'answer_author' => User::find($this->answer->user_id)->name
         ];
     }
 }

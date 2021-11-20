@@ -9,6 +9,7 @@ use App\Models\AnswerVote;
 use App\Models\Comment;
 use App\Models\Question;
 use App\Models\User;
+use App\Notifications\NewAnswerNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -30,6 +31,10 @@ class AnswerController extends Controller
         $newAnswer->question_id = $question->id;
         $newAnswer->save();
 
+        $questionAuthor->notify(
+            new NewAnswerNotification($question, $newAnswer)
+        );
+
         Mail::to($questionAuthor)->send(new NewAnswer(
             $questionAuthor, 
             $newAnswer,
@@ -39,8 +44,6 @@ class AnswerController extends Controller
         $url = url("/questions/{$question->slug}");
 
         return redirect($url)->withFragment($newAnswer->id);
-        // $r = redirect($url)->withFragment($newAnswer->id); 
-        // dd($r->getTargetUrl());
     }
 
     /**
