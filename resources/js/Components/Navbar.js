@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "@inertiajs/inertia-react"
 import { Inertia } from "@inertiajs/inertia"
+import Dropdown from "./Dropdown"
 
 export default function Navbar({ user, className = "", sticky = true }) {
     const [query, setQuery] = useState("")
@@ -76,22 +77,42 @@ export default function Navbar({ user, className = "", sticky = true }) {
                                 </div>
                             </div>
 
-                            <div className="hover:bg-gray-300">
-                                <div className="inline-block px-2">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="h-6 w-6 text-gray-500 mt-3"
-                                        viewBox="0 0 19 19"
-                                        fill="currentColor"
-                                    >
-                                        <path
-                                            fill-rule="evenodd"
-                                            d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v7h-2l-1 2H8l-1-2H5V5z"
-                                            clip-rule="evenodd"
-                                        />
-                                    </svg>
-                                </div>
-                            </div>
+
+                            <Dropdown className="hover:bg-gray-300 cursor-pointer">
+                                <Dropdown.Trigger>
+                                    <div className="inline-block px-2">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-6 w-6 text-gray-500 mt-3"
+                                            viewBox="0 0 19 19"
+                                            fill="currentColor"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v7h-2l-1 2H8l-1-2H5V5z"
+                                                clip-rule="evenodd"
+                                            />
+                                        </svg>
+                                    </div>
+                                </Dropdown.Trigger>
+
+                                <Dropdown.Content width={"w-96"}>
+                                    <div>
+                                        <div className="px-2 py-1 flex flex-row justify-between bg-gray-200 ">
+                                            <h5 className="text-xs font-semibold text-gray-700 self-center">INBOX</h5>
+
+                                            <span className="text-blue-500 text-sm">all items</span>
+                                        </div>
+
+                                        <div className="px-2 py-1">
+                                            No new notifications.
+                                        </div>
+                                        
+                                    </div>
+                                </Dropdown.Content>
+                            </Dropdown>
+                            
+
                         </div>
                     ) : (
                         <div className="mt-2">
