@@ -124,7 +124,7 @@ export default function Navbar({ user, className = "", sticky = true }) {
                                 </Link>
                                 
                                 <Dropdown.Content width={"w-96"}>
-                                    <div>
+                                    <div className="overflow-y-scroll h-72">
                                         <div className="px-2 py-1 flex flex-row justify-between bg-gray-200 ">
                                             <h5 className="text-xs font-semibold text-gray-700 self-center">INBOX</h5>
 
@@ -134,7 +134,9 @@ export default function Navbar({ user, className = "", sticky = true }) {
                                         <div>
                                             {user.notifications.map((notification) => (
                                                 <Link href={notification.data.url}>
-                                                    <div className="py-1 hover:bg-gray-300 border-b border-gray-200">
+                                                    <div 
+                                                        className="py-1 hover:bg-gray-300 border-b border-gray-200"
+                                                    >
                                                         <div className="px-2 flex flex-row justify-between">
                                                             <div>
                                                                 <img className="inline-block mr-2" height="25" width="25" src="/favicon.ico" />
