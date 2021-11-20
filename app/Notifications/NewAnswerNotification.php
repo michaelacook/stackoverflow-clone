@@ -65,7 +65,8 @@ class NewAnswerNotification extends Notification
             'headline' => 'You have a new answer to your question',
             'question_title' => $this->question->title,
             'answer_preview' => substr($this->answer->body, 0, 50),
-            'answer_author' => User::find($this->answer->user_id)->name
+            'answer_author' => User::find($this->answer->user_id)->name,
+            'url' => '/questions' . '/' . $this->question->slug . '#' . $this->answer->id
         ];
     }
 }
