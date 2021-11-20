@@ -62,7 +62,7 @@ class NewAnswerNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'headline' => 'You have a new answer to your question',
+            'type' => 'answer',
             'question_title' => $this->question->title,
             'answer_preview' => substr($this->answer->body, 0, 50),
             'answer_author' => User::find($this->answer->user_id)->name,
