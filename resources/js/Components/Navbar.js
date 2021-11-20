@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { Link } from "@inertiajs/inertia-react"
 import { Inertia } from "@inertiajs/inertia"
 import Dropdown from "./Dropdown"
+import moment from "moment"
 
 export default function Navbar({ user, className = "", sticky = true }) {
     const [query, setQuery] = useState("")
@@ -80,7 +81,7 @@ export default function Navbar({ user, className = "", sticky = true }) {
 
                             <Dropdown className="hover:bg-gray-300 cursor-pointer">
                                 <Dropdown.Trigger>
-                                    <div className="inline-block px-2">
+                                    <div className="relative inline-block px-2">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             className="h-6 w-6 text-gray-500 mt-3"
@@ -93,6 +94,26 @@ export default function Navbar({ user, className = "", sticky = true }) {
                                                 clip-rule="evenodd"
                                             />
                                         </svg>
+                                        <div 
+                                            style={{
+                                                top: "8px",
+                                                right: "4px"
+                                            }} 
+                                            className={`
+                                                absolute 
+                                                flex flex-row 
+                                                justify-center 
+                                                h-4 w-4 
+                                                bg-red-600 
+                                                text-xs 
+                                                text-white 
+                                                rounded-full
+                                                ${!user.notifications.filter((notif) => !notif.read_at).length ? "invisible" : ""}
+                                                `
+                                            }
+                                            >
+                                                {user.notifications.filter((notif) => !notif.read_at).length}
+                                        </div>
                                     </div>
                                 </Dropdown.Trigger>
 
@@ -104,8 +125,39 @@ export default function Navbar({ user, className = "", sticky = true }) {
                                             <span className="text-blue-500 text-sm">all items</span>
                                         </div>
 
-                                        <div className="px-2 py-1">
-                                            No new notifications.
+                                        <div>
+                                            {user.notifications.map((notification) => (
+                                                <Link href={notification.data.url}>
+                                                    <div className="py-1 hover:bg-gray-300 border-b border-gray-200">
+                                                        <div className="px-2 flex flex-row justify-between">
+                                                            <div>
+                                                                <img className="inline-block mr-2" height="25" width="25" src="/favicon.ico" />
+                                                                <span className="text-sm text-gray-500">
+                                                                    {notification.data.type}
+                                                                </span>
+                                                            </div>
+                                                            <span className="text-xs text-gray-500 self-center">
+                                                                {moment(notification.created_at).format("MMM Do YYYY")}
+                                                            </span>
+                                                        </div>
+                                                        <div className="ml-10">
+                                                            <h5 className="text-sm text-blue-500">
+                                                                {notification.data.question_title}
+                                                            </h5>
+                                                            <p className="text-sm text-gray-600">
+                                                                {notification.data.answer_preview}...
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </Link>
+                                            ))}
+                                            {user.notifications.length ? (
+                                                <div className="py-2 hover:bg-gray-300 flex flex-row justify-center">
+                                                    <Link href="/" className="text-xs text-blue-500">
+                                                        see all inbox items
+                                                    </Link>
+                                                </div>
+                                            ) : <p>No new notifications.</p>}
                                         </div>
                                         
                                     </div>
