@@ -40,7 +40,7 @@ class NewAnswer extends Mailable
         return $this
             ->from("no-reply@cloneoverflow.com", "Clone Overflow")
             ->subject("You have a new answer to your question!")
-            ->markdown('new-answer', [
+            ->markdown('emails.new-answer', [
                 'user' => $this->user,
                 'answer' => $this->answer,
                 'question' => $this->question
