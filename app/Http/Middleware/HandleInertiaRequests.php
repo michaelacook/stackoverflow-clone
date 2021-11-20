@@ -50,6 +50,7 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'auth' => [
                 'user' => $user ? $user : null,
+                'notifications' => $user->notifications,
                 'watchedTags' => $user 
                     ? $request->user()->watched()->get() 
                     : null, 
