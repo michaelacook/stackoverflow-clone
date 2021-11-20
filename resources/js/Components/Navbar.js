@@ -80,43 +80,49 @@ export default function Navbar({ user, className = "", sticky = true }) {
 
 
                             <Dropdown className="hover:bg-gray-300 cursor-pointer">
-                                <Dropdown.Trigger>
-                                    <div className="relative inline-block px-2">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="h-6 w-6 text-gray-500 mt-3"
-                                            viewBox="0 0 19 19"
-                                            fill="currentColor"
-                                        >
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v7h-2l-1 2H8l-1-2H5V5z"
-                                                clip-rule="evenodd"
-                                            />
-                                        </svg>
-                                        <div 
-                                            style={{
-                                                top: "8px",
-                                                right: "4px"
-                                            }} 
-                                            className={`
-                                                absolute 
-                                                flex flex-row 
-                                                justify-center 
-                                                h-4 w-4 
-                                                bg-red-600 
-                                                text-xs 
-                                                text-white 
-                                                rounded-full
-                                                ${!user.notifications.filter((notif) => !notif.read_at).length ? "invisible" : ""}
-                                                `
-                                            }
+                                <Link 
+                                    preserveScroll={true} 
+                                    preserveState={true}
+                                    href="/notifications/mark-as-read"
+                                >
+                                    <Dropdown.Trigger>
+                                        <div className="relative inline-block px-2">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="h-6 w-6 text-gray-500 mt-3"
+                                                viewBox="0 0 19 19"
+                                                fill="currentColor"
                                             >
-                                                {user.notifications.filter((notif) => !notif.read_at).length}
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v7h-2l-1 2H8l-1-2H5V5z"
+                                                    clip-rule="evenodd"
+                                                />
+                                            </svg>
+                                            <div 
+                                                style={{
+                                                    top: "8px",
+                                                    right: "4px"
+                                                }} 
+                                                className={`
+                                                    absolute 
+                                                    flex flex-row 
+                                                    justify-center 
+                                                    h-4 w-4 
+                                                    bg-red-600 
+                                                    text-xs 
+                                                    text-white 
+                                                    rounded-full
+                                                    ${!user.notifications.filter((notif) => !notif.read_at).length ? "invisible" : ""}
+                                                    `
+                                                }
+                                                >
+                                                    {user.notifications.filter((notif) => !notif.read_at).length}
+                                            </div>
                                         </div>
-                                    </div>
-                                </Dropdown.Trigger>
-
+                                    </Dropdown.Trigger>
+                                </Link>
+                                
                                 <Dropdown.Content width={"w-96"}>
                                     <div>
                                         <div className="px-2 py-1 flex flex-row justify-between bg-gray-200 ">
@@ -159,12 +165,9 @@ export default function Navbar({ user, className = "", sticky = true }) {
                                                 </div>
                                             ) : <p>No new notifications.</p>}
                                         </div>
-                                        
                                     </div>
                                 </Dropdown.Content>
                             </Dropdown>
-                            
-
                         </div>
                     ) : (
                         <div className="mt-2">
