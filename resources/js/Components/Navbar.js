@@ -124,7 +124,7 @@ export default function Navbar({ user, className = "", sticky = true }) {
                                 </Link>
                                 
                                 <Dropdown.Content width={"w-96"}>
-                                    <div className="overflow-y-scroll h-72">
+                                    <div className="overflow-y-scroll max-h-72">
                                         <div className="px-2 py-1 flex flex-row justify-between bg-gray-200 ">
                                             <h5 className="text-xs font-semibold text-gray-700 self-center">INBOX</h5>
 
