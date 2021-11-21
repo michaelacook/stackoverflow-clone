@@ -45,7 +45,7 @@ class NewQuestionCommentNotification extends Notification
         return [
             'type' => 'comment',
             'title' => $this->question->title,
-            'preview' => substr($this->answer->body, 0, 50),
+            'preview' => substr($this->comment->body, 0, 50),
             'url' => '/questions' . '/' . $this->question->slug . '#' . $this->comment->id
         ];
     }

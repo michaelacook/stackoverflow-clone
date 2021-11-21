@@ -13,6 +13,7 @@ use App\Models\Question;
 use App\Models\Comment;
 use App\Models\Answer;
 use App\Models\QuestionVote;
+use App\Notifications\NewQuestionCommentNotification;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Mail;
 
@@ -218,15 +219,21 @@ class QuestionController extends Controller
     {
         $userId = $request->input('user')['id'];
         $commentBody = $request->input('comment');
-        $question = $request->input('question');
+        $question = Question::find($request->input('question')['id']);
+        $questionAuthor = User::find($question->user_id);
 
-        Comment::create([
-            'body' => $commentBody,
-            'user_id' => $userId, 
-            'question_id' => $question['id']
-        ]);
+        $comment = new Comment;
+        $comment->body = $commentBody;
+        $comment->user_id = $userId;
+        $comment->question_id = $question->id;
+        $comment->save();
 
-        $url = '/questions' . '/' . $question['slug'];
+        $questionAuthor->notify(new NewQuestionCommentNotification(
+            $question, 
+            $comment
+        ));
+
+        $url = '/questions' . '/' . $question->slug;
 
         return redirect($url);
     }
