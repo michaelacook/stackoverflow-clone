@@ -63,9 +63,9 @@ class NewAnswerNotification extends Notification
     {
         return [
             'type' => 'answer',
-            'question_title' => $this->question->title,
-            'answer_preview' => substr($this->answer->body, 0, 50),
-            'answer_author' => User::find($this->answer->user_id)->name,
+            'title' => $this->question->title,
+            'preview' => substr($this->answer->body, 0, 50),
+            'author' => User::find($this->answer->user_id)->name,
             'url' => '/questions' . '/' . $this->question->slug . '#' . $this->answer->id
         ];
     }
