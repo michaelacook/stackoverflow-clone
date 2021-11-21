@@ -78,10 +78,9 @@ export default function Navbar({ user, className = "", sticky = true }) {
                                 </div>
                             </div>
 
-
                             <Dropdown className="hover:bg-gray-300 cursor-pointer">
-                                <Link 
-                                    preserveScroll={true} 
+                                <Link
+                                    preserveScroll={true}
                                     preserveState={true}
                                     href="/notifications/mark-as-read"
                                 >
@@ -99,11 +98,11 @@ export default function Navbar({ user, className = "", sticky = true }) {
                                                     clip-rule="evenodd"
                                                 />
                                             </svg>
-                                            <div 
+                                            <div
                                                 style={{
                                                     top: "8px",
-                                                    right: "4px"
-                                                }} 
+                                                    right: "4px",
+                                                }}
                                                 className={`
                                                     absolute 
                                                     flex flex-row 
@@ -113,59 +112,106 @@ export default function Navbar({ user, className = "", sticky = true }) {
                                                     text-xs 
                                                     text-white 
                                                     rounded-full
-                                                    ${!user.notifications.filter((notif) => !notif.read_at).length ? "invisible" : ""}
-                                                    `
+                                                    ${
+                                                        !user.notifications.filter(
+                                                            (notif) =>
+                                                                !notif.read_at
+                                                        ).length
+                                                            ? "invisible"
+                                                            : ""
+                                                    }
+                                                    `}
+                                            >
+                                                {
+                                                    user.notifications.filter(
+                                                        (notif) =>
+                                                            !notif.read_at
+                                                    ).length
                                                 }
-                                                >
-                                                    {user.notifications.filter((notif) => !notif.read_at).length}
                                             </div>
                                         </div>
                                     </Dropdown.Trigger>
                                 </Link>
-                                
+
                                 <Dropdown.Content width={"w-96"}>
                                     <div className="overflow-y-scroll max-h-72">
                                         <div className="px-2 py-1 flex flex-row justify-between bg-gray-200 ">
-                                            <h5 className="text-xs font-semibold text-gray-700 self-center">INBOX</h5>
+                                            <h5 className="text-xs font-semibold text-gray-700 self-center">
+                                                INBOX
+                                            </h5>
 
-                                            <span className="text-blue-500 text-sm">all items</span>
+                                            <span className="text-blue-500 text-sm">
+                                                all items
+                                            </span>
                                         </div>
 
                                         <div>
-                                            {user.notifications.slice(0, 10).map((notification) => (
-                                                <Link href={notification.data.url}>
-                                                    <div
-                                                        className="py-1 hover:bg-gray-300 border-b border-gray-200"
+                                            {user.notifications
+                                                .slice(0, 10)
+                                                .map((notification) => (
+                                                    <Link
+                                                        href={
+                                                            notification.data
+                                                                .url
+                                                        }
                                                     >
-                                                        <div className="px-2 flex flex-row justify-between">
-                                                            <div>
-                                                                <img className="inline-block mr-2" height="25" width="25" src="/favicon.ico" />
-                                                                <span className="text-sm text-gray-500">
-                                                                    {notification.data.type}
+                                                        <div className="py-1 hover:bg-gray-300 border-b border-gray-200">
+                                                            <div className="px-2 flex flex-row justify-between">
+                                                                <div>
+                                                                    <img
+                                                                        className="inline-block mr-2"
+                                                                        height="25"
+                                                                        width="25"
+                                                                        src="/favicon.ico"
+                                                                    />
+                                                                    <span className="text-sm text-gray-500">
+                                                                        {
+                                                                            notification
+                                                                                .data
+                                                                                .type
+                                                                        }
+                                                                    </span>
+                                                                </div>
+                                                                <span className="text-xs text-gray-500 self-center">
+                                                                    {moment(
+                                                                        notification.created_at
+                                                                    ).format(
+                                                                        "MMM Do YYYY"
+                                                                    )}
                                                                 </span>
                                                             </div>
-                                                            <span className="text-xs text-gray-500 self-center">
-                                                                {moment(notification.created_at).format("MMM Do YYYY")}
-                                                            </span>
+                                                            <div className="ml-10">
+                                                                <h5 className="text-sm text-blue-500">
+                                                                    {
+                                                                        notification
+                                                                            .data
+                                                                            .title
+                                                                    }
+                                                                </h5>
+                                                                <p className="text-sm text-gray-600 pr-1 break-all">
+                                                                    {
+                                                                        notification
+                                                                            .data
+                                                                            .preview
+                                                                    }
+                                                                    ...
+                                                                </p>
+                                                            </div>
                                                         </div>
-                                                        <div className="ml-10">
-                                                            <h5 className="text-sm text-blue-500">
-                                                                {notification.data.title}
-                                                            </h5>
-                                                            <p className="text-sm text-gray-600 pr-1 break-all">
-                                                                {notification.data.preview}...
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </Link>
-                                            ))}
+                                                    </Link>
+                                                ))}
                                             {user.notifications.length ? (
                                                 <div className="py-2 hover:bg-gray-300 flex flex-row justify-center">
-                                                    <Link href="/" className="text-xs text-blue-500">
+                                                    <Link
+                                                        href="/"
+                                                        className="text-xs text-blue-500"
+                                                    >
                                                         see all inbox items
                                                     </Link>
                                                 </div>
-                                            ) : <p>No new notifications.</p>}
+                                            ) : (
+                                                <p>No new notifications.</p>
+                                            )}
                                         </div>
                                     </div>
                                 </Dropdown.Content>
