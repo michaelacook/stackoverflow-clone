@@ -152,7 +152,7 @@ export default function Navbar({ user, className = "", sticky = true }) {
                                                             <h5 className="text-sm text-blue-500">
                                                                 {notification.data.title}
                                                             </h5>
-                                                            <p className="text-sm text-gray-600">
+                                                            <p className="text-sm text-gray-600 pr-1 break-all">
                                                                 {notification.data.preview}...
                                                             </p>
                                                         </div>
