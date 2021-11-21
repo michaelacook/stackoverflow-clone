@@ -6,9 +6,10 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 use App\Models\Question;
+use App\Models\Answer;
 use App\Models\Comment;
 
-class NewQuestionCommentNotification extends Notification
+class NewCommentNotification extends Notification
 {
     use Queueable;
 

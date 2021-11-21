@@ -13,7 +13,7 @@ use App\Models\Question;
 use App\Models\Comment;
 use App\Models\Answer;
 use App\Models\QuestionVote;
-use App\Notifications\NewQuestionCommentNotification;
+use App\Notifications\NewCommentNotification;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Mail;
 
@@ -228,7 +228,7 @@ class QuestionController extends Controller
         $comment->question_id = $question->id;
         $comment->save();
 
-        $questionAuthor->notify(new NewQuestionCommentNotification(
+        $questionAuthor->notify(new NewCommentNotification(
             $question, 
             $comment
         ));
