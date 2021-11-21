@@ -150,10 +150,10 @@ export default function Navbar({ user, className = "", sticky = true }) {
                                                         </div>
                                                         <div className="ml-10">
                                                             <h5 className="text-sm text-blue-500">
-                                                                {notification.data.question_title}
+                                                                {notification.data.title}
                                                             </h5>
                                                             <p className="text-sm text-gray-600">
-                                                                {notification.data.answer_preview}...
+                                                                {notification.data.preview}...
                                                             </p>
                                                         </div>
                                                     </div>
