@@ -10,6 +10,7 @@ use App\Models\Comment;
 use App\Models\Question;
 use App\Models\User;
 use App\Notifications\NewAnswerNotification;
+use App\Notifications\NewCommentNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -133,13 +134,21 @@ class AnswerController extends Controller
      */
     public function postComment(Request $request)
     {
-        $values = $request->all();
+        $values = $request->all();     
 
-        Comment::create([
-            'body' => $values['comment'],
-            'user_id' => Auth::id(),
-            'answer_id' => $values['answer']['id'] 
-        ]);
+        $answerAuthor = User::find($values['answer']['user_id']);
+        $question = Question::find($values['answer']['question_id']);
+
+        $comment = new Comment;
+        $comment->body = $values['comment'];
+        $comment->user_id = Auth::id();
+        $comment->answer_id = $values['answer']['id'];
+        $comment->save();
+
+        $answerAuthor->notify(new NewCommentNotification(
+            $question, 
+            $comment
+        ));
 
         $url = '/questions' . '/' . $request['question']['slug'];
 
