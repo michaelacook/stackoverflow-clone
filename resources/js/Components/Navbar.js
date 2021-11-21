@@ -132,9 +132,9 @@ export default function Navbar({ user, className = "", sticky = true }) {
                                         </div>
 
                                         <div>
-                                            {user.notifications.map((notification) => (
+                                            {user.notifications.slice(0, 10).map((notification) => (
                                                 <Link href={notification.data.url}>
-                                                    <div 
+                                                    <div
                                                         className="py-1 hover:bg-gray-300 border-b border-gray-200"
                                                     >
                                                         <div className="px-2 flex flex-row justify-between">
