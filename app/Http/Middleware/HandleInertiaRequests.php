@@ -36,6 +36,7 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request)
     {
         $user = null;
+        $notifications = null;
 
         if (Auth::check())
         {
@@ -45,12 +46,14 @@ class HandleInertiaRequests extends Middleware
                 'comments'
             ])
             ->find(Auth::id());
+
+            $notifications = $user->notifications;
         }
 
         return array_merge(parent::share($request), [
             'auth' => [
-                'user' => $user ? $user : null,
-                'notifications' => $user ? $user->notifications : null,
+                'user' => $user,
+                'notifications' => $notifications,
                 'watchedTags' => $user 
                     ? $request->user()->watched()->get() 
                     : null, 
