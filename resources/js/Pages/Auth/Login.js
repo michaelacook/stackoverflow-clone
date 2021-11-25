@@ -70,18 +70,27 @@ export default function Login({ status, canResetPassword }) {
                         </div>
 
                         <div>
-                            <button className="w-full flex flex-row justify-center py-2 rounded bg-white border text-sm border-gray-300 mb-3">
+                            <button
+                                type="button"
+                                className="w-full flex flex-row justify-center py-2 rounded bg-white border text-sm border-gray-300 mb-3"
+                            >
                                 <GoogleIcon className={"inline-block"} />
                                 &nbsp;Log in with Google
                             </button>
-                            <button className="w-full flex flex-row justify-center py-2 rounded bg-black text-sm text-white mb-3">
+                            <button 
+                                type="button"
+                                className="w-full flex flex-row justify-center py-2 rounded bg-black text-sm text-white mb-3"
+                            >
                                 <GitHubIcon
                                     className={`inline-block`}
                                     inverted={true}
                                 />
                                 &nbsp;Log in with GitHub
                             </button>
-                            <button className="w-full flex flex-row justify-center py-2 rounded bg-facebook hover:bg-facebook-dark text-sm text-white mb-5">
+                            <button 
+                                type="button"
+                                className="w-full flex flex-row justify-center py-2 rounded bg-facebook hover:bg-facebook-dark text-sm text-white mb-5"
+                            >
                                 <FacebookIcon
                                     className={`inline-block`}
                                     inverted={true}
