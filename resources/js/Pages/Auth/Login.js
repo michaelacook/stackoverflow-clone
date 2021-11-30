@@ -77,8 +77,8 @@ export default function Login({ status, canResetPassword }) {
                                 <GoogleIcon className={"inline-block"} />
                                 &nbsp;Log in with Google
                             </button>
-                            <button 
-                                type="button"
+                            <a
+                                href="/login/github"
                                 className="w-full flex flex-row justify-center py-2 rounded bg-black text-sm text-white mb-3"
                             >
                                 <GitHubIcon
@@ -86,7 +86,7 @@ export default function Login({ status, canResetPassword }) {
                                     inverted={true}
                                 />
                                 &nbsp;Log in with GitHub
-                            </button>
+                            </a>
                             <button 
                                 type="button"
                                 className="w-full flex flex-row justify-center py-2 rounded bg-facebook hover:bg-facebook-dark text-sm text-white mb-5"
