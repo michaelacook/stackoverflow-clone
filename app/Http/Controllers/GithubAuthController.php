@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -26,10 +27,12 @@ class GithubAuthController extends Controller
             [
                 'name' => $user->name, 
                 'password' => Hash::make(Str::random(12)),
-                'profileUrl' => $user->avatar,
-                'email_verified_at' => now()
+                'profileUrl' => $user->avatar
             ]
         );
+
+        $user->markEmailAsVerified();
+        $user->save();
 
         Auth::login($user, true);
 
