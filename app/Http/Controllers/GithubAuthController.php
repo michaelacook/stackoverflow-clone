@@ -26,7 +26,8 @@ class GithubAuthController extends Controller
             [
                 'name' => $user->name, 
                 'password' => Hash::make(Str::random(12)),
-                'profileUrl' => $user->avatar
+                'profileUrl' => $user->avatar,
+                'email_verified_at' => now()
             ]
         );
 
