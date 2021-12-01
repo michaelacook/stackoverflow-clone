@@ -69,13 +69,16 @@ export default function Register() {
                                 <GoogleIcon className={"inline-block"} />
                                 &nbsp;Sign up with Google
                             </button>
-                            <button className="w-full flex flex-row justify-center py-2 rounded bg-black text-sm text-white mb-3">
+                            <a
+                                href="/login/github" 
+                                className="w-full flex flex-row justify-center py-2 rounded bg-black text-sm text-white mb-3"
+                            >
                                 <GitHubIcon
                                     className={`inline-block`}
                                     inverted={true}
                                 />
                                 &nbsp;Sign up with GitHub
-                            </button>
+                            </a>
                             <button className="w-full flex flex-row justify-center py-2 rounded bg-facebook hover:bg-facebook-dark text-sm text-white mb-5">
                                 <FacebookIcon
                                     className={`inline-block`}
