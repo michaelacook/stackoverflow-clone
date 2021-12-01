@@ -87,8 +87,8 @@ export default function Login({ status, canResetPassword }) {
                                 />
                                 &nbsp;Log in with GitHub
                             </a>
-                            <button 
-                                type="button"
+                            <a 
+                                href="/login/facebook"
                                 className="w-full flex flex-row justify-center py-2 rounded bg-facebook hover:bg-facebook-dark text-sm text-white mb-5"
                             >
                                 <FacebookIcon
@@ -96,7 +96,7 @@ export default function Login({ status, canResetPassword }) {
                                     inverted={true}
                                 />
                                 &nbsp;Log in with Facebook
-                            </button>
+                            </a>
                         </div>
 
                         <div className="p-6 rounded-lg bg-white shadow-lg">

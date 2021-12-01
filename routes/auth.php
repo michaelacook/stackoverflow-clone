@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\GithubAuthController;
+use App\Http\Controllers\Auth\FacebookAuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/register', [RegisteredUserController::class, 'create'])
@@ -67,3 +68,7 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 Route::get('/login/github', [GithubAuthController::class, 'redirect']);
 
 Route::get('/login/github/callback', [GithubAuthController::class, 'authenticate']);
+
+Route::get('/login/facebook', [FacebookAuthController::class, 'redirect']);
+
+Route::get('/login/facebook/callback', [FacebookAuthController::class, 'authenticate']);

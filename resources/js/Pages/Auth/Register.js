@@ -79,13 +79,16 @@ export default function Register() {
                                 />
                                 &nbsp;Sign up with GitHub
                             </a>
-                            <button className="w-full flex flex-row justify-center py-2 rounded bg-facebook hover:bg-facebook-dark text-sm text-white mb-5">
+                            <a
+                                href="/login/facebook"
+                                className="w-full flex flex-row justify-center py-2 rounded bg-facebook hover:bg-facebook-dark text-sm text-white mb-5"
+                            >
                                 <FacebookIcon
                                     className={`inline-block`}
                                     inverted={true}
                                 />
                                 &nbsp;Sign up with Facebook
-                            </button>
+                            </a>
                         </div>
 
                         <div className="p-6 rounded-lg bg-white shadow-lg">
