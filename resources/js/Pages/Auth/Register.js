@@ -65,10 +65,13 @@ export default function Register() {
                         </div>
 
                         <div>
-                            <button className="w-full flex flex-row justify-center py-2 rounded bg-white border text-sm border-gray-300 mb-3">
+                            <a 
+                                href="/login/google"
+                                className="w-full flex flex-row justify-center py-2 rounded bg-white border text-sm border-gray-300 mb-3"
+                            >
                                 <GoogleIcon className={"inline-block"} />
                                 &nbsp;Sign up with Google
-                            </button>
+                            </a>
                             <a
                                 href="/login/github" 
                                 className="w-full flex flex-row justify-center py-2 rounded bg-black text-sm text-white mb-3"

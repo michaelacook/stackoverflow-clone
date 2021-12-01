@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Auth\GithubAuthController;
 use App\Http\Controllers\Auth\FacebookAuthController;
+use App\Http\Controllers\Auth\GoogleAuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/register', [RegisteredUserController::class, 'create'])
@@ -72,3 +73,7 @@ Route::get('/login/github/callback', [GithubAuthController::class, 'authenticate
 Route::get('/login/facebook', [FacebookAuthController::class, 'redirect']);
 
 Route::get('/login/facebook/callback', [FacebookAuthController::class, 'authenticate']);
+
+Route::get('/login/google', [GoogleAuthController::class, 'redirect']);
+
+Route::get('/login/google/callback', [GoogleAuthController::class, 'authenticate']);
