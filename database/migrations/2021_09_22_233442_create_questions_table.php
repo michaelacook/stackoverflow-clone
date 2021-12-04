@@ -23,6 +23,7 @@ class CreateQuestionsTable extends Migration
             $table->integer('views')->default(0);
             $table->integer('votes')->default(0);
             $table->string('slug')->unique();
+            $table->boolean('open')->default(true);
             $table->timestamps();
         });
     }
