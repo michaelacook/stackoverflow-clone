@@ -40,12 +40,16 @@ export default function Question({ page, question, answers, tags, comments }) {
         }
     }
 
+    function closeQuestion() {
+        Inertia.get(`/questions/${question.id}/close`)
+    }
+
     return (
         <>
             <Navbar user={auth.user} />
             <Grid page={page}>
                 <div className="w-4/6 mt-5 ml-6 mb-6">
-                    <h1 className="text-2xl mb-2">{question.title}</h1>
+                    <h1 className="text-2xl mb-2">{question.title} {!question.open ? "[Closed]" : null}</h1>
 
                     <div className="mb-3">
                         <span className="text-xs text-gray-600">
@@ -149,7 +153,7 @@ export default function Question({ page, question, answers, tags, comments }) {
                         </div>
                     ) : null}
 
-                    {auth.user && auth.user.email_verified_at ? (
+                    {auth.user && auth.user.email_verified_at && question.open ? (
                         <div className="ml-14 mt-2 mb-5">
                             {!addComment && auth.user ? (
                                 <span
@@ -347,7 +351,7 @@ export default function Question({ page, question, answers, tags, comments }) {
                                     text-sm 
                                     rounded-sm
                                     ${
-                                        auth.user && auth.user.email_verified_at
+                                        auth.user && auth.user.email_verified_at && question.open
                                             ? null
                                             : "btn-disabled"
                                     }
@@ -355,7 +359,7 @@ export default function Question({ page, question, answers, tags, comments }) {
                                 placeholder="Use markdown format..."
                                 rows="12"
                                 disabled={
-                                    auth.user && auth.user.email_verified_at
+                                    auth.user && auth.user.email_verified_at && question.open
                                         ? false
                                         : true
                                 }
@@ -373,7 +377,7 @@ export default function Question({ page, question, answers, tags, comments }) {
                                     rounded-sm 
                                     shadow-sm
                                     ${
-                                        auth.user && auth.user.email_verified_at
+                                        auth.user && auth.user.email_verified_at && question.open
                                             ? "hover:bg-blue-600"
                                             : "btn-disabled"
                                     }
