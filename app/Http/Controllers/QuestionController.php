@@ -51,6 +51,21 @@ class QuestionController extends Controller
     }
 
     /**
+     * Close a question for answers 
+     * 
+     * @param App//Models/Question $question
+     */
+    public function close(Question $question)
+    {
+        $question->open = false; 
+        $question->save();
+
+        $url = '/questions' . '/' . $question->slug;
+
+        return redirect($url);
+    }
+
+    /**
      * retrieve questions by tag name
      */
     public function getQuestionsByTag(Request $request, $tag)

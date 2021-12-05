@@ -44,6 +44,7 @@ Route::post('/questions', [QuestionController::class, 'post'])->middleware('auth
 Route::get('/questions', [QuestionController::class, 'all']);
 Route::get('/questions/by-tag/{tag}', [QuestionController::class, 'getQuestionsByTag']);
 Route::get('/questions/{question:slug}', [QuestionController::class, 'index']);
+Route::get('/questions/{question}/close', [QuestionController::class, 'close']);
 
 Route::get('/notifications/mark-as-read', [NotificationController::class, 'markAsRead']);
 
