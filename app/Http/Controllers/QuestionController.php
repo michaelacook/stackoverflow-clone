@@ -51,6 +51,21 @@ class QuestionController extends Controller
     }
 
     /**
+     * Open a question for answers 
+     * 
+     * @param App//Models/Question $question
+     */
+    public function open(Question $question) 
+    {
+        $question->open = true;
+        $question->save();
+
+        $url = '/questions' . '/' . $question->slug;
+
+        return redirect($url);
+    }
+
+    /**
      * Close a question for answers 
      * 
      * @param App//Models/Question $question
@@ -63,6 +78,18 @@ class QuestionController extends Controller
         $url = '/questions' . '/' . $question->slug;
 
         return redirect($url);
+    }
+
+    /**
+     * Delete a question  
+     * 
+     * @param App//Models/Question $question
+     */
+    public function delete(Question $question)
+    {
+        $question->delete();
+
+        return redirect("/");
     }
 
     /**
