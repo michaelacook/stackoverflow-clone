@@ -22,7 +22,7 @@ class QuestionFactory extends Factory
      */
     public function definition()
     {
-        $title = $this->faker->sentence() . "?";
+        $title = str_replace(".", "?", $this->faker->sentence());
         $slug = Str::slug($title);
 
         return [
